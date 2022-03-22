@@ -1233,14 +1233,6 @@
       "group": "People & Body"
     },
     {
-      "char": "🤌",
-      "name": {
-        "ru": "защемленные_пальцы",
-        "en": "pinched_fingers"
-      },
-      "group": "People & Body"
-    },
-    {
       "char": "🤏",
       "name": {
         "ru": "щипающая_рука",
@@ -1525,22 +1517,6 @@
       "name": {
         "ru": "мозг",
         "en": "brain"
-      },
-      "group": "People & Body"
-    },
-    {
-      "char": "🫀",
-      "name": {
-        "ru": "анатомическое_сердце",
-        "en": "anatomical_heart"
-      },
-      "group": "People & Body"
-    },
-    {
-      "char": "🫁",
-      "name": {
-        "ru": "легкие",
-        "en": "lungs"
       },
       "group": "People & Body"
     },
@@ -2809,14 +2785,6 @@
       "group": "People & Body"
     },
     {
-      "char": "🧑‍🦯",
-      "name": {
-        "ru": "человек_с_белой_тростью",
-        "en": "person_with_white_cane"
-      },
-      "group": "People & Body"
-    },
-    {
       "char": "👨‍🦯",
       "name": {
         "ru": "мужчина_с_белой_тростью",
@@ -2833,14 +2801,6 @@
       "group": "People & Body"
     },
     {
-      "char": "🧑‍🦼",
-      "name": {
-        "ru": "человек_в_моторизованном_инвалидном_кресле",
-        "en": "person_in_motorized_wheelchair"
-      },
-      "group": "People & Body"
-    },
-    {
       "char": "👨‍🦼",
       "name": {
         "ru": "человек_в_моторизованной_инвалидной_коляске",
@@ -2853,14 +2813,6 @@
       "name": {
         "ru": "женщина_в_моторизованной_инвалидной_коляске",
         "en": "woman_in_motorized_wheelchair"
-      },
-      "group": "People & Body"
-    },
-    {
-      "char": "🧑‍🦽",
-      "name": {
-        "ru": "человек_в_ручной_инвалидной_коляске",
-        "en": "person_in_manual_wheelchair"
       },
       "group": "People & Body"
     },
@@ -3713,14 +3665,6 @@
       "group": "People & Body"
     },
     {
-      "char": "🫂",
-      "name": {
-        "ru": "люди_обнимаются",
-        "en": "people_hugging"
-      },
-      "group": "People & Body"
-    },
-    {
       "char": "👣",
       "name": {
         "ru": "следы",
@@ -3841,14 +3785,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🐈‍⬛",
-      "name": {
-        "ru": "черная_кошка",
-        "en": "black_cat"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🦁",
       "name": {
         "ru": "лев",
@@ -3917,14 +3853,6 @@
       "name": {
         "ru": "олень",
         "en": "deer"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🦬",
-      "name": {
-        "ru": "бизон",
-        "en": "bison"
       },
       "group": "Animals & Nature"
     },
@@ -4057,14 +3985,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🦣",
-      "name": {
-        "ru": "мамонт",
-        "en": "mammoth"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🦏",
       "name": {
         "ru": "носорог",
@@ -4137,14 +4057,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🦫",
-      "name": {
-        "ru": "бобр",
-        "en": "beaver"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🦔",
       "name": {
         "ru": "еж",
@@ -4165,14 +4077,6 @@
       "name": {
         "ru": "медведь",
         "en": "bear"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🐻‍❄️",
-      "name": {
-        "ru": "полярный_медведь",
-        "en": "polar_bear"
       },
       "group": "Animals & Nature"
     },
@@ -4345,22 +4249,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🦤",
-      "name": {
-        "ru": "дронт",
-        "en": "dodo"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🪶",
-      "name": {
-        "ru": "перо",
-        "en": "feather"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🦩",
       "name": {
         "ru": "фламинго",
@@ -4481,14 +4369,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🦭",
-      "name": {
-        "ru": "тюлень",
-        "en": "seal"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🐟",
       "name": {
         "ru": "рыба",
@@ -4577,14 +4457,6 @@
       "group": "Animals & Nature"
     },
     {
-      "char": "🪲",
-      "name": {
-        "ru": "жук",
-        "en": "beetle"
-      },
-      "group": "Animals & Nature"
-    },
-    {
       "char": "🐞",
       "name": {
         "ru": "божья_коровка",
@@ -4597,14 +4469,6 @@
       "name": {
         "ru": "крикет",
         "en": "cricket"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🪳",
-      "name": {
-        "ru": "таракан",
-        "en": "cockroach"
       },
       "group": "Animals & Nature"
     },
@@ -4637,22 +4501,6 @@
       "name": {
         "ru": "комар",
         "en": "mosquito"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🪰",
-      "name": {
-        "ru": "летать",
-        "en": "fly"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🪱",
-      "name": {
-        "ru": "червь",
-        "en": "worm"
       },
       "group": "Animals & Nature"
     },
@@ -4749,14 +4597,6 @@
       "name": {
         "ru": "рассада",
         "en": "seedling"
-      },
-      "group": "Animals & Nature"
-    },
-    {
-      "char": "🪴",
-      "name": {
-        "ru": "растение_в_горшке",
-        "en": "potted_plant"
       },
       "group": "Animals & Nature"
     },
@@ -4961,14 +4801,6 @@
       "group": "Food & Drink"
     },
     {
-      "char": "🫐",
-      "name": {
-        "ru": "черника",
-        "en": "blueberries"
-      },
-      "group": "Food & Drink"
-    },
-    {
       "char": "🥝",
       "name": {
         "ru": "киви",
@@ -4981,14 +4813,6 @@
       "name": {
         "ru": "помидор",
         "en": "tomato"
-      },
-      "group": "Food & Drink"
-    },
-    {
-      "char": "🫒",
-      "name": {
-        "ru": "оливковое",
-        "en": "olive"
       },
       "group": "Food & Drink"
     },
@@ -5045,14 +4869,6 @@
       "name": {
         "ru": "острый_перец",
         "en": "hot_pepper"
-      },
-      "group": "Food & Drink"
-    },
-    {
-      "char": "🫑",
-      "name": {
-        "ru": "болгарский_перец",
-        "en": "bell_pepper"
       },
       "group": "Food & Drink"
     },
@@ -5141,14 +4957,6 @@
       "name": {
         "ru": "багетный_хлеб",
         "en": "baguette_bread"
-      },
-      "group": "Food & Drink"
-    },
-    {
-      "char": "🫓",
-      "name": {
-        "ru": "лепешка",
-        "en": "flatbread"
       },
       "group": "Food & Drink"
     },
@@ -5281,14 +5089,6 @@
       "group": "Food & Drink"
     },
     {
-      "char": "🫔",
-      "name": {
-        "ru": "тамале",
-        "en": "tamale"
-      },
-      "group": "Food & Drink"
-    },
-    {
       "char": "🥙",
       "name": {
         "ru": "лепешка_с_начинкой",
@@ -5333,14 +5133,6 @@
       "name": {
         "ru": "горшок_с_едой",
         "en": "pot_of_food"
-      },
-      "group": "Food & Drink"
-    },
-    {
-      "char": "🫕",
-      "name": {
-        "ru": "фондю",
-        "en": "fondue"
       },
       "group": "Food & Drink"
     },
@@ -5705,14 +5497,6 @@
       "group": "Food & Drink"
     },
     {
-      "char": "🫖",
-      "name": {
-        "ru": "заварочный_чайник",
-        "en": "teapot"
-      },
-      "group": "Food & Drink"
-    },
-    {
       "char": "🍵",
       "name": {
         "ru": "чашка_без_ручки",
@@ -5797,14 +5581,6 @@
       "name": {
         "ru": "чашка_с_соломинкой",
         "en": "cup_with_straw"
-      },
-      "group": "Food & Drink"
-    },
-    {
-      "char": "🧋",
-      "name": {
-        "ru": "пузырьковый_чай",
-        "en": "bubble_tea"
       },
       "group": "Food & Drink"
     },
@@ -6037,30 +5813,6 @@
       "name": {
         "ru": "кирпич",
         "en": "brick"
-      },
-      "group": "Travel & Places"
-    },
-    {
-      "char": "🪨",
-      "name": {
-        "ru": "рок",
-        "en": "rock"
-      },
-      "group": "Travel & Places"
-    },
-    {
-      "char": "🪵",
-      "name": {
-        "ru": "древесина",
-        "en": "wood"
-      },
-      "group": "Travel & Places"
-    },
-    {
-      "char": "🛖",
-      "name": {
-        "ru": "хижина",
-        "en": "hut"
       },
       "group": "Travel & Places"
     },
@@ -6601,14 +6353,6 @@
       "group": "Travel & Places"
     },
     {
-      "char": "🛻",
-      "name": {
-        "ru": "пикап",
-        "en": "pickup_truck"
-      },
-      "group": "Travel & Places"
-    },
-    {
       "char": "🚚",
       "name": {
         "ru": "грузовик_доставки",
@@ -6701,14 +6445,6 @@
       "name": {
         "ru": "скейтборд",
         "en": "skateboard"
-      },
-      "group": "Travel & Places"
-    },
-    {
-      "char": "🛼",
-      "name": {
-        "ru": "роликовые_коньки",
-        "en": "roller_skate"
       },
       "group": "Travel & Places"
     },
@@ -8073,14 +7809,6 @@
       "group": "Activities"
     },
     {
-      "char": "🪄",
-      "name": {
-        "ru": "волшебная_палочка",
-        "en": "magic_wand"
-      },
-      "group": "Activities"
-    },
-    {
       "char": "🧿",
       "name": {
         "ru": "назар_амулет",
@@ -8133,22 +7861,6 @@
       "name": {
         "ru": "плющевый_мишка",
         "en": "teddy_bear"
-      },
-      "group": "Activities"
-    },
-    {
-      "char": "🪅",
-      "name": {
-        "ru": "пиньята",
-        "en": "pinata"
-      },
-      "group": "Activities"
-    },
-    {
-      "char": "🪆",
-      "name": {
-        "ru": "матрешки",
-        "en": "nesting_dolls"
       },
       "group": "Activities"
     },
@@ -8249,26 +7961,10 @@
       "group": "Activities"
     },
     {
-      "char": "🪡",
-      "name": {
-        "ru": "швейная_иголка",
-        "en": "sewing_needle"
-      },
-      "group": "Activities"
-    },
-    {
       "char": "🧶",
       "name": {
         "ru": "пряжа",
         "en": "yarn"
-      },
-      "group": "Activities"
-    },
-    {
-      "char": "🪢",
-      "name": {
-        "ru": "узел",
-        "en": "knot"
       },
       "group": "Activities"
     },
@@ -8473,14 +8169,6 @@
       "group": "Objects"
     },
     {
-      "char": "🩴",
-      "name": {
-        "ru": "стринги_сандалии",
-        "en": "thong_sandal"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "👞",
       "name": {
         "ru": "мужская_обувь",
@@ -8581,14 +8269,6 @@
       "name": {
         "ru": "крышка_счета",
         "en": "billed_cap"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪖",
-      "name": {
-        "ru": "военный_шлем",
-        "en": "military_helmet"
       },
       "group": "Objects"
     },
@@ -8785,14 +8465,6 @@
       "group": "Objects"
     },
     {
-      "char": "🪗",
-      "name": {
-        "ru": "аккордеон",
-        "en": "accordion"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🎸",
       "name": {
         "ru": "гитара",
@@ -8837,14 +8509,6 @@
       "name": {
         "ru": "барабан",
         "en": "drum"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪘",
-      "name": {
-        "ru": "длинный_барабан",
-        "en": "long_drum"
       },
       "group": "Objects"
     },
@@ -9269,14 +8933,6 @@
       "name": {
         "ru": "сумка_денег",
         "en": "money_bag"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪙",
-      "name": {
-        "ru": "монета",
-        "en": "coin"
       },
       "group": "Objects"
     },
@@ -9801,14 +9457,6 @@
       "group": "Objects"
     },
     {
-      "char": "🪃",
-      "name": {
-        "ru": "бумеранг",
-        "en": "boomerang"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🏹",
       "name": {
         "ru": "лук_и_стрела",
@@ -9825,26 +9473,10 @@
       "group": "Objects"
     },
     {
-      "char": "🪚",
-      "name": {
-        "ru": "столярная_пила",
-        "en": "carpentry_saw"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🔧",
       "name": {
         "ru": "гаечный_ключ",
         "en": "wrench"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪛",
-      "name": {
-        "ru": "отвертка",
-        "en": "screwdriver"
       },
       "group": "Objects"
     },
@@ -9905,14 +9537,6 @@
       "group": "Objects"
     },
     {
-      "char": "🪝",
-      "name": {
-        "ru": "крюк",
-        "en": "hook"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🧰",
       "name": {
         "ru": "ящик_для_инструментов",
@@ -9925,14 +9549,6 @@
       "name": {
         "ru": "магнит",
         "en": "magnet"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪜",
-      "name": {
-        "ru": "лестница",
-        "en": "ladder"
       },
       "group": "Objects"
     },
@@ -10041,30 +9657,6 @@
       "group": "Objects"
     },
     {
-      "char": "🛗",
-      "name": {
-        "ru": "лифт",
-        "en": "elevator"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪞",
-      "name": {
-        "ru": "зеркало",
-        "en": "mirror"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪟",
-      "name": {
-        "ru": "окно",
-        "en": "window"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🛏️",
       "name": {
         "ru": "кровать",
@@ -10097,14 +9689,6 @@
       "group": "Objects"
     },
     {
-      "char": "🪠",
-      "name": {
-        "ru": "поршень",
-        "en": "plunger"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🚿",
       "name": {
         "ru": "душ",
@@ -10117,14 +9701,6 @@
       "name": {
         "ru": "ванна",
         "en": "bathtub"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪤",
-      "name": {
-        "ru": "мышеловка",
-        "en": "mouse_trap"
       },
       "group": "Objects"
     },
@@ -10177,26 +9753,10 @@
       "group": "Objects"
     },
     {
-      "char": "🪣",
-      "name": {
-        "ru": "ведро",
-        "en": "bucket"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "🧼",
       "name": {
         "ru": "мыло",
         "en": "soap"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪥",
-      "name": {
-        "ru": "зубная_щетка",
-        "en": "toothbrush"
       },
       "group": "Objects"
     },
@@ -10241,14 +9801,6 @@
       "group": "Objects"
     },
     {
-      "char": "🪦",
-      "name": {
-        "ru": "надгробие",
-        "en": "headstone"
-      },
-      "group": "Objects"
-    },
-    {
       "char": "⚱️",
       "name": {
         "ru": "похоронная_урна",
@@ -10261,14 +9813,6 @@
       "name": {
         "ru": "моаи",
         "en": "moai"
-      },
-      "group": "Objects"
-    },
-    {
-      "char": "🪧",
-      "name": {
-        "ru": "плакат",
-        "en": "placard"
       },
       "group": "Objects"
     },
@@ -12077,14 +11621,6 @@
       "name": {
         "ru": "радужный_флаг",
         "en": "rainbow_flag"
-      },
-      "group": "Flags"
-    },
-    {
-      "char": "🏳️‍⚧️",
-      "name": {
-        "ru": "трансгендерный_флаг",
-        "en": "transgender_flag"
       },
       "group": "Flags"
     },

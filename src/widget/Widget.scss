@@ -1,8 +1,8 @@
 .Widget {
-  margin: auto;
-  width: 330px;
-  min-height: 600px;
-  font-size: 20px;
+  margin-left: 5px;
+  width: 261px;
+  height: 432px;
+  font-size: 18px;
 
   .search {
     margin: 10px 0;
@@ -11,8 +11,8 @@
     align-items: center;
 
     .search-input {
-      width: 300px;
-      height: 30px;
+      width: 92%;
+      height: 25px;
     }
   }
 }
