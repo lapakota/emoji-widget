@@ -7,18 +7,15 @@
   width: 100%;
   height: 60px;
   border-bottom: 1px solid grey;
-}
 
-.Change-group-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
+  .active-group {
+    background-color: #D8D8D8;
+  }
 
-  user-select: none;
-
-  &:hover {
-    background-color: #f5f5f5;
+  /* Отменяет подпрыгивание при нажатии на группу */
+  .Change-group-button {
+    &:active {
+      transform: translateY(0);
+    }
   }
 }
