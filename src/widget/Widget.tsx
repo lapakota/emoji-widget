@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import EmojiGroup from "./EmojiGroup";
 import ChangeGroupButton from "./ChangeGroupButton";
 import "./Widget.scss";
-
-const emojis: EmojiGroupType[] = require('../assets/emojis.json');
+import emojis from '../assets/emojis.json';
 
 const Widget: React.FC = () => {
     const emojiGroups = emojis.map(data => <EmojiGroup key={data.groupName} groupName={data.groupName}
@@ -28,7 +27,7 @@ const Widget: React.FC = () => {
                 )}
             </div>
             <div className={'search'}>
-                <input className={'search-input'}/>
+                <input className={'search-input'} placeholder={'Emoji Search'}/>
             </div>
             {currentGroup}
         </div>
