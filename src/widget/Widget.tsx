@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import emojisLoader from "../common/emojisLoader";
 import EmojiGroup from "./EmojiGroup";
 import ChangeGroupButton from "./ChangeGroupButton";
 import "./Widget.scss";
 
-const emojis = emojisLoader();
+const emojis: EmojiGroupType[] = require('../assets/emojis.json');
 
 const Widget: React.FC = () => {
     const emojiGroups = emojis.map(data => <EmojiGroup key={data.groupName} groupName={data.groupName}
