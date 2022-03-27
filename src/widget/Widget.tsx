@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EmojiGroup from './EmojiGroup';
 import ChangeGroupButton from './ChangeGroupButton';
 import './Widget.scss';
@@ -7,14 +7,22 @@ import emojis from '../assets/emojis.json';
 const recentEmojisCount = 16;
 
 const Widget: React.FC = () => {
-    const [recentEmojis] = useState([] as EmojiType[]);
+    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(
+        JSON.parse(localStorage.getItem('recentEmojis') as string) || []
+    );
 
     const updateRecentEmojis = (emoji: EmojiType) => {
-        const emojiIndex = recentEmojis.findIndex(e => e.char === emoji.char);
-        emojiIndex !== -1 && recentEmojis.splice(emojiIndex, 1);
+        setRecentEmojis(prevState => {
+            const newState: EmojiType[] = JSON.parse(JSON.stringify(prevState));
 
-        recentEmojis.unshift(emoji);
-        recentEmojis.length > recentEmojisCount && recentEmojis.pop();
+            const emojiIndex = newState.findIndex(e => e.char === emoji.char);
+            emojiIndex !== -1 && newState.splice(emojiIndex, 1);
+
+            newState.unshift(emoji);
+            newState.length > recentEmojisCount && newState.pop();
+
+            return newState;
+        });
     };
 
     const emojiGroups = emojis.map(data => (
@@ -26,13 +34,23 @@ const Widget: React.FC = () => {
         />
     ));
 
-    const [currentGroupIndex, setCurrentGroupIndex] = useState(1);
+    const loadCurrentGroupIndex = () => {
+        const index = JSON.parse(localStorage.getItem('currentGroupIndex') as string);
+        return index !== null ? index : 1;
+    };
+
+    const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
     const [currentGroup, setCurrentGroup] = useState(emojiGroups[currentGroupIndex]);
 
     const changeCurrentGroup = (index: number) => {
         setCurrentGroup(emojiGroups[index]);
         setCurrentGroupIndex(index);
     };
+
+    useEffect(() => {
+        localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
+        localStorage.setItem('currentGroupIndex', JSON.stringify(currentGroupIndex));
+    }, [recentEmojis, currentGroupIndex]);
 
     const icons = ['❤️', '😀', '🐹', '🍉', '🎃', '🌍', '🧻', '🉐'];
 
