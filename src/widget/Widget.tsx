@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import EmojiGroup from './EmojiGroup';
 import ChangeGroupButton from './ChangeGroupButton';
 import './Widget.scss';
 import emojis from '../assets/emojis.json';
+import {NavLink} from "react-router-dom";
+import {CurrentThemeContext} from "../App";
 
 const recentEmojisCount = 16;
 
@@ -53,9 +55,12 @@ const Widget: React.FC = () => {
     }, [recentEmojis, currentGroupIndex]);
 
     const icons = ['❤️', '😀', '🐹', '🍉', '🎃', '🌍', '🧻', '🉐'];
+    const gearWheelIcon = '⚙';
+
+    const currentTheme = useContext(CurrentThemeContext);
 
     return (
-        <div className="Widget">
+        <div className="Widget" style={currentTheme.body}>
             <div className={'buttons-wrapper'}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
@@ -66,6 +71,7 @@ const Widget: React.FC = () => {
                         isActive={index === currentGroupIndex}
                     />
                 ))}
+                <NavLink to='/settings'>{gearWheelIcon}</NavLink>
             </div>
             <div className={'search'}>
                 <input className={'search-input'} placeholder={'Emoji Search'} />
