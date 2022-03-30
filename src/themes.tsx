@@ -3,7 +3,6 @@ export const light = {
     backgroundColor: "#fff",
   },
   text: {
-    fontColor: "#000",
     color: "#000",
   },
   button: {

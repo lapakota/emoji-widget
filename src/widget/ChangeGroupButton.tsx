@@ -4,7 +4,7 @@ import './EmojiGroup.scss';
 
 type ChangeGroupButtonProps = {
     idGroup: number
-    icon: string
+    icon: JSX.Element
     onClick: () => void
     isActive: boolean
 }
