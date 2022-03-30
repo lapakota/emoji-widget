@@ -2,14 +2,31 @@ import React, { useEffect, useState } from 'react';
 import EmojiGroup from './EmojiGroup';
 import ChangeGroupButton from './ChangeGroupButton';
 import './Widget.scss';
-import emojis from '../assets/emojis.json';
+import emojisData from '../assets/emojis.json';
+import EmojiSearch from './EmojiSearch';
 
-const recentEmojisCount = 16;
+const RECENT_COUNT = 16;
 
 const Widget: React.FC = () => {
+    const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
+    const [currentGroupData, setCurrentGroupData] = useState(emojisData[currentGroupIndex]);
+
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchedEmojis, setSearchedEmojis] = useState([] as EmojiType[]);
+
     const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(
         JSON.parse(localStorage.getItem('recentEmojis') as string) || []
     );
+
+    useEffect(() => {
+        localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
+        localStorage.setItem('currentGroupIndex', JSON.stringify(currentGroupIndex));
+    }, [recentEmojis, currentGroupIndex]);
+
+    function loadCurrentGroupIndex() {
+        const index = JSON.parse(localStorage.getItem('currentGroupIndex') as string);
+        return index !== null ? index : 1;
+    }
 
     const updateRecentEmojis = (emoji: EmojiType) => {
         setRecentEmojis(prevState => {
@@ -19,38 +36,26 @@ const Widget: React.FC = () => {
             emojiIndex !== -1 && newState.splice(emojiIndex, 1);
 
             newState.unshift(emoji);
-            newState.length > recentEmojisCount && newState.pop();
+            newState.length > RECENT_COUNT && newState.pop();
 
             return newState;
         });
     };
 
-    const emojiGroups = emojis.map(data => (
-        <EmojiGroup
-            key={data.groupName}
-            groupName={data.groupName}
-            groupEmojis={data.groupName !== 'Recent & Favourites' ? data.groupEmojis : recentEmojis}
-            updateRecent={updateRecentEmojis}
-        />
-    ));
-
-    const loadCurrentGroupIndex = () => {
-        const index = JSON.parse(localStorage.getItem('currentGroupIndex') as string);
-        return index !== null ? index : 1;
-    };
-
-    const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
-    const [currentGroup, setCurrentGroup] = useState(emojiGroups[currentGroupIndex]);
-
-    const changeCurrentGroup = (index: number) => {
-        setCurrentGroup(emojiGroups[index]);
+    const changeCurrentGroupData = (index: number) => {
+        setCurrentGroupData(emojisData[index]);
         setCurrentGroupIndex(index);
     };
 
-    useEffect(() => {
-        localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
-        localStorage.setItem('currentGroupIndex', JSON.stringify(currentGroupIndex));
-    }, [recentEmojis, currentGroupIndex]);
+    const updateSearchedGroup = (emojis: EmojiType[]) => {
+        setSearchedEmojis(emojis);
+    };
+
+    const getRightEmojis = () => {
+        if (isSearching) return searchedEmojis;
+        if (currentGroupData.groupName === 'Recent & Favourites') return recentEmojis;
+        return currentGroupData.groupEmojis;
+    };
 
     const icons = ['❤️', '😀', '🐹', '🍉', '🎃', '🌍', '🧻', '🉐'];
 
@@ -62,15 +67,17 @@ const Widget: React.FC = () => {
                         key={`ChangeGroupButton${index}`}
                         idGroup={index}
                         icon={icon}
-                        onClick={() => changeCurrentGroup(index)}
+                        onClick={() => changeCurrentGroupData(index)}
                         isActive={index === currentGroupIndex}
                     />
                 ))}
             </div>
-            <div className={'search'}>
-                <input className={'search-input'} placeholder={'Emoji Search'} />
-            </div>
-            {currentGroup}
+            <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
+            <EmojiGroup
+                groupName={isSearching ? 'Searched' : currentGroupData.groupName}
+                groupEmojis={getRightEmojis()}
+                updateRecent={updateRecentEmojis}
+            />
         </div>
     );
 };
