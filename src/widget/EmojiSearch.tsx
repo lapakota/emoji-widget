@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import EmojiSearcher from './emojiSearcher';
 
-type SearchProps = {
+type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;
     updateSearched: (emojis: EmojiType[]) => void;
 };
 
-const EmojiSearch: React.FC<SearchProps> = ({ setIsSearching, updateSearched }) => {
+const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearched }) => {
     const [input, setInput] = useState('');
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
