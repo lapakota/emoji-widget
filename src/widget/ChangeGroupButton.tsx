@@ -11,9 +11,11 @@ type ChangeGroupButtonProps = {
 
 const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({idGroup, icon, onClick, isActive}) => {
     return (
-        <div id={`Change-group-button ${idGroup}`}
-             className={`emoji-container Change-group-button${isActive ? ' active-group' : ''}`} onClick={onClick}>
-            {icon}
+        <div className={`change-group_button-wrapper${isActive ? ' active-group' : ''}`}>
+            <button id={`change-group_button ${idGroup}`}
+                    className={`emoji-container change-group_button`} onClick={onClick}>
+                {icon}
+            </button>
         </div>
     );
 }

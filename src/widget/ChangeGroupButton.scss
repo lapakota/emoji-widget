@@ -6,16 +6,35 @@
   align-items: center;
   width: 100%;
   height: 60px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #bdbdbd;
+
 
   .active-group {
-    background-color: #D8D8D8;
+    box-shadow: inset 0 -2px #bdbdbd;
   }
 
-  /* Отменяет подпрыгивание при нажатии на группу */
-  .Change-group-button {
-    &:active {
-      transform: translateY(0);
+  .change-group_button-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+
+    &:hover {
+      box-shadow: inset 0 -2px #dcdcdc;
+    }
+
+    .change-group_button {
+      padding: 0;
+      border: none;
+      font: inherit;
+      color: inherit;
+      background-color: transparent;
+
+      /* Отменяет подпрыгивание при нажатии на группу */
+      &:active {
+        transform: translateY(0);
+      }
     }
   }
 }
+
