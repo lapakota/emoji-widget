@@ -1,0 +1,9 @@
+$emoji-container-size: 32px;
+$emojis-count-in-row: 9;
+$emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
+$inner-gap: 10px;
+
+$widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
+$widget-height: 432px;
+
+$emojis-wrapper-height: 284px;

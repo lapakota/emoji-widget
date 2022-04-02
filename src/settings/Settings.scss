@@ -1,12 +1,12 @@
-.Settings {
-  width: 290px;
-  height: 432px;
+@import "../vars";
+
+.settings {
+  width: $widget-width;
+  height: $widget-height;
   font-size: 18px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
 
   .header {
-    padding: 0 10px;
+    padding: 0 $inner-gap;
     height: 60px;
     width: auto;
     border-bottom: 1px solid #bdbdbd;
@@ -19,7 +19,7 @@
 
       span {
         text-decoration: none;
-        padding-left: 10px;
+        padding-left: $inner-gap;
       }
     }
   }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EmojiSearcher from './emojiSearcher';
+import EmojiSearcher from '../models/emojiSearcher';
 
 type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;

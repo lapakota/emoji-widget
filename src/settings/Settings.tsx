@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import './Settings.scss';
 import { NavLink } from 'react-router-dom';
 import { CurrentThemeContext, ChangeThemeContext } from '../App';
-import ArrowLeftIcon from '../icons/ArrowLeftIcon';
+import ArrowLeftIcon from '../assets/icons/ArrowLeftIcon';
 import * as themes from '../themes';
 
 const Settings = () => {
     const currentTheme = useContext(CurrentThemeContext);
 
     return (
-        <div className={'Settings'} style={currentTheme.body}>
+        <div className={'settings'} style={currentTheme.body}>
             <div className={'header'}>
                 <NavLink to={'/widget'}>
                     <span className={'link'}>
@@ -22,9 +22,14 @@ const Settings = () => {
                 <div className={'settings_item'}>
                     <div style={currentTheme.text}>Dark theme</div>
                     <ChangeThemeContext.Consumer>
-                        {dispatchChangeTheme => <input type={'checkbox'} className={'toggle'}
-                                                       onClick={() => dispatchChangeTheme()}
-                                                       checked={currentTheme === themes.dark} />}
+                        {dispatchChangeTheme => (
+                            <input
+                                type={'checkbox'}
+                                className={'toggle'}
+                                onClick={() => dispatchChangeTheme()}
+                                defaultChecked={currentTheme === themes.dark}
+                            />
+                        )}
                     </ChangeThemeContext.Consumer>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { MemoryRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Widget from './widget/Widget';
-import Settings from './Settings/Settings';
+import Settings from './settings/Settings';
 import './index.scss';
 import * as themes from './themes';
 
@@ -25,7 +25,7 @@ const App = () => {
     };
 
     return (
-        <BrowserRouter>
+        <MemoryRouter>
             <div className='app' style={theme.body}>
                 <ChangeThemeContext.Provider value={dispatchChangeTheme}>
                     <CurrentThemeContext.Provider value={theme}>
@@ -37,7 +37,7 @@ const App = () => {
                     </CurrentThemeContext.Provider>
                 </ChangeThemeContext.Provider>
             </div>
-        </BrowserRouter>
+        </MemoryRouter>
     );
 };
 
