@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import EmojiGroup from './EmojiGroup';
 import ChangeGroupButton from './ChangeGroupButton';
 import './Widget.scss';
 import emojisData from '../assets/emojis.json';
 import EmojiSearch from './EmojiSearch';
+import { NavLink } from 'react-router-dom';
+import { CurrentThemeContext } from '../App';
+import FavoriteIcon from '../icons/FavoriteIcon';
+import PeopleIcon from '../icons/PeopleIcon';
+import SettingsIcon from '../icons/SettingsIcon';
+import NatureIcon from '../icons/NatureIcon';
+import FoodIcon from '../icons/FoodIcon';
+import ActivitiesIcon from '../icons/ActivitiesIcon';
+import TravelIcon from '../icons/TravelIcon';
+import ObjectsIcon from '../icons/ObjectsIcon';
+import SymbolsIcon from '../icons/SymbolsIcon';
 
 const RECENT_COUNT = 16;
 
 const Widget: React.FC = () => {
+    const currentTheme = useContext(CurrentThemeContext);
     const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
     const [currentGroupData, setCurrentGroupData] = useState(emojisData[currentGroupIndex]);
 
@@ -57,10 +69,20 @@ const Widget: React.FC = () => {
         return currentGroupData.groupEmojis;
     };
 
-    const icons = ['❤️', '😀', '🐹', '🍉', '🎃', '🌍', '🧻', '🉐'];
+    const icons = [
+        <FavoriteIcon color={currentTheme.text.color} />,
+        <PeopleIcon color={currentTheme.text.color} />,
+        <NatureIcon color={currentTheme.text.color} />,
+        <FoodIcon color={currentTheme.text.color} />,
+        <ActivitiesIcon color={currentTheme.text.color} />,
+        <TravelIcon color={currentTheme.text.color} />,
+        <ObjectsIcon color={currentTheme.text.color} />,
+        <SymbolsIcon color={currentTheme.text.color} />
+    ];
+    const settingsIcon = <SettingsIcon color={currentTheme.text.color} />;
 
     return (
-        <div className="Widget">
+        <div className='Widget' style={currentTheme.body}>
             <div className={'buttons-wrapper'}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
@@ -71,6 +93,7 @@ const Widget: React.FC = () => {
                         isActive={index === currentGroupIndex}
                     />
                 ))}
+                <NavLink to='/settings'>{settingsIcon}</NavLink>
             </div>
             <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
             <EmojiGroup

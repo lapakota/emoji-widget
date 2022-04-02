@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './EmojiGroup.scss';
+import {CurrentThemeContext} from "../App";
 
 type EmojiGroupProps = {
     groupName: string;
@@ -8,9 +9,11 @@ type EmojiGroupProps = {
 };
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
-    return (
+  const currentTheme = useContext(CurrentThemeContext);
+
+  return (
         <div className="Emoji-group">
-            <h3 className="group-name">{groupName}</h3>
+            <h3 className="group-name" style={currentTheme.text}>{groupName}</h3>
             <div className="emojis-wrapper">
                 {groupEmojis.map((emojiInfo, index) => (
                     <div
