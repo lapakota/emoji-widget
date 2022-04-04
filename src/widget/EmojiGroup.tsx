@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../App';
+import { Emoji} from 'emoji-data-ts';
 
 type EmojiGroupProps = {
     groupName: string;
-    groupEmojis: EmojiType[];
-    updateRecent: (emoji: EmojiType) => void;
+    groupEmojis: Emoji[];
+    updateRecent: (emoji: Emoji) => void;
 };
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
@@ -19,15 +20,19 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
             <div className="emojis-wrapper">
                 {groupEmojis.map((emojiInfo, index) => (
                     <div
-                        key={`${emojiInfo.name.en}${index}`}
-                        className={`emoji-container ${emojiInfo.name.en}`}
-                        title={emojiInfo.name.en}
+                        key={`${emojiInfo.short_name}${index}`}
+                        className={`emoji-container ${emojiInfo.short_name}`}
+                        title={emojiInfo.char + emojiInfo.short_name}
                         onClick={() => {
                             updateRecent(emojiInfo);
                             navigator.clipboard.writeText(emojiInfo.char);
                         }}
                     >
-                        {emojiInfo.char}
+                        <img
+                            className={'emoji-img'}
+                            src={`/img/apple/64/${emojiInfo.image_url}`}
+                            alt={'emoji'}
+                        />
                     </div>
                 ))}
             </div>

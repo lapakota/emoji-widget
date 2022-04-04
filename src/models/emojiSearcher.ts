@@ -1,16 +1,17 @@
-import emojis from '../assets/emojis.json';
+import { Emoji } from 'emoji-data-ts';
+import { emojisData } from './emojisData';
 
 export default class EmojiSearcher {
     private static allEmojis = this._getAllEmojis();
 
     static searchEmojis(query: string) {
         const queryTokens = this._splitIntoTokens(query, ' ');
-        const foundEmojis: EmojiType[] = [];
+        const foundEmojis: Emoji[] = [];
 
         for (let emojiData of this.allEmojis) {
             const nameTokens = [
-                ...this._splitIntoTokens(emojiData.name.ru, '_'),
-                ...this._splitIntoTokens(emojiData.name.en, '_')
+                ...this._splitIntoTokens(emojiData.short_name, '_')
+                // ...this._splitIntoTokens(emojiData.name.ru, '_')
             ];
 
             const queryOccurrences: string[] = [];
@@ -50,8 +51,8 @@ export default class EmojiSearcher {
     }
 
     static _getAllEmojis() {
-        const allEmojis: EmojiType[] = [];
-        for (let { groupEmojis } of emojis as EmojiGroupType[]) allEmojis.push(...groupEmojis);
+        const allEmojis: Emoji[] = [];
+        for (let name in emojisData) allEmojis.push(...emojisData[name]);
         return allEmojis;
     }
 }

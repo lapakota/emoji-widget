@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import EmojiGroup from './EmojiGroup';
 import ChangeGroupButton from './ChangeGroupButton';
 import './Widget.scss';
-import emojisData from '../assets/emojis.json';
 import EmojiSearch from './EmojiSearch';
 import { NavLink } from 'react-router-dom';
 import { CurrentThemeContext } from '../App';
@@ -15,17 +14,20 @@ import ActivitiesIcon from '../assets/icons/ActivitiesIcon';
 import TravelIcon from '../assets/icons/TravelIcon';
 import ObjectsIcon from '../assets/icons/ObjectsIcon';
 import SymbolsIcon from '../assets/icons/SymbolsIcon';
+import { Emoji } from 'emoji-data-ts';
+import { emojiGroups, Groups } from '../models/emojiGroups';
+import { emojisData } from '../models/emojisData';
 
 const RECENT_COUNT = 18;
 
 const Widget: React.FC = () => {
-    const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
-    const [currentGroupData, setCurrentGroupData] = useState(emojisData[currentGroupIndex]);
+    const [currentGroupName, setCurrentGroupName] = useState<string>(loadCurrentGroupName());
+    const [currentGroupEmojis, setCurrentGroupEmojis] = useState<Emoji[]>(emojisData[currentGroupName]);
 
     const [isSearching, setIsSearching] = useState(false);
-    const [searchedEmojis, setSearchedEmojis] = useState([] as EmojiType[]);
+    const [searchedEmojis, setSearchedEmojis] = useState<Emoji[]>([]);
 
-    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(
+    const [recentEmojis, setRecentEmojis] = useState<Emoji[]>(
         JSON.parse(localStorage.getItem('recentEmojis') as string) || []
     );
 
@@ -33,17 +35,17 @@ const Widget: React.FC = () => {
 
     useEffect(() => {
         localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
-        localStorage.setItem('currentGroupIndex', JSON.stringify(currentGroupIndex));
-    }, [recentEmojis, currentGroupIndex]);
+        localStorage.setItem('currentGroupName', JSON.stringify(currentGroupName));
+    }, [recentEmojis, currentGroupName]);
 
-    function loadCurrentGroupIndex() {
-        const index = JSON.parse(localStorage.getItem('currentGroupIndex') as string);
-        return index !== null ? +index : 1;
+    function loadCurrentGroupName() {
+        const name = JSON.parse(localStorage.getItem('currentGroupName') as string);
+        return name !== null ? name : Groups.Emotion;
     }
 
-    const updateRecentEmojis = (emoji: EmojiType) => {
+    const updateRecentEmojis = (emoji: Emoji) => {
         setRecentEmojis(prevState => {
-            const newState: EmojiType[] = JSON.parse(JSON.stringify(prevState));
+            const newState: Emoji[] = JSON.parse(JSON.stringify(prevState));
 
             const emojiIndex = newState.findIndex(e => e.char === emoji.char);
             emojiIndex !== -1 && newState.splice(emojiIndex, 1);
@@ -55,19 +57,19 @@ const Widget: React.FC = () => {
         });
     };
 
-    const changeCurrentGroupData = (index: number) => {
-        setCurrentGroupData(emojisData[index]);
-        setCurrentGroupIndex(index);
+    const changeCurrentGroupData = (name: string) => {
+        setCurrentGroupEmojis(emojisData[name]);
+        setCurrentGroupName(name);
     };
 
-    const updateSearchedGroup = (emojis: EmojiType[]) => {
+    const updateSearchedGroup = (emojis: Emoji[]) => {
         setSearchedEmojis(emojis);
     };
 
     const getRightEmojis = () => {
         if (isSearching) return searchedEmojis;
-        if (currentGroupData.groupName === 'Recent & Favourites') return recentEmojis;
-        return currentGroupData.groupEmojis;
+        if (currentGroupName === Groups.Recent) return recentEmojis;
+        return currentGroupEmojis;
     };
 
     const icons = [
@@ -90,8 +92,8 @@ const Widget: React.FC = () => {
                         key={`ChangeGroupButton${index}`}
                         idGroup={index}
                         icon={icon}
-                        onClick={() => changeCurrentGroupData(index)}
-                        isActive={index === currentGroupIndex}
+                        onClick={() => changeCurrentGroupData(emojiGroups[index])}
+                        isActive={emojiGroups[index] === currentGroupName}
                     />
                 ))}
                 <NavLink className={`emoji-container change-group_button`} to="/settings">
@@ -100,7 +102,7 @@ const Widget: React.FC = () => {
             </div>
             <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
             <EmojiGroup
-                groupName={isSearching ? 'Searched' : currentGroupData.groupName}
+                groupName={isSearching ? 'Searched' : currentGroupName}
                 groupEmojis={getRightEmojis()}
                 updateRecent={updateRecentEmojis}
             />
