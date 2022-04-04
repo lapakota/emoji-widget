@@ -16,7 +16,7 @@ import TravelIcon from '../assets/icons/TravelIcon';
 import ObjectsIcon from '../assets/icons/ObjectsIcon';
 import SymbolsIcon from '../assets/icons/SymbolsIcon';
 
-const RECENT_COUNT = 16;
+const RECENT_COUNT = 18;
 
 const Widget: React.FC = () => {
     const [currentGroupIndex, setCurrentGroupIndex] = useState<number>(loadCurrentGroupIndex());
@@ -38,7 +38,7 @@ const Widget: React.FC = () => {
 
     function loadCurrentGroupIndex() {
         const index = JSON.parse(localStorage.getItem('currentGroupIndex') as string);
-        return index !== null ? index : 1;
+        return index !== null ? +index : 1;
     }
 
     const updateRecentEmojis = (emoji: EmojiType) => {
@@ -83,7 +83,7 @@ const Widget: React.FC = () => {
     const settingsIcon = <SettingsIcon color={currentTheme.text.color} />;
 
     return (
-        <div className="Widget" style={currentTheme.body}>
+        <div className="widget" style={currentTheme.body}>
             <div className={'buttons-wrapper'}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton

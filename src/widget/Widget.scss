@@ -1,9 +1,11 @@
 @import "../vars";
 
-.Widget {
+.widget {
   width: $widget-width;
   height: $widget-height;
+  margin: auto;
   font-size: 18px;
+
 
   .search {
     margin: $inner-gap 0;
