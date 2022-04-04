@@ -21,6 +21,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                     <div
                         key={`${emojiInfo.name.en}${index}`}
                         className={`emoji-container ${emojiInfo.name.en}`}
+                        title={emojiInfo.name.en}
                         onClick={() => {
                             updateRecent(emojiInfo);
                             navigator.clipboard.writeText(emojiInfo.char);
