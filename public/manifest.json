@@ -8,6 +8,13 @@
     "default_popup": "index.html",
     "default_title": "Open the widget"
   },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
   "icons": {
     "16": "favicon-16x16.png",
     "32": "favicon-32x32.png",
