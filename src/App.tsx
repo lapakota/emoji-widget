@@ -4,7 +4,6 @@ import Widget from './widget/Widget';
 import Settings from './settings/Settings';
 import './index.scss';
 import * as themes from './themes';
-import send from './messageSender';
 
 export const CurrentThemeContext = React.createContext<typeof themes.light | typeof themes.dark>(themes.light);
 export const ChangeThemeContext = React.createContext<any>(() => {});

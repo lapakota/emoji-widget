@@ -17,7 +17,6 @@ import SymbolsIcon from '../assets/icons/SymbolsIcon';
 import { Emoji } from 'emoji-data-ts';
 import { emojiGroups, Groups } from '../models/emojiGroups';
 import { emojisData } from '../models/emojisData';
-import send from "../messageSender";
 
 const RECENT_COUNT = 18;
 

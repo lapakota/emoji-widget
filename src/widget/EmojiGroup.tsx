@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../App';
 import { Emoji } from 'emoji-data-ts';
-import send from '../messageSender';
+import sendMessage from '../messageSender';
 
 type EmojiGroupProps = {
     groupName: string;
@@ -25,10 +25,10 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                         className={`emoji-container ${emojiInfo.short_name}`}
                         title={emojiInfo.char + emojiInfo.short_name}
                         onClick={() => {
-                            send(emojiInfo.char);
+                          updateRecent(emojiInfo);
+                          navigator.clipboard.writeText(emojiInfo.char);
 
-                            updateRecent(emojiInfo);
-                            navigator.clipboard.writeText(emojiInfo.char);
+                          sendMessage(emojiInfo.char);
                         }}
                     >
                         <img className={'emoji-img'} src={`/img/apple/64/${emojiInfo.image_url}`} alt={'emoji'} />

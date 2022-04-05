@@ -1,5 +1,3 @@
-console.log('<----- Content script started running ----->');
-
 chrome.runtime.onMessage.addListener(function (request) {
     if (request.name === 'emoji') {
         const activeElementClass = document.activeElement.className;

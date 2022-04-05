@@ -3,7 +3,10 @@
   "description": "Widget for picking Emojis",
   "version": "2.0",
   "manifest_version": 3,
-  "permissions": ["activeTab", "scripting"],
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
   "action": {
     "default_popup": "index.html",
     "default_title": "Open the widget"
@@ -11,8 +14,12 @@
   "content_scripts": [
     {
       "all_frames": true,
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
   ],
   "icons": {
