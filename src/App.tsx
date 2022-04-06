@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { MemoryRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Widget from './widget/Widget';
 import Settings from './settings/Settings';
