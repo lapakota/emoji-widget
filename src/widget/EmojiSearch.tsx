@@ -23,7 +23,10 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearche
 
     return (
         <div className={'search'}>
-            <input className={'search-input'} placeholder={'Emoji Search'} value={input} onChange={onChange} />
+            <input className={'search-input'}
+                   placeholder={'Emoji Search'}
+                   value={input}
+                   onChange={onChange} />
         </div>
     );
 };
