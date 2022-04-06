@@ -13,7 +13,7 @@ const Settings = () => {
             <div className={'header'}>
                 <NavLink to={'/widget'}>
                     <span className={'link'}>
-                        <ArrowLeftIcon color={currentTheme.arrow.color} />
+                        <ArrowLeftIcon color={'black'} />
                         <span style={currentTheme.text}>Go back</span>
                     </span>
                 </NavLink>
