@@ -1,4 +1,5 @@
 $emoji-container-size: 32px;
+$emoji-image-size: 25px;
 $emojis-count-in-row: 9;
 $emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
 $inner-gap: 10px;

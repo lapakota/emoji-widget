@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MemoryRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Widget from './widget/Widget';
+import Widget from './widget/Widget/Widget';
 import Settings from './settings/Settings';
 import './index.scss';
 import * as themes from './themes';

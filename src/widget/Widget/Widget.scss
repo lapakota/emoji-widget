@@ -1,4 +1,4 @@
-@import "../vars";
+@import "../../vars";
 
 .widget {
   width: $widget-width;
@@ -24,7 +24,6 @@
       border-radius: 5px;
 
       &:focus {
-        //box-shadow: inset 0 0 0 0.1rem rgba(158, 158, 158, 0.25);
         box-shadow: 0 0 0 2px rgba(245, 245, 245, 1),
         0 0 0 3px rgba(0, 144, 255, 1);
       }

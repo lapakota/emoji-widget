@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import EmojiGroup from './EmojiGroup';
-import ChangeGroupButton from './ChangeGroupButton';
+import EmojiGroup from '../EmojiGroup/EmojiGroup';
+import ChangeGroupButton from '../ChangeGroupButton/ChangeGroupButton';
 import './Widget.scss';
-import EmojiSearch from './EmojiSearch';
+import EmojiSearch from '../EmojiSearch';
 import { NavLink } from 'react-router-dom';
-import { CurrentThemeContext } from '../App';
-import FavoriteIcon from '../assets/icons/FavoriteIcon';
-import PeopleIcon from '../assets/icons/PeopleIcon';
-import SettingsIcon from '../assets/icons/SettingsIcon';
-import NatureIcon from '../assets/icons/NatureIcon';
-import FoodIcon from '../assets/icons/FoodIcon';
-import ActivitiesIcon from '../assets/icons/ActivitiesIcon';
-import TravelIcon from '../assets/icons/TravelIcon';
-import ObjectsIcon from '../assets/icons/ObjectsIcon';
-import SymbolsIcon from '../assets/icons/SymbolsIcon';
+import { CurrentThemeContext } from '../../App';
+import FavoriteIcon from '../../assets/icons/FavoriteIcon';
+import PeopleIcon from '../../assets/icons/PeopleIcon';
+import SettingsIcon from '../../assets/icons/SettingsIcon';
+import NatureIcon from '../../assets/icons/NatureIcon';
+import FoodIcon from '../../assets/icons/FoodIcon';
+import ActivitiesIcon from '../../assets/icons/ActivitiesIcon';
+import TravelIcon from '../../assets/icons/TravelIcon';
+import ObjectsIcon from '../../assets/icons/ObjectsIcon';
+import SymbolsIcon from '../../assets/icons/SymbolsIcon';
 import { Emoji } from 'emoji-data-ts';
-import { emojiGroups, Groups } from '../models/emojiGroups';
-import { emojisData } from '../models/emojisData';
+import { emojiGroups, Groups } from '../../models/emojiGroups';
+import { emojisData } from '../../models/emojisData';
 
 const RECENT_COUNT = 18;
 
