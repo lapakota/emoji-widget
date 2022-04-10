@@ -1,29 +1,8 @@
-@import "../vars";
+@import "../../vars";
 
 .settings {
-  width: $widget-width;
-  height: $widget-height;
   margin: auto;
   font-size: 18px;
-
-  .header {
-    padding: 0 $inner-gap;
-    height: 60px;
-    width: auto;
-    border-bottom: 1px solid #bdbdbd;
-
-    .link {
-      height: 60px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      span {
-        text-decoration: none;
-        padding-left: $inner-gap;
-      }
-    }
-  }
 
   .settings_menu {
     display: flex;

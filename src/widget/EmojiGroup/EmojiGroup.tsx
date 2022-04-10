@@ -5,7 +5,7 @@ import { Emoji } from 'emoji-data-ts';
 import sendMessage from '../../messageSender';
 
 type EmojiGroupProps = {
-    groupName: string;
+    groupName?: string;
     groupEmojis: Emoji[];
     updateRecent: (emoji: Emoji) => void;
 };
@@ -15,9 +15,11 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
 
     return (
         <div className="Emoji-group">
-            <h3 className="group-name" style={currentTheme.text}>
-                {groupName}
-            </h3>
+            {groupName && (
+                <h3 className="group-name" style={currentTheme.text}>
+                    {groupName}
+                </h3>
+            )}
             <div className="emojis-wrapper">
                 {groupEmojis.map((emojiInfo, index) => (
                     <div

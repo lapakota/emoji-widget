@@ -1,5 +1,5 @@
 export enum Groups {
-    Recent = 'Recent & Favourites',
+    Favourites = 'Recent & Favourites',
     Emotion = 'Emotion & People',
     Nature = 'Animals & Nature',
     Food = 'Food & Drink',
@@ -7,8 +7,9 @@ export enum Groups {
     Travel = 'Travel & Places',
     Objects = 'Objects',
     Symbols = 'Symbols & Flags',
-    Settings = 'Settings'
+    Settings = 'Settings',
+    Searched = 'Searched'
 }
 
 // @ts-ignore
-export const emojiGroups: string[] = Object.keys(Groups).map(key => Groups[key]);
+export const emojiGroups: Groups[] = Object.keys(Groups).map(key => Groups[key]);

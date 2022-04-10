@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { MemoryRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Widget from './widget/Widget/Widget';
-import Settings from './settings/Settings';
 import './index.scss';
 import * as themes from './themes';
 
@@ -24,19 +22,13 @@ const App = () => {
     };
 
     return (
-        <MemoryRouter>
-            <div className="app">
-                <ChangeThemeContext.Provider value={dispatchChangeTheme}>
-                    <CurrentThemeContext.Provider value={theme}>
-                        <Routes>
-                            <Route path="/widget" element={<Widget />} />
-                            <Route path="/settings" element={<Settings />} />
-                            <Route path="/" element={<Navigate replace to="/widget" />} />
-                        </Routes>
-                    </CurrentThemeContext.Provider>
-                </ChangeThemeContext.Provider>
-            </div>
-        </MemoryRouter>
+        <div className="app">
+            <ChangeThemeContext.Provider value={dispatchChangeTheme}>
+                <CurrentThemeContext.Provider value={theme}>
+                    <Widget />
+                </CurrentThemeContext.Provider>
+            </ChangeThemeContext.Provider>
+        </div>
     );
 };
 

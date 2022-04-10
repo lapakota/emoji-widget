@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import EmojiGroup from '../EmojiGroup/EmojiGroup';
 import ChangeGroupButton from '../ChangeGroupButton/ChangeGroupButton';
 import './Widget.scss';
-import EmojiSearch from '../EmojiSearch';
-import { NavLink } from 'react-router-dom';
 import { CurrentThemeContext } from '../../App';
 import FavoriteIcon from '../../assets/icons/FavoriteIcon';
 import PeopleIcon from '../../assets/icons/PeopleIcon';
@@ -17,11 +14,14 @@ import SymbolsIcon from '../../assets/icons/SymbolsIcon';
 import { Emoji } from 'emoji-data-ts';
 import { emojiGroups, Groups } from '../../models/emojiGroups';
 import { emojisData } from '../../models/emojisData';
+import SettingsGroup from '../WidgetGroups/SettingsGroup';
+import BasicGroup from '../WidgetGroups/BasicGroup';
+import FavouritesGroup from '../WidgetGroups/FavouritesGroup';
 
 const RECENT_COUNT = 18;
 
 const Widget: React.FC = () => {
-    const [currentGroupName, setCurrentGroupName] = useState<string>(loadCurrentGroupName());
+    const [currentGroupName, setCurrentGroupName] = useState<Groups>(loadCurrentGroupName());
     const [currentGroupEmojis, setCurrentGroupEmojis] = useState<Emoji[]>(emojisData[currentGroupName]);
 
     const [isSearching, setIsSearching] = useState(false);
@@ -29,6 +29,9 @@ const Widget: React.FC = () => {
 
     const [recentEmojis, setRecentEmojis] = useState<Emoji[]>(
         JSON.parse(localStorage.getItem('recentEmojis') as string) || []
+    );
+    const [favouritesEmojis, setFavouritesEmojis] = useState<Emoji[]>(
+        JSON.parse(localStorage.getItem('favouritesEmojis') as string) || []
     );
 
     const currentTheme = useContext(CurrentThemeContext);
@@ -57,19 +60,14 @@ const Widget: React.FC = () => {
         });
     };
 
-    const changeCurrentGroupData = (name: string) => {
+    const changeCurrentGroupData = (name: Groups) => () => {
+        setIsSearching(false);
         setCurrentGroupEmojis(emojisData[name]);
         setCurrentGroupName(name);
     };
 
     const updateSearchedGroup = (emojis: Emoji[]) => {
         setSearchedEmojis(emojis);
-    };
-
-    const getRightEmojis = () => {
-        if (isSearching) return searchedEmojis;
-        if (currentGroupName === Groups.Recent) return recentEmojis;
-        return currentGroupEmojis;
     };
 
     const icons = [
@@ -80,9 +78,9 @@ const Widget: React.FC = () => {
         <ActivitiesIcon color={currentTheme.text.color} />,
         <TravelIcon color={currentTheme.text.color} />,
         <ObjectsIcon color={currentTheme.text.color} />,
-        <SymbolsIcon color={currentTheme.text.color} />
+        <SymbolsIcon color={currentTheme.text.color} />,
+        <SettingsIcon color={currentTheme.text.color} />
     ];
-    const settingsIcon = <SettingsIcon color={currentTheme.text.color} />;
 
     return (
         <div className="widget" style={currentTheme.body}>
@@ -92,20 +90,30 @@ const Widget: React.FC = () => {
                         key={`ChangeGroupButton${index}`}
                         idGroup={index}
                         icon={icon}
-                        onClick={() => changeCurrentGroupData(emojiGroups[index])}
+                        onClick={changeCurrentGroupData(emojiGroups[index])}
                         isActive={emojiGroups[index] === currentGroupName}
                     />
                 ))}
-                <NavLink className={`emoji-container change-group_button`} to="/settings">
-                    {settingsIcon}
-                </NavLink>
             </div>
-            <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
-            <EmojiGroup
-                groupName={isSearching ? 'Searched' : currentGroupName}
-                groupEmojis={getRightEmojis()}
-                updateRecent={updateRecentEmojis}
-            />
+            {currentGroupName === Groups.Favourites ? (
+                <FavouritesGroup
+                    recentEmojis={isSearching ? searchedEmojis : recentEmojis}
+                    favouritesEmojis={isSearching ? [] : favouritesEmojis}
+                    updateSearchedGroup={updateSearchedGroup}
+                    updateRecentEmojis={updateRecentEmojis}
+                    setIsSearching={setIsSearching}
+                />
+            ) : currentGroupName === Groups.Settings ? (
+                <SettingsGroup />
+            ) : (
+                <BasicGroup
+                    groupName={isSearching ? Groups.Searched : currentGroupName}
+                    groupEmojis={isSearching ? searchedEmojis : currentGroupEmojis}
+                    updateSearchedGroup={updateSearchedGroup}
+                    updateRecentEmojis={updateRecentEmojis}
+                    setIsSearching={setIsSearching}
+                />
+            )}
         </div>
     );
 };
