@@ -24,10 +24,11 @@ const Menu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
     const { anchorPoint, show } = useContextMenu();
 
     const getEmojiByCoords = () => {
-        const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y) as HTMLImageElement;
-        console.log(targetEmojiData);
-        if (targetEmojiData?.className === 'emoji-img') {
-            return targetEmojiData.alt;
+        const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
+
+        if (targetEmojiData?.className === 'emoji-img') return (targetEmojiData as HTMLImageElement).alt;
+        if (targetEmojiData?.className.startsWith('emoji-container')) {
+            return (targetEmojiData.firstChild as HTMLImageElement).alt;
         }
     };
 
@@ -62,12 +63,12 @@ const Menu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
             <ul className="menu" style={getRightStyle()}>
                 <li>
                     <button className={'add-to-favourites_button'} onClick={addFavourites}>
-                        Add to favourites
+                        <span className={'button_text'}>Add to favourites</span>
                     </button>
                 </li>
                 <li>
                     <button className={'copy_button'} onClick={copyEmoji}>
-                        Copy emoji
+                        <span className={'button_text'}>Copy emoji</span>
                     </button>
                 </li>
             </ul>

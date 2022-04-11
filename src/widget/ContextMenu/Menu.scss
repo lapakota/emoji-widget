@@ -6,7 +6,6 @@
   width: 120px;
   height: 40px;
   margin: 0;
-  /* use absolute positioning  */
   position: absolute;
   list-style: none;
   box-shadow: 0 0 20px 0 #ccc;
@@ -23,6 +22,10 @@
 
     &:hover {
       color: #5CB176;
+    }
+
+    .button_text {
+      margin-left: 5px;
     }
   }
 }
