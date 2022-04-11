@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../../App';
 import { Emoji } from 'emoji-data-ts';
-import sendMessage from '../../messageSender';
+import sendMessage from '../../utils/messageSender';
 
 type EmojiGroupProps = {
     groupName?: string;
@@ -12,6 +12,11 @@ type EmojiGroupProps = {
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
     const currentTheme = useContext(CurrentThemeContext);
+
+    const onClick = (emojiInfo: Emoji) => {
+      updateRecent(emojiInfo);
+      sendMessage(emojiInfo.char);
+    }
 
     return (
         <div className="Emoji-group">
@@ -26,13 +31,9 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                         key={`${emojiInfo.short_name}${index}`}
                         className={`emoji-container ${emojiInfo.short_name}`}
                         title={emojiInfo.char + emojiInfo.short_name}
-                        onClick={() => {
-                            updateRecent(emojiInfo);
-                            // navigator.clipboard.writeText(emojiInfo.char);
-                            sendMessage(emojiInfo.char);
-                        }}
+                        onClick={() => onClick(emojiInfo)}
                     >
-                        <img className={'emoji-img'} src={`/img/apple/64/${emojiInfo.image_url}`} alt={'emoji'} />
+                        <img className={'emoji-img'} src={`/img/apple/64/${emojiInfo.image_url}`} alt={emojiInfo.char} />
                     </div>
                 ))}
             </div>

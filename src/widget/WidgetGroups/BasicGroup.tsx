@@ -1,8 +1,8 @@
-import EmojiSearch from '../EmojiSearch';
+import EmojiSearch from '../EmojiSearch/EmojiSearch';
 import EmojiGroup from '../EmojiGroup/EmojiGroup';
 import React from 'react';
 import { Emoji } from 'emoji-data-ts';
-import { Groups } from '../../models/emojiGroups';
+import { Groups } from '../../utils/emojiGroups';
 
 type BasicGroupProps = {
     groupName: Groups;

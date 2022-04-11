@@ -1,12 +1,14 @@
-import EmojiSearch from '../EmojiSearch';
-import EmojiGroup from '../EmojiGroup/EmojiGroup';
+import EmojiSearch from '../../EmojiSearch/EmojiSearch';
+import EmojiGroup from '../../EmojiGroup/EmojiGroup';
 import React from 'react';
 import { Emoji } from 'emoji-data-ts';
-import { Groups } from '../../models/emojiGroups';
+import { Groups } from '../../../utils/emojiGroups';
+import './FavouritesGroup.scss';
 
 type FavouritesGroupProps = {
     recentEmojis: Emoji[];
     favouritesEmojis: Emoji[];
+    isSearching: boolean;
     setIsSearching: (value: boolean) => void;
     updateSearchedGroup: (emojis: Emoji[]) => void;
     updateRecentEmojis: (emoji: Emoji) => void;
@@ -15,6 +17,7 @@ type FavouritesGroupProps = {
 const FavouritesGroup: React.FC<FavouritesGroupProps> = ({
     recentEmojis,
     favouritesEmojis,
+    isSearching,
     setIsSearching,
     updateSearchedGroup,
     updateRecentEmojis
@@ -23,8 +26,14 @@ const FavouritesGroup: React.FC<FavouritesGroupProps> = ({
         <>
             <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
             <EmojiGroup groupName={Groups.Favourites} groupEmojis={recentEmojis} updateRecent={updateRecentEmojis} />
-            <div className={'emoji-groups_separator'} />
-            <EmojiGroup groupEmojis={favouritesEmojis} updateRecent={updateRecentEmojis} />
+            {!isSearching && (
+                <>
+                    <div className={'emoji-groups_separator'}>
+                        <div className="separator_inner" />
+                    </div>
+                    <EmojiGroup groupEmojis={favouritesEmojis} updateRecent={updateRecentEmojis} />
+                </>
+            )}
         </>
     );
 };

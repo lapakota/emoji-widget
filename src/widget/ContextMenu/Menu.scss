@@ -1,0 +1,28 @@
+.menu {
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 0;
+  width: 120px;
+  height: 40px;
+  margin: 0;
+  /* use absolute positioning  */
+  position: absolute;
+  list-style: none;
+  box-shadow: 0 0 20px 0 #ccc;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+
+  .copy_button,
+  .add-to-favourites_button {
+    all: unset;
+    position: relative;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      color: #5CB176;
+    }
+  }
+}

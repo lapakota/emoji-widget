@@ -5,32 +5,4 @@
   height: $widget-height;
   margin: auto;
   font-size: 18px;
-
-
-  .search {
-    margin: $inner-gap 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .search-input {
-      all: unset;
-      width: calc(#{$emojis-row-width} - 10px);
-      padding: 5px;
-      border: none;
-      font-size: 14px;
-      background-color: #fff;
-      color: #212529;
-      border-radius: 5px;
-
-      &:focus {
-        box-shadow: 0 0 0 2px rgba(245, 245, 245, 1),
-        0 0 0 3px rgba(0, 144, 255, 1);
-      }
-    }
-  }
-
-  .emoji-groups_separator {
-    height: $emoji-container-size;
-  }
 }

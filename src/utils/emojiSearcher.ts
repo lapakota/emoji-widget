@@ -30,7 +30,11 @@ export default class EmojiSearcher {
         return foundEmojis;
     }
 
-    static _isQueryTokenSuitable(
+    static getEmojiDataByChar(char: string) {
+        return this.allEmojis.filter(x => x.char === char)[0];
+    }
+
+    private static _isQueryTokenSuitable(
         queryToken: string,
         nameToken: string,
         queryOccurrences: string[],
@@ -43,14 +47,14 @@ export default class EmojiSearcher {
         );
     }
 
-    static _splitIntoTokens(query: string, sep: ' ' | '_'): string[] {
+    private static _splitIntoTokens(query: string, sep: ' ' | '_'): string[] {
         return query
             .toLowerCase()
             .split(sep)
             .filter(x => x !== '');
     }
 
-    static _getAllEmojis() {
+    private static _getAllEmojis() {
         const allEmojis: Emoji[] = [];
         for (let name in emojisData) allEmojis.push(...emojisData[name]);
         return allEmojis;

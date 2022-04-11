@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './SettingsGroup.scss';
-import { CurrentThemeContext, ChangeThemeContext } from '../../App';
-import * as themes from '../../themes';
+import { CurrentThemeContext, ChangeThemeContext } from '../../../App';
+import * as themes from '../../../themes';
 
 const SettingsGroup = () => {
     const currentTheme = useContext(CurrentThemeContext);

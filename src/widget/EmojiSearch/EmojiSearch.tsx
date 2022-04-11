@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import EmojiSearcher from '../models/emojiSearcher';
+import EmojiSearcher from '../../utils/emojiSearcher';
 import { Emoji } from 'emoji-data-ts';
+import "./EmojiSearch.scss"
 
 type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;
