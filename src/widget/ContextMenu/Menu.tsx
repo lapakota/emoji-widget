@@ -4,8 +4,9 @@ import React from 'react';
 import { Emoji } from 'emoji-data-ts';
 import EmojiSearcher from '../../utils/emojiSearcher';
 
-const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+//TODO исправить
+const viewportWidth = 308;
+const viewportHeight = 440;
 
 const menuWidth = 120;
 const menuHeight = 40;
