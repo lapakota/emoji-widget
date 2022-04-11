@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Widget from './widget/Widget/Widget';
 import './index.scss';
 import * as themes from './themes';
-import Menu from "./widget/ContextMenu/Menu";
 
 export const CurrentThemeContext = React.createContext<typeof themes.light | typeof themes.dark>(themes.light);
 export const ChangeThemeContext = React.createContext<any>(() => {});
