@@ -1,5 +1,5 @@
 import useContextMenu from '../../utils/useContextMenu';
-import './Menu.scss';
+import './ContextMenu.scss';
 import React from 'react';
 import { Emoji } from 'emoji-data-ts';
 import EmojiSearcher from '../../utils/emojiSearcher';
@@ -21,7 +21,7 @@ type MenuProps = {
     updateFavourites: (emoji: Emoji) => void;
 };
 
-const Menu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
+const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
     const { anchorPoint, show } = useContextMenu();
 
     const getEmojiByCoords = () => {
@@ -78,4 +78,4 @@ const Menu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
     return <></>;
 };
 
-export default Menu;
+export default ContextMenu;

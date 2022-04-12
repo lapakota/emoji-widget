@@ -1,7 +1,7 @@
 @import "../../../vars";
 
 .emoji-groups_separator {
-  padding: 0 0 0 10px;
+  padding-left: $inner-gap;
   width: $emojis-row-width;
 
   .separator_inner {

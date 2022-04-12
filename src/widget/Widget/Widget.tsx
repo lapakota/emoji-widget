@@ -17,7 +17,7 @@ import { emojisData } from '../../utils/emojisData';
 import SettingsGroup from '../WidgetGroups/SettingsGroup/SettingsGroup';
 import BasicGroup from '../WidgetGroups/BasicGroup';
 import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
-import Menu from '../ContextMenu/Menu';
+import ContextMenu from '../ContextMenu/ContextMenu';
 
 const RECENT_COUNT = 18;
 
@@ -131,7 +131,7 @@ const Widget: React.FC = () => {
                     setIsSearching={setIsSearching}
                 />
             )}
-            <Menu updateFavourites={updateFavouritesEmojis} updateRecent={updateRecentEmojis} />
+            <ContextMenu updateFavourites={updateFavouritesEmojis} updateRecent={updateRecentEmojis} />
         </div>
     );
 };
