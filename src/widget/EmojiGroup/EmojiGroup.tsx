@@ -10,12 +10,32 @@ type EmojiGroupProps = {
     updateRecent: (emoji: EmojiType) => void;
 };
 
+const appleImgPath = '/img/sheet_apple_64_clean.png';
+const googleImgPath = '/img/sheet_google_64_clean.png';
+const twitterImgPath = '/img/sheet_twitter_64_clean.png';
+const facebookImgPath = '/img/sheet_facebook_64_clean.png';
+
+const sheetColumns = 60;
+const sheetRows = 60;
+const multiplyX = 100 / (sheetColumns - 1);
+const multiplyY = 100 / (sheetRows - 1);
+const sheetSizeX = 100 * sheetColumns;
+const sheetSizeY = 100 * sheetRows;
+
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
     const currentTheme = useContext(CurrentThemeContext);
 
     const onClick = (emojiInfo: EmojiType) => {
         updateRecent(emojiInfo);
         sendMessage(emojiInfo.char);
+    };
+
+    const getImageStyles = (emojiInfo: EmojiType) => {
+        return {
+            backgroundImage: `url(${appleImgPath})`,
+            backgroundPosition: `${emojiInfo.sheet_x * multiplyX}% ${emojiInfo.sheet_y * multiplyY}%`,
+            backgroundSize: `${sheetSizeX}% ${sheetSizeY}%`
+        };
     };
 
     return (
@@ -33,11 +53,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                         title={`${emojiInfo.char} ${emojiInfo.name}`}
                         onClick={() => onClick(emojiInfo)}
                     >
-                        <img
-                            className={'emoji-img'}
-                            src={`/img/apple/64/${emojiInfo.image_url}`}
-                            alt={emojiInfo.char}
-                        />
+                        <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />
                     </div>
                 ))}
             </div>

@@ -27,9 +27,10 @@ const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) =>
     const getEmojiByCoords = () => {
         const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
 
-        if (targetEmojiData?.className === 'emoji-img') return (targetEmojiData as HTMLImageElement).alt;
+        if (targetEmojiData?.className === 'emoji-img')
+            return (targetEmojiData as HTMLSpanElement).getAttribute('data-char');
         if (targetEmojiData?.className.startsWith('emoji-container')) {
-            return (targetEmojiData.firstChild as HTMLImageElement).alt;
+            return (targetEmojiData.firstChild as HTMLSpanElement).getAttribute('data-char');
         }
     };
 

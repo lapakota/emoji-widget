@@ -11,7 +11,7 @@ export default class EmojiSearcher {
         for (let emojiData of this.allEmojis) {
             const nameTokens = [
                 ...this._splitIntoTokens(emojiData.name, '_')
-                // ...this._splitIntoTokens(emojiData.name.ru, '_')
+                // TODO сделать словарь с переводами названий
             ];
 
             const queryOccurrences: string[] = [];
