@@ -42,35 +42,31 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
 
     //TODO зарефакторить
     let Div1 = styled.div`
-        &::-webkit-scrollbar-thumb {
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-    `;
+      &::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }`;
     let Div2 = styled.div`
-        &:hover {
-            background-color: #e8e8e8;
-        }
-    `;
+      &:hover {
+        background-color: #e8e8e8;
+      }`;
     if (currentTheme === themes.dark) {
         Div1 = styled.div`
-            &::-webkit-scrollbar-thumb {
-                box-shadow: inset 0 0 6px #5e5e5e;
-            }
-        `;
+          &::-webkit-scrollbar-thumb {
+            box-shadow: inset 0 0 6px #5e5e5e;
+          }`;
         Div2 = styled.div`
-            &:hover {
-                background-color: #5e5e5e;
-            }
-        `;
+          &:hover {
+            background-color: #5e5e5e;
+          }`;
     }
     return (
-        <div className="Emoji-group">
+        <div className='Emoji-group'>
             {groupName && (
-                <h3 className="group-name" style={currentTheme.text}>
+                <h3 className='group-name' style={currentTheme.text}>
                     {groupName}
                 </h3>
             )}
-            <Div1 className="emojis-wrapper">
+            <Div1 className='emojis-wrapper'>
                 {groupEmojis.map((emojiInfo, index) => (
                     <Div2
                         key={`${emojiInfo.short_name}${index}`}
