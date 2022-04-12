@@ -1,22 +1,42 @@
 import React, { useContext } from 'react';
 import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../../App';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from '../../utils/emojisData';
 import sendMessage from '../../utils/messageSender';
 
 type EmojiGroupProps = {
     groupName?: string;
-    groupEmojis: Emoji[];
-    updateRecent: (emoji: Emoji) => void;
+    groupEmojis: EmojiType[];
+    updateRecent: (emoji: EmojiType) => void;
 };
+
+const appleImgPath = '/img/sheet_apple_64_clean.png';
+// const googleImgPath = '/img/sheet_google_64_clean.png';
+// const twitterImgPath = '/img/sheet_twitter_64_clean.png';
+// const facebookImgPath = '/img/sheet_facebook_64_clean.png';
+
+const sheetColumns = 60;
+const sheetRows = 60;
+const multiplyX = 100 / (sheetColumns - 1);
+const multiplyY = 100 / (sheetRows - 1);
+const sheetSizeX = 100 * sheetColumns;
+const sheetSizeY = 100 * sheetRows;
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
     const currentTheme = useContext(CurrentThemeContext);
 
-    const onClick = (emojiInfo: Emoji) => {
-      updateRecent(emojiInfo);
-      sendMessage(emojiInfo.char);
-    }
+    const onClick = (emojiInfo: EmojiType) => {
+        updateRecent(emojiInfo);
+        sendMessage(emojiInfo.char);
+    };
+
+    const getImageStyles = (emojiInfo: EmojiType) => {
+        return {
+            backgroundImage: `url(${appleImgPath})`,
+            backgroundPosition: `${emojiInfo.sheet_x * multiplyX}% ${emojiInfo.sheet_y * multiplyY}%`,
+            backgroundSize: `${sheetSizeX}% ${sheetSizeY}%`
+        };
+    };
 
     return (
         <div className="Emoji-group">
@@ -29,11 +49,11 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                 {groupEmojis.map((emojiInfo, index) => (
                     <div
                         key={`${emojiInfo.short_name}${index}`}
-                        className={`emoji-container ${emojiInfo.short_name}`}
-                        title={emojiInfo.char + emojiInfo.short_name}
+                        className={`emoji-container ${emojiInfo.name}`}
+                        title={`${emojiInfo.char} ${emojiInfo.name}`}
                         onClick={() => onClick(emojiInfo)}
                     >
-                        <img className={'emoji-img'} src={`/img/apple/64/${emojiInfo.image_url}`} alt={emojiInfo.char} />
+                        <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />
                     </div>
                 ))}
             </div>

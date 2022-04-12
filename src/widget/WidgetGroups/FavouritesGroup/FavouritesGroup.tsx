@@ -1,17 +1,17 @@
 import EmojiSearch from '../../EmojiSearch/EmojiSearch';
 import EmojiGroup from '../../EmojiGroup/EmojiGroup';
 import React from 'react';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from "../../../utils/emojisData";
 import { Groups } from '../../../utils/emojiGroups';
 import './FavouritesGroup.scss';
 
 type FavouritesGroupProps = {
-    recentEmojis: Emoji[];
-    favouritesEmojis: Emoji[];
+    recentEmojis: EmojiType[];
+    favouritesEmojis: EmojiType[];
     isSearching: boolean;
     setIsSearching: (value: boolean) => void;
-    updateSearchedGroup: (emojis: Emoji[]) => void;
-    updateRecentEmojis: (emoji: Emoji) => void;
+    updateSearchedGroup: (emojis: EmojiType[]) => void;
+    updateRecentEmojis: (emoji: EmojiType) => void;
 };
 
 const FavouritesGroup: React.FC<FavouritesGroupProps> = ({

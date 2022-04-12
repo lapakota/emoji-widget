@@ -1,7 +1,7 @@
 import useContextMenu from '../../utils/useContextMenu';
 import './ContextMenu.scss';
 import React from 'react';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
 
 //TODO исправить
@@ -17,8 +17,8 @@ type MenuStyle = {
 };
 
 type MenuProps = {
-    updateRecent: (emoji: Emoji) => void;
-    updateFavourites: (emoji: Emoji) => void;
+    updateRecent: (emoji: EmojiType) => void;
+    updateFavourites: (emoji: EmojiType) => void;
 };
 
 const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
@@ -27,9 +27,10 @@ const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) =>
     const getEmojiByCoords = () => {
         const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
 
-        if (targetEmojiData?.className === 'emoji-img') return (targetEmojiData as HTMLImageElement).alt;
+        if (targetEmojiData?.className === 'emoji-img')
+            return (targetEmojiData as HTMLSpanElement).getAttribute('data-char');
         if (targetEmojiData?.className.startsWith('emoji-container')) {
-            return (targetEmojiData.firstChild as HTMLImageElement).alt;
+            return (targetEmojiData.firstChild as HTMLSpanElement).getAttribute('data-char');
         }
     };
 

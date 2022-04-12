@@ -1,15 +1,15 @@
 import EmojiSearch from '../EmojiSearch/EmojiSearch';
 import EmojiGroup from '../EmojiGroup/EmojiGroup';
 import React from 'react';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from '../../utils/emojisData';
 import { Groups } from '../../utils/emojiGroups';
 
 type BasicGroupProps = {
     groupName: Groups;
-    groupEmojis: Emoji[];
+    groupEmojis: EmojiType[];
     setIsSearching: (value: boolean) => void;
-    updateSearchedGroup: (emojis: Emoji[]) => void;
-    updateRecentEmojis: (emoji: Emoji) => void;
+    updateSearchedGroup: (emojis: EmojiType[]) => void;
+    updateRecentEmojis: (emoji: EmojiType) => void;
 };
 
 const BasicGroup: React.FC<BasicGroupProps> = ({
