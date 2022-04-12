@@ -11,9 +11,9 @@ type EmojiGroupProps = {
 };
 
 const appleImgPath = '/img/sheet_apple_64_clean.png';
-const googleImgPath = '/img/sheet_google_64_clean.png';
-const twitterImgPath = '/img/sheet_twitter_64_clean.png';
-const facebookImgPath = '/img/sheet_facebook_64_clean.png';
+// const googleImgPath = '/img/sheet_google_64_clean.png';
+// const twitterImgPath = '/img/sheet_twitter_64_clean.png';
+// const facebookImgPath = '/img/sheet_facebook_64_clean.png';
 
 const sheetColumns = 60;
 const sheetRows = 60;
