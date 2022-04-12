@@ -3,13 +3,15 @@ import Widget from './widget/Widget/Widget';
 import './index.scss';
 import * as themes from './themes';
 
-export const CurrentThemeContext = React.createContext<typeof themes.light | typeof themes.dark>(themes.light);
+type Theme = typeof themes.light | typeof themes.dark;
+export const CurrentThemeContext = React.createContext<Theme>(themes.light);
 export const ChangeThemeContext = React.createContext<any>(() => {});
 
+
 const App = () => {
-    const [theme, setTheme] = useState<typeof themes.light | typeof themes.dark>(themes.light);
+    const [theme, setTheme] = useState<Theme>(themes.light);
     const dispatchChangeTheme = () => {
-        let newTheme: typeof themes.light | typeof themes.dark = themes.light;
+        let newTheme: Theme = themes.light;
         switch (theme) {
             case themes.light:
                 newTheme = themes.dark;

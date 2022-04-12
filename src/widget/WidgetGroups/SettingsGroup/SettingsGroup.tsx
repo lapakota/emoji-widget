@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './SettingsGroup.scss';
 import { CurrentThemeContext, ChangeThemeContext } from '../../../App';
 import * as themes from '../../../themes';
+import { NavLink } from 'react-router-dom';
 
 const SettingsGroup = () => {
     const currentTheme = useContext(CurrentThemeContext);

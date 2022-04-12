@@ -1,29 +1,33 @@
+const backgroundColorLight = '#f5f5f5';
+const fontColourLight = '#000000';
+const inputBackgroundColorLight = '#ffffff';
+
+const backgroundColorDark = '#333336';
+const fontColourDark = '#dbdbdb';
+const inputBackgroundColorDark = '#444446';
+
 export const light = {
     body: {
-        backgroundColor: '#f5f5f5'
+        backgroundColor: backgroundColorLight
     },
     text: {
-        color: '#000'
+        color: fontColourLight
     },
-    button: {
-        color: 'black'
-    },
-    arrow: {
-        color: 'black'
+    input: {
+        color: fontColourLight,
+        backgroundColor: inputBackgroundColorLight
     }
 };
 
 export const dark = {
     body: {
-        backgroundColor: '#222226'
+        backgroundColor: backgroundColorDark
     },
     text: {
-        color: '#fefefe'
+        color: fontColourDark
     },
-    button: {
-        color: 'red'
-    },
-    arrow: {
-        color: '#fefefe'
+    input: {
+        color: fontColourDark,
+        backgroundColor: inputBackgroundColorDark
     }
 };
