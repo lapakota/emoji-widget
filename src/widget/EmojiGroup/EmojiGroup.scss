@@ -23,10 +23,6 @@
       width: 5px;
     }
 
-    &::-webkit-scrollbar-thumb {
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
     .emoji-container {
       display: flex;
       align-items: center;
@@ -40,10 +36,6 @@
 
       &:active .emoji-img {
         transform: scale(0.9)
-      }
-
-      &:hover {
-        background-color: #E8E8E8;
       }
 
       .emoji-img {
