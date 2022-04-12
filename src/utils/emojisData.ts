@@ -17,6 +17,7 @@ const normalizeEmojiName = (name: string) => {
         .toLowerCase()
         .split(/[-:. ]/)
         .filter(x => x.length > 0)
+        .map(x => x.trim())
         .join('_');
 };
 
