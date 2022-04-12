@@ -1,4 +1,4 @@
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from './emojisData';
 import { emojisData } from './emojisData';
 
 export default class EmojiSearcher {
@@ -6,11 +6,11 @@ export default class EmojiSearcher {
 
     static searchEmojis(query: string) {
         const queryTokens = this._splitIntoTokens(query, ' ');
-        const foundEmojis: Emoji[] = [];
+        const foundEmojis: EmojiType[] = [];
 
         for (let emojiData of this.allEmojis) {
             const nameTokens = [
-                ...this._splitIntoTokens(emojiData.short_name, '_')
+                ...this._splitIntoTokens(emojiData.name, '_')
                 // ...this._splitIntoTokens(emojiData.name.ru, '_')
             ];
 
@@ -55,7 +55,7 @@ export default class EmojiSearcher {
     }
 
     private static _getAllEmojis() {
-        const allEmojis: Emoji[] = [];
+        const allEmojis: EmojiType[] = [];
         for (let name in emojisData) allEmojis.push(...emojisData[name]);
         return allEmojis;
     }

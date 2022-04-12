@@ -1,6 +1,10 @@
 import { Emoji, EmojiData } from 'emoji-data-ts';
 
-type EmojisDataType = { [name: string]: Emoji[] };
+export interface EmojiType extends Emoji {
+    name: string;
+}
+
+type EmojiGroupType = { [name: string]: EmojiType[] };
 
 const getRightGroupName = (name: string) => {
     if (name === 'Smileys & Emotion' || name === 'People & Body') return 'Emotion & People';
@@ -8,13 +12,22 @@ const getRightGroupName = (name: string) => {
     return name;
 };
 
-const initEmojisData = () => {
-    const emojisData: EmojisDataType = Object.fromEntries(new EmojiData().emojiCategoryLookUp);
-    const processedEmojisData: EmojisDataType = {};
+const normalizeEmojiName = (name: string) => {
+    return name
+        .toLowerCase()
+        .split(/[-:. ]/)
+        .filter(x => x.length > 0)
+        .join('_');
+};
 
-    for (let name in emojisData) {
-        const targetGroup = getRightGroupName(name);
-        const emojis = emojisData[name];
+const initEmojisData = () => {
+    const emojisData = Object.fromEntries(new EmojiData().emojiCategoryLookUp);
+    const processedEmojisData: EmojiGroupType = {};
+
+    for (let groupName in emojisData) {
+        const targetGroup = getRightGroupName(groupName);
+        const emojis = emojisData[groupName] as unknown as EmojiType[];
+        emojis.map(x => (x.name = normalizeEmojiName(x.name)));
 
         if (!processedEmojisData.hasOwnProperty(targetGroup)) {
             processedEmojisData[targetGroup] = emojis;

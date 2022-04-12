@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import EmojiSearcher from '../../utils/emojiSearcher';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from "../../utils/emojisData";
 import "./EmojiSearch.scss"
 
 type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;
-    updateSearched: (emojis: Emoji[]) => void;
+    updateSearched: (emojis: EmojiType[]) => void;
 };
 
 const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearched }) => {

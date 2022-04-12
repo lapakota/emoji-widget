@@ -11,9 +11,8 @@ import ActivitiesIcon from '../../assets/icons/ActivitiesIcon';
 import TravelIcon from '../../assets/icons/TravelIcon';
 import ObjectsIcon from '../../assets/icons/ObjectsIcon';
 import SymbolsIcon from '../../assets/icons/SymbolsIcon';
-import { Emoji } from 'emoji-data-ts';
 import { emojiGroups, Groups } from '../../utils/emojiGroups';
-import { emojisData } from '../../utils/emojisData';
+import { emojisData, EmojiType } from '../../utils/emojisData';
 import SettingsGroup from '../WidgetGroups/SettingsGroup/SettingsGroup';
 import BasicGroup from '../WidgetGroups/BasicGroup';
 import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
@@ -31,13 +30,13 @@ const Widget: React.FC = () => {
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
         loadState(StatesKeys.CurrentGroupName, Groups.Emotion)
     );
-    const [currentGroupEmojis, setCurrentGroupEmojis] = useState<Emoji[]>(emojisData[currentGroupName]);
+    const [currentGroupEmojis, setCurrentGroupEmojis] = useState<EmojiType[]>(emojisData[currentGroupName]);
 
     const [isSearching, setIsSearching] = useState(false);
-    const [searchedEmojis, setSearchedEmojis] = useState<Emoji[]>([]);
+    const [searchedEmojis, setSearchedEmojis] = useState<EmojiType[]>([]);
 
-    const [recentEmojis, setRecentEmojis] = useState<Emoji[]>(loadState(StatesKeys.RecentEmojis, []));
-    const [favouritesEmojis, setFavouritesEmojis] = useState<Emoji[]>(loadState(StatesKeys.FavouritesEmojis, []));
+    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadState(StatesKeys.RecentEmojis, []));
+    const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(loadState(StatesKeys.FavouritesEmojis, []));
 
     const currentTheme = useContext(CurrentThemeContext);
 
@@ -51,8 +50,8 @@ const Widget: React.FC = () => {
         return JSON.parse(localStorage.getItem(key) as string) || defaultValue;
     }
 
-    const getNewEmojisState = (prevState: Emoji[], emoji: Emoji) => {
-        const newState: Emoji[] = JSON.parse(JSON.stringify(prevState));
+    const getNewEmojisState = (prevState: EmojiType[], emoji: EmojiType) => {
+        const newState: EmojiType[] = JSON.parse(JSON.stringify(prevState));
 
         const emojiIndex = newState.findIndex(e => e.char === emoji.char);
         emojiIndex !== -1 && newState.splice(emojiIndex, 1);
@@ -62,15 +61,15 @@ const Widget: React.FC = () => {
         return newState;
     };
 
-    const updateRecentEmojis = (emoji: Emoji) => {
+    const updateRecentEmojis = (emoji: EmojiType) => {
         setRecentEmojis(prevState => {
-            const newState: Emoji[] = getNewEmojisState(prevState, emoji);
+            const newState: EmojiType[] = getNewEmojisState(prevState, emoji);
             newState.length > RECENT_COUNT && newState.pop();
             return newState;
         });
     };
 
-    const updateFavouritesEmojis = (emoji: Emoji) => {
+    const updateFavouritesEmojis = (emoji: EmojiType) => {
         setFavouritesEmojis(prevState => {
             return getNewEmojisState(prevState, emoji);
         });
@@ -82,7 +81,7 @@ const Widget: React.FC = () => {
         setCurrentGroupName(name);
     };
 
-    const updateSearchedGroup = (emojis: Emoji[]) => {
+    const updateSearchedGroup = (emojis: EmojiType[]) => {
         setSearchedEmojis(emojis);
     };
 

@@ -1,7 +1,7 @@
 import useContextMenu from '../../utils/useContextMenu';
 import './ContextMenu.scss';
 import React from 'react';
-import { Emoji } from 'emoji-data-ts';
+import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
 
 //TODO исправить
@@ -17,8 +17,8 @@ type MenuStyle = {
 };
 
 type MenuProps = {
-    updateRecent: (emoji: Emoji) => void;
-    updateFavourites: (emoji: Emoji) => void;
+    updateRecent: (emoji: EmojiType) => void;
+    updateFavourites: (emoji: EmojiType) => void;
 };
 
 const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
