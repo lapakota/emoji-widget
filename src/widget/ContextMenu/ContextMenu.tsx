@@ -65,7 +65,7 @@ const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) =>
 
     if (show) {
         return (
-            <ul className={cn('menu', !isLightTheme ? 'menu-dark' : '')} style={getRightStyle()}>
+            <ul className={cn('menu', isLightTheme ? 'light-menu' : 'dark-menu')} style={getRightStyle()}>
                 <li>
                     <button className={'add-to-favourites_button'} onClick={addFavourites}>
                         <span className={'button_text'}>Add to favourites</span>

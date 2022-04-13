@@ -27,7 +27,7 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearche
 
     return (
         <div className={'search'}>
-            <input className={cn('search-input', !isLightTheme ? 'search-input-dark' : '')}
+            <input className={cn('search-input', isLightTheme ? 'light-search-input' : 'dark-search-input')}
                    placeholder={'Emoji Search'}
                    value={input}
                    onChange={onChange} />

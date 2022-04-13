@@ -87,7 +87,7 @@ const Widget: React.FC = () => {
     };
 
     function setCurrentIconColor() {
-        return isLightTheme ? 'black' : 'white';
+        return isLightTheme ? '#000000' : '#dbdbdb';
     }
 
     const icons = [
@@ -103,7 +103,7 @@ const Widget: React.FC = () => {
     ];
 
     return (
-        <div className={cn('widget', isLightTheme ? '' : "widget-dark")}>
+        <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
             <div className={'buttons-wrapper'}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
