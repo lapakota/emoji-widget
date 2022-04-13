@@ -3,7 +3,7 @@ import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../../App';
 import { EmojiType } from '../../utils/emojisData';
 import sendMessage from '../../utils/messageSender';
-import styled from 'styled-components';
+import cn from 'classnames';
 import * as themes from '../../themes';
 
 type EmojiGroupProps = {
@@ -40,29 +40,10 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
         };
     };
 
-    //TODO зарефакторить
-    let Div1 = styled.div`
-        &::-webkit-scrollbar-thumb {
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        }
-    `;
-    let Div2 = styled.div`
-        &:hover {
-            background-color: #e8e8e8;
-        }
-    `;
-    if (currentTheme === themes.dark) {
-        Div1 = styled.div`
-            &::-webkit-scrollbar-thumb {
-                box-shadow: inset 0 0 6px #5e5e5e;
-            }
-        `;
-        Div2 = styled.div`
-            &:hover {
-                background-color: #5e5e5e;
-            }
-        `;
-    }
+    const getRightThemedClassname = (lightName: string, darkName: string) => {
+        return currentTheme === themes.light ? lightName : darkName;
+    };
+
     return (
         <div className="Emoji-group">
             {groupName && (
@@ -70,18 +51,18 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                     {groupName}
                 </h3>
             )}
-            <Div1 className="emojis-wrapper">
+            <div className={cn('emojis-wrapper', getRightThemedClassname('light-wrapper', 'dark-wrapper'))}>
                 {groupEmojis.map((emojiInfo, index) => (
-                    <Div2
+                    <button
                         key={`${emojiInfo.short_name}${index}`}
-                        className={`emoji-container ${emojiInfo.name}`}
+                        className={cn('emoji-container', getRightThemedClassname('light-container', 'dark-container'))}
                         title={`${emojiInfo.char} ${emojiInfo.name}`}
                         onClick={() => onClick(emojiInfo)}
                     >
                         <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />
-                    </Div2>
+                    </button>
                 ))}
-            </Div1>
+            </div>
         </div>
     );
 };

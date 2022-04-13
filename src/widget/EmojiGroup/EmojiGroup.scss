@@ -11,6 +11,18 @@
     font-weight: normal;
   }
 
+  .light-wrapper {
+    &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .dark-wrapper {
+    &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6px #5e5e5e;
+    }
+  }
+
   .emojis-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -23,12 +35,29 @@
       width: 5px;
     }
 
+    .light-container {
+      &:hover {
+        background-color: #e8e8e8;
+      }
+    }
+
+    .dark-container {
+      &:hover {
+        background-color: #5e5e5e;
+      }
+    }
+
     .emoji-container {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       width: $emoji-container-size;
       height: $emoji-container-size;
+      border: none;
+      font: inherit;
+      color: inherit;
+      background-color: transparent;
       border-radius: 5px;
 
       user-select: none;
