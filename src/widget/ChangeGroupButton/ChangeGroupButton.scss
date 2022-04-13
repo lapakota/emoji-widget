@@ -7,11 +7,11 @@
   justify-content: left;
   align-items: center;
   height: 60px;
-  border-bottom: 1px solid $borderBottomColorLight;
+  border-bottom: 1px solid $borderBottomColor;
 
 
   .active-group {
-    box-shadow: inset 0 -2px $borderBottomColorLight;
+    box-shadow: inset 0 -2px $borderBottomColor;
   }
 
   .change-group_button {
@@ -28,7 +28,7 @@
     cursor: pointer;
 
     &:hover {
-      box-shadow: inset 0 -2px $borderHoverGroupColorLight;
+      box-shadow: inset 0 -2px $borderHoverGroupColor;
     }
   }
 }
