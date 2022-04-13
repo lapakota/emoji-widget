@@ -13,16 +13,17 @@
     }
 
     .settings_item {
-      color: black;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       margin: 0 20px;
       padding: 10px 0;
+
     }
   }
 }
 
+//for toggle
 input[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: none;

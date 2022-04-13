@@ -4,4 +4,10 @@
   width: $widget-width;
   height: $widget-height;
   font-size: 18px;
+  background-color: $backgroundColorLight;
+  color: $fontColourLight;
+}
+.widget-dark {
+  background-color: $backgroundColorDark !important;
+  color: $fontColourDark !important;
 }

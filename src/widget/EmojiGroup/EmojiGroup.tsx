@@ -4,7 +4,6 @@ import { CurrentThemeContext } from '../../App';
 import { EmojiType } from '../../utils/emojisData';
 import sendMessage from '../../utils/messageSender';
 import cn from 'classnames';
-import * as themes from '../../themes';
 
 type EmojiGroupProps = {
     groupName?: string;
@@ -25,7 +24,7 @@ const sheetSizeX = 100 * sheetColumns;
 const sheetSizeY = 100 * sheetRows;
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
-    const currentTheme = useContext(CurrentThemeContext);
+    const isLightTheme = useContext(CurrentThemeContext);
 
     const onClick = (emojiInfo: EmojiType) => {
         updateRecent(emojiInfo);
@@ -41,13 +40,13 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
     };
 
     const getRightThemedClassname = (lightName: string, darkName: string) => {
-        return currentTheme === themes.light ? lightName : darkName;
+        return isLightTheme ? lightName : darkName;
     };
 
     return (
         <div className="Emoji-group">
             {groupName && (
-                <h3 className="group-name" style={currentTheme.text}>
+                <h3 className="group-name">
                     {groupName}
                 </h3>
             )}

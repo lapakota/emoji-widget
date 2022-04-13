@@ -8,3 +8,18 @@ $widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
 $widget-height: 440px;
 
 $emojis-wrapper-height: 288px;
+
+$backgroundColorLight: #f5f5f5;
+$fontColourLight: #000000;
+$inputBackgroundColorLight: #ffffff;
+$hoverBackgroundColorLight: #e8e8e8;
+$scrollbarColorLight: #0000004C;
+$borderBottomColorLight: #bdbdbd;
+$borderHoverGroupColorLight: #dcdcdc;
+
+$backgroundColorDark: #333336;
+$fontColourDark: #dbdbdb;
+$inputBackgroundColorDark: #444446;
+$hoverBackgroundColorDark: #5e5e5e;
+
+$inputBorderColor: #0090FF;

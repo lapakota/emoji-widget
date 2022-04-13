@@ -17,6 +17,7 @@ import SettingsGroup from '../WidgetGroups/SettingsGroup/SettingsGroup';
 import BasicGroup from '../WidgetGroups/BasicGroup';
 import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
+import cn from 'classnames';
 
 const RECENT_COUNT = 18;
 
@@ -38,7 +39,7 @@ const Widget: React.FC = () => {
     const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadState(StatesKeys.RecentEmojis, []));
     const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(loadState(StatesKeys.FavouritesEmojis, []));
 
-    const currentTheme = useContext(CurrentThemeContext);
+    const isLightTheme = useContext(CurrentThemeContext);
 
     useEffect(() => {
         localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
@@ -85,20 +86,24 @@ const Widget: React.FC = () => {
         setSearchedEmojis(emojis);
     };
 
+    function setCurrentIconColor() {
+        return isLightTheme ? 'black' : 'white';
+    }
+
     const icons = [
-        <FavoriteIcon color={currentTheme.text.color} />,
-        <PeopleIcon color={currentTheme.text.color} />,
-        <NatureIcon color={currentTheme.text.color} />,
-        <FoodIcon color={currentTheme.text.color} />,
-        <ActivitiesIcon color={currentTheme.text.color} />,
-        <TravelIcon color={currentTheme.text.color} />,
-        <ObjectsIcon color={currentTheme.text.color} />,
-        <SymbolsIcon color={currentTheme.text.color} />,
-        <SettingsIcon color={currentTheme.text.color} />
+        <FavoriteIcon color={setCurrentIconColor()} />,
+        <PeopleIcon color={setCurrentIconColor()} />,
+        <NatureIcon color={setCurrentIconColor()} />,
+        <FoodIcon color={setCurrentIconColor()} />,
+        <ActivitiesIcon color={setCurrentIconColor()} />,
+        <TravelIcon color={setCurrentIconColor()} />,
+        <ObjectsIcon color={setCurrentIconColor()} />,
+        <SymbolsIcon color={setCurrentIconColor()} />,
+        <SettingsIcon color={setCurrentIconColor()} />
     ];
 
     return (
-        <div className="widget" style={currentTheme.body}>
+        <div className={cn('widget', isLightTheme ? '' : "widget-dark")}>
             <div className={'buttons-wrapper'}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
