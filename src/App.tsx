@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
 import Widget from './widget/Widget/Widget';
 import './index.scss';
-import * as themes from './themes';
 
-type Theme = typeof themes.light | typeof themes.dark;
-export const CurrentThemeContext = React.createContext<Theme>(themes.light);
-export const ChangeThemeContext = React.createContext<any>(() => {});
-
+export const CurrentThemeContext = React.createContext<boolean>(true);
+export const ChangeThemeContext = React.createContext<any>(() => {
+});
 
 const App = () => {
-    const [theme, setTheme] = useState<Theme>(themes.light);
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(true);
     const dispatchChangeTheme = () => {
-        let newTheme: Theme = themes.light;
-        switch (theme) {
-            case themes.light:
-                newTheme = themes.dark;
-                break;
-            case themes.dark:
-                newTheme = themes.light;
-                break;
-        }
-        setTheme(newTheme);
+        setIsLightTheme(!isLightTheme);
     };
-
+    console.log(isLightTheme);
     return (
-        <div className="app">
+        <div className='app'>
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
-                <CurrentThemeContext.Provider value={theme}>
+                <CurrentThemeContext.Provider value={isLightTheme}>
                     <Widget />
                 </CurrentThemeContext.Provider>
             </ChangeThemeContext.Provider>

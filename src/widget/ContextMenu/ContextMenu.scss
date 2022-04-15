@@ -1,6 +1,7 @@
+@import "../../vars";
+
 .menu {
   font-size: 14px;
-  background-color: #fff;
   border-radius: 2px;
   padding: 0;
   width: 120px;
@@ -8,7 +9,6 @@
   margin: 0;
   position: absolute;
   list-style: none;
-  box-shadow: 0 0 20px 0 #ccc;
   opacity: 1;
   transition: opacity 0.5s linear;
 
@@ -28,4 +28,16 @@
       margin-left: 5px;
     }
   }
+}
+
+.light-menu {
+  color: $fontColourLight;
+  background-color: $inputBackgroundColorLight;
+  box-shadow: 0 0 3px 0 #cccccc;
+}
+
+.dark-menu {
+  color: $fontColourDark;
+  background-color: $inputBackgroundColorDark;
+  box-shadow: none;
 }

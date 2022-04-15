@@ -1,8 +1,10 @@
 import useContextMenu from '../../utils/useContextMenu';
 import './ContextMenu.scss';
-import React from 'react';
+import React, { useContext } from 'react';
 import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
+import { CurrentThemeContext } from '../../App';
+import cn from 'classnames';
 
 //TODO исправить
 const viewportWidth = 308;
@@ -23,6 +25,7 @@ type MenuProps = {
 
 const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) => {
     const { anchorPoint, show } = useContextMenu();
+    const isLightTheme = useContext(CurrentThemeContext);
 
     const getEmojiByCoords = () => {
         const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
@@ -62,7 +65,7 @@ const ContextMenu: React.FC<MenuProps> = ({ updateRecent, updateFavourites }) =>
 
     if (show) {
         return (
-            <ul className="menu" style={getRightStyle()}>
+            <ul className={cn('menu', isLightTheme ? 'light-menu' : 'dark-menu')} style={getRightStyle()}>
                 <li>
                     <button className={'add-to-favourites_button'} onClick={addFavourites}>
                         <span className={'button_text'}>Add to favourites</span>
