@@ -45,17 +45,13 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
 
     return (
         <div className="emoji-group">
-            {groupName && (
-                <h3 className="group-name">
-                    {groupName}
-                </h3>
-            )}
+            {groupName && <h3 className="group-name">{groupName}</h3>}
             <div className={cn('emojis-wrapper', getRightThemeClassname('light-wrapper', 'dark-wrapper'))}>
                 {groupEmojis.map((emojiInfo, index) => (
                     <button
                         key={`${emojiInfo.short_name}${index}`}
                         className={cn('emoji-container', getRightThemeClassname('light-container', 'dark-container'))}
-                        title={`${emojiInfo.char} ${emojiInfo.name}`}
+                        title={`${emojiInfo.char} ${emojiInfo.short_name}`}
                         onClick={() => onClick(emojiInfo)}
                     >
                         <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />

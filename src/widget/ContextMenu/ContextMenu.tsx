@@ -7,9 +7,6 @@ import { CurrentThemeContext } from '../../App';
 import cn from 'classnames';
 import { Groups } from '../../utils/emojiGroups';
 
-const viewportWidth = document.documentElement.clientWidth;
-const viewportHeight = document.documentElement.clientHeight;
-
 const menuWidth = 100;
 const menuHeight = 66;
 
@@ -27,7 +24,11 @@ type ContextMenuProps = {
 
 const ContextMenu: React.FC<ContextMenuProps> = ({ currentGroupName, updateRecent, addFavourite, removeFavourite }) => {
     const { anchorPoint, show } = useContextMenu();
+
     const isLightTheme = useContext(CurrentThemeContext);
+
+    const widgetWidth = document.documentElement.clientWidth;
+    const widgetHeight = document.documentElement.clientHeight;
 
     const getEmojiByMouseCoords = () => {
         const targetEmojiData = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
@@ -61,10 +62,10 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ currentGroupName, updateRecen
     const getRightPositionStyle = () => {
         const positionStyle: MenuPositionStyle = { top: 0, left: 0 };
         // Доп сдвиг на 1 пиксель, чтобы не перекрывать контейнер со смайликом
-        if (anchorPoint.x > viewportWidth / 2) positionStyle.left = anchorPoint.x - menuWidth - 1;
+        if (anchorPoint.x > widgetWidth / 2) positionStyle.left = anchorPoint.x - menuWidth - 1;
         else positionStyle.left = anchorPoint.x + 1;
 
-        if (anchorPoint.y > viewportHeight - menuHeight) positionStyle.top = anchorPoint.y - menuHeight - 1;
+        if (anchorPoint.y > widgetHeight - menuHeight) positionStyle.top = anchorPoint.y - menuHeight - 1;
         else positionStyle.top = anchorPoint.y + 1;
 
         return positionStyle;
