@@ -4,16 +4,30 @@
   font-size: 14px;
   border-radius: 2px;
   padding: 0;
-  width: 120px;
-  height: 40px;
   margin: 0;
   position: absolute;
   list-style: none;
-  opacity: 1;
-  transition: opacity 0.5s linear;
+
+  .button_text {
+    font-size: inherit;
+    padding-left: 8px;
+  }
+
+  .current-emoji_wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid #bdbdbd;
+    user-select: none;
+
+    .current-emoji {
+      font-size: 18px;
+    }
+  }
 
   .copy_button,
-  .add-to-favourites_button {
+  .add-to-favourites_button,
+  .remove-from-favourites_button {
     all: unset;
     position: relative;
     width: 100%;
@@ -21,11 +35,7 @@
     cursor: pointer;
 
     &:hover {
-      color: #5CB176;
-    }
-
-    .button_text {
-      margin-left: 5px;
+      color: #0090ff;
     }
   }
 }

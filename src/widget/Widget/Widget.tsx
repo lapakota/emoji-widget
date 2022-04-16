@@ -54,7 +54,7 @@ const Widget: React.FC = () => {
         return JSON.parse(localStorage.getItem(key) as string) || defaultValue;
     }
 
-    const getNewEmojisState = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {
+    const getNewEmojisStateAfterAdding = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {
         const newState: EmojiType[] = JSON.parse(JSON.stringify(prevState));
 
         const emojiIndex = newState.findIndex(e => e.char === emoji.char);
@@ -67,11 +67,15 @@ const Widget: React.FC = () => {
     };
 
     const updateRecentEmojis = (emoji: EmojiType) => {
-        setRecentEmojis(prevState => getNewEmojisState(prevState, emoji, RECENT_COUNT));
+        setRecentEmojis(prevState => getNewEmojisStateAfterAdding(prevState, emoji, RECENT_COUNT));
     };
 
-    const updateFavouritesEmojis = (emoji: EmojiType) => {
-        setFavouritesEmojis(prevState => getNewEmojisState(prevState, emoji, FAVOURITES_COUNT));
+    const addFavouriteEmoji = (emoji: EmojiType) => {
+        setFavouritesEmojis(prevState => getNewEmojisStateAfterAdding(prevState, emoji, FAVOURITES_COUNT));
+    };
+
+    const removeFavouriteEmoji = (emoji: EmojiType) => {
+        setFavouritesEmojis(prevState => prevState.filter(x => x.char !== emoji.char));
     };
 
     const changeCurrentGroupData = (name: Groups) => () => {
@@ -133,7 +137,12 @@ const Widget: React.FC = () => {
                     setIsSearching={setIsSearching}
                 />
             )}
-            <ContextMenu updateFavourites={updateFavouritesEmojis} updateRecent={updateRecentEmojis} />
+            <ContextMenu
+                currentGroupName={currentGroupName}
+                addFavourite={addFavouriteEmoji}
+                removeFavourite={removeFavouriteEmoji}
+                updateRecent={updateRecentEmojis}
+            />
         </div>
     );
 };

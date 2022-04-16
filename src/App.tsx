@@ -11,7 +11,6 @@ const App = () => {
     const dispatchChangeTheme = () => {
         setIsLightTheme(!isLightTheme);
     };
-    console.log(isLightTheme);
     return (
         <div className='app'>
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
