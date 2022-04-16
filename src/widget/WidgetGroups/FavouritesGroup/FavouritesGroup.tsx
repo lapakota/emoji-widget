@@ -1,7 +1,7 @@
 import EmojiSearch from '../../EmojiSearch/EmojiSearch';
 import EmojiGroup from '../../EmojiGroup/EmojiGroup';
 import React from 'react';
-import { EmojiType } from "../../../utils/emojisData";
+import { EmojiType } from '../../../utils/emojisData';
 import { Groups } from '../../../utils/emojiGroups';
 import './FavouritesGroup.scss';
 

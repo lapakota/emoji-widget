@@ -8,7 +8,7 @@ import cn from 'classnames';
 import { Groups } from '../../utils/emojiGroups';
 
 const menuWidth = 100;
-const menuHeight = 66;
+const menuHeight = 70;
 
 type MenuPositionStyle = {
     top: number;
