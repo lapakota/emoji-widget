@@ -13,7 +13,7 @@ const viewportHeight = document.documentElement.clientHeight;
 const menuWidth = 100;
 const menuHeight = 66;
 
-type MenuStyle = {
+type MenuPositionStyle = {
     top: number;
     left: number;
 };
@@ -59,15 +59,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ currentGroupName, updateRecen
     };
 
     const getRightPositionStyle = () => {
-        const style: MenuStyle = { top: 0, left: 0 };
+        const positionStyle: MenuPositionStyle = { top: 0, left: 0 };
         // Доп сдвиг на 1 пиксель, чтобы не перекрывать контейнер со смайликом
-        if (anchorPoint.x > viewportWidth / 2) style.left = anchorPoint.x - menuWidth - 1;
-        else style.left = anchorPoint.x + 1;
+        if (anchorPoint.x > viewportWidth / 2) positionStyle.left = anchorPoint.x - menuWidth - 1;
+        else positionStyle.left = anchorPoint.x + 1;
 
-        if (anchorPoint.y > viewportHeight - menuHeight) style.top = anchorPoint.y - menuHeight - 1;
-        else style.top = anchorPoint.y + 1;
+        if (anchorPoint.y > viewportHeight - menuHeight) positionStyle.top = anchorPoint.y - menuHeight - 1;
+        else positionStyle.top = anchorPoint.y + 1;
 
-        return style;
+        return positionStyle;
     };
 
     const currentEmojiChar = getEmojiByMouseCoords();
