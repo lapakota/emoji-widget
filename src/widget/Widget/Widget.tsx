@@ -19,7 +19,10 @@ import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
 
-const RECENT_COUNT = 18;
+const EMOJIS_IN_ROW = 9;
+
+const RECENT_COUNT = EMOJIS_IN_ROW;
+const FAVOURITES_COUNT = EMOJIS_IN_ROW * 7;
 
 enum StatesKeys {
     CurrentGroupName = 'currentGroupName',
@@ -51,7 +54,7 @@ const Widget: React.FC = () => {
         return JSON.parse(localStorage.getItem(key) as string) || defaultValue;
     }
 
-    const getNewEmojisState = (prevState: EmojiType[], emoji: EmojiType) => {
+    const getNewEmojisState = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {
         const newState: EmojiType[] = JSON.parse(JSON.stringify(prevState));
 
         const emojiIndex = newState.findIndex(e => e.char === emoji.char);
@@ -59,21 +62,16 @@ const Widget: React.FC = () => {
 
         newState.unshift(emoji);
 
+        newState.length > limit && newState.pop();
         return newState;
     };
 
     const updateRecentEmojis = (emoji: EmojiType) => {
-        setRecentEmojis(prevState => {
-            const newState: EmojiType[] = getNewEmojisState(prevState, emoji);
-            newState.length > RECENT_COUNT && newState.pop();
-            return newState;
-        });
+        setRecentEmojis(prevState => getNewEmojisState(prevState, emoji, RECENT_COUNT));
     };
 
     const updateFavouritesEmojis = (emoji: EmojiType) => {
-        setFavouritesEmojis(prevState => {
-            return getNewEmojisState(prevState, emoji);
-        });
+        setFavouritesEmojis(prevState => getNewEmojisState(prevState, emoji, FAVOURITES_COUNT));
     };
 
     const changeCurrentGroupData = (name: Groups) => () => {

@@ -39,22 +39,22 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
         };
     };
 
-    const getRightThemedClassname = (lightName: string, darkName: string) => {
+    const getRightThemeClassname = (lightName: string, darkName: string) => {
         return isLightTheme ? lightName : darkName;
     };
 
     return (
-        <div className="Emoji-group">
+        <div className="emoji-group">
             {groupName && (
                 <h3 className="group-name">
                     {groupName}
                 </h3>
             )}
-            <div className={cn('emojis-wrapper', getRightThemedClassname('light-wrapper', 'dark-wrapper'))}>
+            <div className={cn('emojis-wrapper', getRightThemeClassname('light-wrapper', 'dark-wrapper'))}>
                 {groupEmojis.map((emojiInfo, index) => (
                     <button
                         key={`${emojiInfo.short_name}${index}`}
-                        className={cn('emoji-container', getRightThemedClassname('light-container', 'dark-container'))}
+                        className={cn('emoji-container', getRightThemeClassname('light-container', 'dark-container'))}
                         title={`${emojiInfo.char} ${emojiInfo.name}`}
                         onClick={() => onClick(emojiInfo)}
                     >
