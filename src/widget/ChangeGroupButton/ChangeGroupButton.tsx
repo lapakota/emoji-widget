@@ -1,23 +1,25 @@
 import React from 'react';
 import './ChangeGroupButton.scss';
 import '../EmojiGroup/EmojiGroup.scss';
+import { Groups } from '../../utils/emojiGroups';
 
 type ChangeGroupButtonProps = {
-    idGroup: number;
+    groupName: Groups;
     icon: JSX.Element;
     onClick: () => void;
     isActive: boolean;
 };
 
-const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ idGroup, icon, onClick, isActive }) => {
+const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, onClick, isActive }) => {
     return (
-            <button
-                id={`change-group_button ${idGroup}`}
-                className={`change-group_button${isActive ? ' active-group' : ''}`}
-                onClick={onClick}
-            >
-                {icon}
-            </button>
+        <button
+            id={groupName}
+            name={`change group to ${groupName}`}
+            className={`change-group_button${isActive ? ' active-group' : ''}`}
+            onClick={onClick}
+        >
+            {icon}
+        </button>
     );
 };
 

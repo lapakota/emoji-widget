@@ -110,7 +110,7 @@ const Widget: React.FC = () => {
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
                         key={`ChangeGroupButton${index}`}
-                        idGroup={index}
+                        groupName={emojiGroups[index]}
                         icon={icon}
                         onClick={changeCurrentGroupData(emojiGroups[index])}
                         isActive={emojiGroups[index] === currentGroupName}
