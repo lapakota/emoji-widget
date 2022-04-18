@@ -1,0 +1,108 @@
+@import "../../vars";
+
+$image-size: 40px;
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+$button-font-size: 14px;
+
+.auth {
+  margin: 20px 20px 10px;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &_name {
+      max-width: calc(100% - #{$image-size});
+      word-break: break-word;
+    }
+
+    &_image {
+      width: $image-size;
+      height: $image-size;
+      border-radius: 50%;
+      right: 0;
+    }
+  }
+
+  .light-login {
+    .google-icon-wrapper {
+      background-color: $white;
+    }
+  }
+
+  .dark-login {
+    .google-icon-wrapper {
+      background-color: $inputBackgroundColorDark;
+    }
+  }
+
+  .login_button {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 42px;
+    background-color: $google-blue;
+    border-radius: 2px;
+    cursor: pointer;
+
+    .google-icon-wrapper {
+      margin-top: 1px;
+      margin-left: 1px;
+      width: 40px;
+      height: 40px;
+      border-radius: 2px;
+    }
+
+    .google-icon {
+      margin-top: 11px;
+      margin-left: 11px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .btn-text {
+      margin: 11px 44px 0 0;
+      color: $white;
+      font-size: $button-font-size;
+      letter-spacing: 0.2px;
+      user-select: none;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 6px $google-blue;
+    }
+
+    &:active {
+      background: $button-active-blue;
+    }
+  }
+
+  .logOut_button {
+    width: 100%;
+    height: 22px;
+    margin-top: 10px;
+    color: white;
+    background-color: $google-blue;
+    border-radius: 2px;
+    border: none;
+    font-size: $button-font-size;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 6px $google-blue;
+    }
+
+    &:active {
+      background: $button-active-blue;
+    }
+  }
+
+}
