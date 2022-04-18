@@ -51,7 +51,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                     <button
                         key={`${emojiInfo.short_name}${index}`}
                         className={cn('emoji-container', getRightThemeClassname('light-container', 'dark-container'))}
-                        title={`${emojiInfo.char} ${emojiInfo.short_name}`}
+                        title={emojiInfo.short_name}
                         onClick={() => onClick(emojiInfo)}
                     >
                         <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />
