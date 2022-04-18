@@ -7,13 +7,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyDuR-AE9QJCSpPN7pwyjEjABJvubdzBjcg',
-    authDomain: 'shpora-emoji-widget.firebaseapp.com',
-    projectId: 'shpora-emoji-widget',
-    storageBucket: 'shpora-emoji-widget.appspot.com',
-    messagingSenderId: '495862607282',
-    appId: '1:495862607282:web:21dc2b88ed5ef37c7588ab',
-    measurementId: 'G-PYCSWKQWFB'
+    apiKey: 'AIzaSyBLaYk-2wCn0Oo8J-OXvUvDl3AJws4Ib1E',
+    authDomain: 'shpora-widget.firebaseapp.com',
+    projectId: 'shpora-widget',
+    storageBucket: 'shpora-widget.appspot.com',
+    messagingSenderId: '183747301370',
+    appId: '1:183747301370:web:50f790d63b023328dade43'
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
