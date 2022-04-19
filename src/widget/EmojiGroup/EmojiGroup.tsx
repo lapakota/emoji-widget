@@ -7,6 +7,7 @@ import cn from 'classnames';
 
 type EmojiGroupProps = {
     groupName?: string;
+    isFavouriteGroup?: boolean;
     groupEmojis: EmojiType[];
     updateRecent: (emoji: EmojiType) => void;
 };
@@ -23,7 +24,12 @@ const multiplyY = 100 / (sheetRows - 1);
 const sheetSizeX = 100 * sheetColumns;
 const sheetSizeY = 100 * sheetRows;
 
-const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateRecent }) => {
+const EmojiGroup: React.FC<EmojiGroupProps> = ({
+    groupName,
+    isFavouriteGroup = false,
+    groupEmojis,
+    updateRecent
+}) => {
     const isLightTheme = useContext(CurrentThemeContext);
 
     const onClick = (emojiInfo: EmojiType) => {
@@ -54,7 +60,12 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
                         title={emojiInfo.short_name}
                         onClick={() => onClick(emojiInfo)}
                     >
-                        <span className={'emoji-img'} data-char={emojiInfo.char} style={getImageStyles(emojiInfo)} />
+                        <span
+                            className={'emoji-img'}
+                            data-char={emojiInfo.char}
+                            data-is-favourite={isFavouriteGroup}
+                            style={getImageStyles(emojiInfo)}
+                        />
                     </button>
                 ))}
             </div>
