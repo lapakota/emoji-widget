@@ -22,6 +22,10 @@ const Auth: React.FC = () => {
         await signOut(auth).catch(e => console.log(e));
     };
 
+    const createTabWithGoogleAccount = () => {
+        chrome.tabs.create({ url: 'https://myaccount.google.com/' }).catch(e => console.error(e));
+    };
+
     if (loading) {
         return (
             <div className={'auth'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -35,7 +39,12 @@ const Auth: React.FC = () => {
             {user && (
                 <div className={'user-info'}>
                     <div className={'user-info_name'}>{user.displayName}</div>
-                    <img className={'user-info_image'} src={user.photoURL as string} alt={'user avatar'} />
+                    <img
+                        className={'user-info_image'}
+                        src={user.photoURL as string}
+                        alt={'user avatar'}
+                        onClick={createTabWithGoogleAccount}
+                    />
                 </div>
             )}
             {user ? (

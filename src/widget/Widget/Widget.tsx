@@ -18,6 +18,9 @@ import BasicGroup from '../WidgetGroups/BasicGroup';
 import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
+// import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
+// import { FirebaseContext } from '../../index';
+// import { collection, setDoc, doc, getDoc } from 'firebase/firestore';
 
 const EMOJIS_IN_ROW = 9;
 
@@ -31,16 +34,22 @@ enum StatesKeys {
 }
 
 const Widget: React.FC = () => {
+    // const { firestore } = useContext(FirebaseContext);
+    // const [widgetState, loading] = useDocumentData(doc(firestore, 'widgetState', 'state'));
+    // console.log(widgetState);
+    const widgetState = undefined
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
-        loadState(StatesKeys.CurrentGroupName, Groups.Emotion)
+        loadState(StatesKeys.CurrentGroupName, Groups.Emotion, widgetState)
     );
     const [currentGroupEmojis, setCurrentGroupEmojis] = useState<EmojiType[]>(emojisData[currentGroupName]);
 
     const [isSearching, setIsSearching] = useState(false);
     const [searchedEmojis, setSearchedEmojis] = useState<EmojiType[]>([]);
 
-    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadState(StatesKeys.RecentEmojis, []));
-    const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(loadState(StatesKeys.FavouritesEmojis, []));
+    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadState(StatesKeys.RecentEmojis, [], widgetState));
+    const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(
+        loadState(StatesKeys.FavouritesEmojis, [], widgetState)
+    );
 
     const isLightTheme = useContext(CurrentThemeContext);
 
@@ -48,10 +57,21 @@ const Widget: React.FC = () => {
         localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
         localStorage.setItem('favouritesEmojis', JSON.stringify(favouritesEmojis));
         localStorage.setItem('currentGroupName', JSON.stringify(currentGroupName));
+
+        // const widgetStateRef = collection(firestore, 'widgetState');
+
+        // setDoc(doc(widgetStateRef, 'state'), {
+        //     recentEmojis: recentEmojis,
+        //     favouritesEmojis: favouritesEmojis,
+        //     currentGroupName: currentGroupName
+        // }).catch(e => console.error(e));
     }, [recentEmojis, favouritesEmojis, currentGroupName]);
 
-    function loadState(key: string, defaultValue: any) {
-        return JSON.parse(localStorage.getItem(key) as string) || defaultValue;
+    function loadState(key: string, defaultValue: any, widgetState: any) {
+        const state = JSON.parse(localStorage.getItem(key) as string);
+        if (state) return state;
+        if (widgetState && widgetState[key]) return widgetState[key];
+        return defaultValue;
     }
 
     const getNewEmojisStateAfterAdding = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {

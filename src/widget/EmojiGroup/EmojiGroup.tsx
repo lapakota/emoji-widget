@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './EmojiGroup.scss';
 import { CurrentThemeContext } from '../../App';
 import { EmojiType } from '../../utils/emojisData';
-import sendMessage from '../../utils/messageSender';
+import sendEmojiMessage from '../../utils/messageSender';
 import cn from 'classnames';
 
 type EmojiGroupProps = {
@@ -28,7 +28,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, groupEmojis, updateR
 
     const onClick = (emojiInfo: EmojiType) => {
         updateRecent(emojiInfo);
-        sendMessage(emojiInfo.char);
+        sendEmojiMessage(emojiInfo.char);
     };
 
     const getImageStyles = (emojiInfo: EmojiType) => {
