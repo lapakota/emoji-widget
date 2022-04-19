@@ -2,19 +2,26 @@
   "name": "Emoji Widget",
   "description": "Widget for picking Emojis",
   "version": "3.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "identity",
+    "identity.email"
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
     "default_title": "Open the widget"
   },
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "windows": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X",
+        "linux": "Ctrl+Shift+X"
+      }
+    }
   },
   "content_scripts": [
     {
@@ -27,18 +34,22 @@
       ]
     }
   ],
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+X",
-        "mac": "Command+Shift+X"
-      }
-    }
-  },
-  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
   "icons": {
     "16": "favicon-16x16.png",
     "32": "favicon-32x32.png",
     "192": "favicon-192x192.png"
-  }
+  },
+  "oauth2": {
+    "client_id": "183747301370-9p4aiv6c53r3pktl6phujp7gch0593i2.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1iKTwCis31Zgi05IA3OoBOymXTbuZVMFyr9M/nYYwugzvpA5jwbDG5KijYOli4ILutl1ZaYTuZ3n4dG+p0irBb4KLry6ifdBh9OF6Brpr/5PaPXvxMFTYHf3hDWrVnmVp5w1fYO9zuOosEQl47dSTO0Tf49+qT/2TUG9QvLrzUtS5gztnWM9riHYq+5I97yCmnC3gpIsqqVbCSAWTeP89oXbSjdSPQFBTdZrCJXRMIBeK+i8ZJ96VYl82qYnW0ucm4mkZVWb3EDnmT1i/f5uP1wijCaC8vNfO3LeSlR3gQXOz//Xeezmji2+bumGKQjwcOLCimPSocBdTa5sDsOs7wIDAQAB"
 }

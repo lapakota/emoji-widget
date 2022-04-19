@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signOut, signInWithCredential } from 'firebase/auth';
 import './Auth.scss';
 import { CurrentThemeContext } from '../../App';
 import cn from 'classnames';
@@ -12,9 +12,14 @@ const Auth: React.FC = () => {
     const { auth } = useContext(FirebaseContext);
     const [user, loading] = useAuthState(auth);
 
-    const login = async () => {
-        const provider = new GoogleAuthProvider();
-        const { user } = await signInWithPopup(auth, provider);
+    const login = () => {
+        chrome.identity.getAuthToken({}, token => {
+            let credential = GoogleAuthProvider.credential(null, token);
+            signInWithCredential(auth, credential).then(userCredential => {
+                const user = auth.currentUser;
+                console.log(userCredential, user);
+            });
+        });
         console.log(user);
     };
 
