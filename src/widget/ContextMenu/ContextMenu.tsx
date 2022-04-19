@@ -28,7 +28,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
     const widgetWidth = document.documentElement.clientWidth;
     const widgetHeight = document.documentElement.clientHeight;
 
-    const getEmojiGroupDataAttribute = (attr: string) => {
+    const getDataAttributeByMouseCoords = (attr: string) => {
         const targetElement = document.elementFromPoint(anchorPoint.x, anchorPoint.y);
         if (targetElement?.classList.length === 0) return;
 
@@ -39,11 +39,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
     };
 
     const getEmojiByMouseCoords = () => {
-        return getEmojiGroupDataAttribute('data-char');
+        return getDataAttributeByMouseCoords('data-char');
     };
 
     const isFavouritesEmojis = () => {
-        return String(getEmojiGroupDataAttribute('data-is-favourite')).toLowerCase() === 'true';
+        return String(getDataAttributeByMouseCoords('data-is-favourite')).toLowerCase() === 'true';
     };
 
     const addToFavourites = () => {
@@ -76,7 +76,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
         return positionStyle;
     };
 
-    const currentEmojiChar = getEmojiGroupDataAttribute('data-char');
+    const currentEmojiChar = getDataAttributeByMouseCoords('data-char');
     const isFavourites = isFavouritesEmojis();
 
     if (show && currentEmojiChar) {
