@@ -7,10 +7,15 @@ export const ChangeThemeContext = React.createContext<any>(() => {
 });
 
 const App = () => {
-    const [isLightTheme, setIsLightTheme] = useState<boolean>(true);
-    const dispatchChangeTheme = () => {
-        setIsLightTheme(!isLightTheme);
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(
+        JSON.parse(localStorage.getItem('isLightTheme') as string)
+    );
+
+    const dispatchChangeTheme = (currentTheme: boolean) => {
+        localStorage.setItem('isLightTheme', JSON.stringify(currentTheme));
+        setIsLightTheme(currentTheme);
     };
+
     return (
         <div className='app'>
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
