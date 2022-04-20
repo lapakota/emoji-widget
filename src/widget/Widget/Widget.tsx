@@ -67,7 +67,7 @@ const Widget: React.FC = () => {
                 }
             });
         }
-    }, [user]);
+    }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         localStorage.setItem(StatesKeys.CurrentGroupName, JSON.stringify(currentGroupName));
@@ -82,7 +82,7 @@ const Widget: React.FC = () => {
                 [StatesKeys.FavouritesEmojis]: favouritesEmojis
             }).then(_ => console.log('Save recent and favourites to firebase'));
         }
-    }, [recentEmojis, favouritesEmojis]);
+    }, [recentEmojis, favouritesEmojis]); // eslint-disable-line react-hooks/exhaustive-deps
 
     function loadWidgetState(key: string, defaultValue: any) {
         const state = JSON.parse(localStorage.getItem(key) as string);
