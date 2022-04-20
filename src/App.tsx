@@ -16,7 +16,6 @@ const App = () => {
         setIsLightTheme(currentTheme);
     };
 
-    console.log(localStorage)
     return (
         <div className='app'>
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
