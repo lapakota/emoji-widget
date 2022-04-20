@@ -11,11 +11,12 @@ const App = () => {
         JSON.parse(localStorage.getItem('isLightTheme') as string)
     );
 
-    const dispatchChangeTheme = () => {
-        localStorage.setItem('isLightTheme', JSON.stringify(!isLightTheme));
-        setIsLightTheme(!isLightTheme);
+    const dispatchChangeTheme = (currentTheme: boolean) => {
+        localStorage.setItem('isLightTheme', JSON.stringify(currentTheme));
+        setIsLightTheme(currentTheme);
     };
 
+    console.log(localStorage)
     return (
         <div className='app'>
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
