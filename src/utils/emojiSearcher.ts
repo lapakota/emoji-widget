@@ -10,6 +10,7 @@ export default class EmojiSearcher {
 
         for (let emojiData of this.allEmojis) {
             const nameTokens = [
+                emojiData.char,
                 ...this._splitIntoTokens(emojiData.name, '_')
                 // TODO сделать словарь с переводами названий
             ];

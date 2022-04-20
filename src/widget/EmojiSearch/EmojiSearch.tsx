@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import EmojiSearcher from '../../utils/emojiSearcher';
 import { EmojiType } from '../../utils/emojisData';
 import './EmojiSearch.scss';
@@ -12,11 +12,9 @@ type EmojiSearchProps = {
 
 const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearched }) => {
     const isLightTheme = useContext(CurrentThemeContext);
-    const [input, setInput] = useState('');
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputText = e.target.value;
-        setInput(inputText);
 
         if (inputText === '') {
             setIsSearching(false);
@@ -27,10 +25,11 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearche
 
     return (
         <div className={'search'}>
-            <input className={cn('search-input', isLightTheme ? 'light-search-input' : 'dark-search-input')}
-                   placeholder={'Emoji Search'}
-                   value={input}
-                   onChange={onChange} />
+            <input
+                className={cn('search-input', isLightTheme ? 'light-search-input' : 'dark-search-input')}
+                placeholder={'Emoji Search'}
+                onChange={onChange}
+            />
         </div>
     );
 };

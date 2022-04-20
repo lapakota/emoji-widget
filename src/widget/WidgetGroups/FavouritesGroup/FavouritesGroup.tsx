@@ -1,7 +1,7 @@
 import EmojiSearch from '../../EmojiSearch/EmojiSearch';
 import EmojiGroup from '../../EmojiGroup/EmojiGroup';
 import React from 'react';
-import { EmojiType } from "../../../utils/emojisData";
+import { EmojiType } from '../../../utils/emojisData';
 import { Groups } from '../../../utils/emojiGroups';
 import './FavouritesGroup.scss';
 
@@ -31,7 +31,11 @@ const FavouritesGroup: React.FC<FavouritesGroupProps> = ({
                     <div className={'emoji-groups_separator'}>
                         <div className="separator_inner" />
                     </div>
-                    <EmojiGroup groupEmojis={favouritesEmojis} updateRecent={updateRecentEmojis} />
+                    <EmojiGroup
+                        groupEmojis={favouritesEmojis}
+                        isFavouriteGroup={true}
+                        updateRecent={updateRecentEmojis}
+                    />
                 </>
             )}
         </>
