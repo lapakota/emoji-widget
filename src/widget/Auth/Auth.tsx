@@ -12,15 +12,18 @@ const Auth: React.FC = () => {
     const { auth } = useContext(FirebaseContext);
     const [user, loading] = useAuthState(auth);
 
-    const login = () => {
-        chrome.identity.getAuthToken({}, token => {
-            let credential = GoogleAuthProvider.credential(null, token);
-            signInWithCredential(auth, credential).then(userCredential => {
-                const user = auth.currentUser;
-                console.log(userCredential, user);
-            });
+    const login = async () => {
+        chrome.identity.getAuthToken({ interactive: true }, token => {
+            if (chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError);
+            }
+            if (token) {
+                let credential = GoogleAuthProvider.credential(null, token);
+                signInWithCredential(auth, credential).then(userCredential => {
+                    console.log('Signed in: ', userCredential.user);
+                });
+            }
         });
-        console.log(user);
     };
 
     const logOut = async () => {

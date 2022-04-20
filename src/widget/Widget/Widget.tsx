@@ -18,9 +18,9 @@ import BasicGroup from '../WidgetGroups/BasicGroup';
 import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
-// import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
-// import { FirebaseContext } from '../../index';
-// import { collection, setDoc, doc, getDoc } from 'firebase/firestore';
+import { FirebaseContext } from '../../index';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const EMOJIS_IN_ROW = 9;
 
@@ -34,43 +34,59 @@ enum StatesKeys {
 }
 
 const Widget: React.FC = () => {
-    // const { firestore } = useContext(FirebaseContext);
-    // const [widgetState, loading] = useDocumentData(doc(firestore, 'widgetState', 'state'));
-    // console.log(widgetState);
-    const widgetState = undefined
+    const isLightTheme = useContext(CurrentThemeContext);
+    const { firestore } = useContext(FirebaseContext);
+    const { auth } = useContext(FirebaseContext);
+
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
-        loadState(StatesKeys.CurrentGroupName, Groups.Emotion, widgetState)
+        loadWidgetState(StatesKeys.CurrentGroupName, Groups.Emotion)
     );
     const [currentGroupEmojis, setCurrentGroupEmojis] = useState<EmojiType[]>(emojisData[currentGroupName]);
-
+    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadWidgetState(StatesKeys.RecentEmojis, []));
+    const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(
+        loadWidgetState(StatesKeys.FavouritesEmojis, [])
+    );
     const [isSearching, setIsSearching] = useState(false);
     const [searchedEmojis, setSearchedEmojis] = useState<EmojiType[]>([]);
 
-    const [recentEmojis, setRecentEmojis] = useState<EmojiType[]>(loadState(StatesKeys.RecentEmojis, [], widgetState));
-    const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(
-        loadState(StatesKeys.FavouritesEmojis, [], widgetState)
-    );
-
-    const isLightTheme = useContext(CurrentThemeContext);
+    const [user] = useAuthState(auth);
 
     useEffect(() => {
-        localStorage.setItem('recentEmojis', JSON.stringify(recentEmojis));
-        localStorage.setItem('favouritesEmojis', JSON.stringify(favouritesEmojis));
-        localStorage.setItem('currentGroupName', JSON.stringify(currentGroupName));
+        if (user) {
+            getDoc(doc(firestore, 'users', user?.uid)).then(data => {
+                const favourites = data.get(StatesKeys.FavouritesEmojis);
+                const recent = data.get(StatesKeys.RecentEmojis);
+                if (favourites && recent) {
+                    setFavouritesEmojis(favourites);
+                    setRecentEmojis(recent);
+                } else {
+                    setDoc(doc(firestore, 'users', user.uid), {
+                        [StatesKeys.RecentEmojis]: recentEmojis,
+                        [StatesKeys.FavouritesEmojis]: favouritesEmojis
+                    }).then(_ => console.log('Save recent and favourites to firebase after creating account'));
+                }
+            });
+        }
+    }, [user]);
 
-        // const widgetStateRef = collection(firestore, 'widgetState');
+    useEffect(() => {
+        localStorage.setItem(StatesKeys.CurrentGroupName, JSON.stringify(currentGroupName));
+        localStorage.setItem(StatesKeys.RecentEmojis, JSON.stringify(recentEmojis));
+        localStorage.setItem(StatesKeys.FavouritesEmojis, JSON.stringify(favouritesEmojis));
+    }, [currentGroupName, recentEmojis, favouritesEmojis]);
 
-        // setDoc(doc(widgetStateRef, 'state'), {
-        //     recentEmojis: recentEmojis,
-        //     favouritesEmojis: favouritesEmojis,
-        //     currentGroupName: currentGroupName
-        // }).catch(e => console.error(e));
-    }, [recentEmojis, favouritesEmojis, currentGroupName]);
+    useEffect(() => {
+        if (user) {
+            setDoc(doc(firestore, 'users', user.uid), {
+                [StatesKeys.RecentEmojis]: recentEmojis,
+                [StatesKeys.FavouritesEmojis]: favouritesEmojis
+            }).then(_ => console.log('Save recent and favourites to firebase'));
+        }
+    }, [recentEmojis, favouritesEmojis]);
 
-    function loadState(key: string, defaultValue: any, widgetState: any) {
+    function loadWidgetState(key: string, defaultValue: any) {
         const state = JSON.parse(localStorage.getItem(key) as string);
         if (state) return state;
-        if (widgetState && widgetState[key]) return widgetState[key];
         return defaultValue;
     }
 

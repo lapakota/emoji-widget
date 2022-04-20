@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Widget from './widget/Widget/Widget';
 import './index.scss';
+import { doc, getDoc } from 'firebase/firestore';
+import { FirebaseContext } from './index';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const CurrentThemeContext = React.createContext<boolean>(true);
 export const ChangeThemeContext = React.createContext<any>(() => {});
 
 const App = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(true);
+
     const dispatchChangeTheme = () => {
         setIsLightTheme(!isLightTheme);
     };
+
     return (
         <div className="app">
             <ChangeThemeContext.Provider value={dispatchChangeTheme}>
