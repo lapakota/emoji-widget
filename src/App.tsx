@@ -1,9 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Widget from './widget/Widget/Widget';
 import './index.scss';
-import { doc, getDoc } from 'firebase/firestore';
-import { FirebaseContext } from './index';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const CurrentThemeContext = React.createContext<boolean>(true);
 export const ChangeThemeContext = React.createContext<any>(() => {});
