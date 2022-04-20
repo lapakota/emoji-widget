@@ -3,12 +3,12 @@ import { FirebaseContext } from '../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GoogleAuthProvider, signOut, signInWithCredential } from 'firebase/auth';
 import './Auth.scss';
-import { CurrentThemeContext } from '../../App';
 import cn from 'classnames';
 import Loading from '../Loading/Loading';
+import { CurrentThemeContext } from '../Widget/Widget';
 
 const Auth: React.FC = () => {
-    const isLightTheme = useContext(CurrentThemeContext);
+    const { isLightTheme } = useContext(CurrentThemeContext);
     const { auth } = useContext(FirebaseContext);
     const [user, loading] = useAuthState(auth);
 

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import './EmojiGroup.scss';
-import { CurrentThemeContext } from '../../App';
 import { EmojiType } from '../../utils/emojisData';
 import sendEmojiMessage from '../../utils/messageSender';
 import cn from 'classnames';
+import { CurrentThemeContext } from '../Widget/Widget';
 
 type EmojiGroupProps = {
     groupName?: string;
@@ -24,13 +24,8 @@ const multiplyY = 100 / (sheetRows - 1);
 const sheetSizeX = 100 * sheetColumns;
 const sheetSizeY = 100 * sheetRows;
 
-const EmojiGroup: React.FC<EmojiGroupProps> = ({
-    groupName,
-    isFavouriteGroup = false,
-    groupEmojis,
-    updateRecent
-}) => {
-    const isLightTheme = useContext(CurrentThemeContext);
+const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = false, groupEmojis, updateRecent }) => {
+    const { isLightTheme } = useContext(CurrentThemeContext);
 
     const onClick = (emojiInfo: EmojiType) => {
         updateRecent(emojiInfo);

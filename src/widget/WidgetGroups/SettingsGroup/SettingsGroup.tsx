@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import './SettingsGroup.scss';
-import { CurrentThemeContext, ChangeThemeContext } from '../../../App';
 import Auth from '../../Auth/Auth';
+import { CurrentThemeContext } from "../../Widget/Widget";
 
 const SettingsGroup = () => {
-    const isLightTheme = useContext(CurrentThemeContext);
-    const dispatchChangeTheme = useContext(ChangeThemeContext);
+    const { isLightTheme, dispatchChangeTheme } = useContext(CurrentThemeContext);
 
     return (
         <div className={'settings'}>
