@@ -19,7 +19,7 @@ const SettingsGroup = () => {
                     <input
                         type={'checkbox'}
                         className={'toggle'}
-                        onClick={() => dispatchChangeTheme()}
+                        onClick={() => dispatchChangeTheme(!isLightTheme)}
                         defaultChecked={!isLightTheme}
                     />
                 </div>

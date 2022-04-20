@@ -174,7 +174,6 @@ const Widget: React.FC = () => {
                 />
             )}
             <ContextMenu
-                currentGroupName={currentGroupName}
                 addFavourite={addFavouriteEmoji}
                 removeFavourite={removeFavouriteEmoji}
                 updateRecent={updateRecentEmojis}
