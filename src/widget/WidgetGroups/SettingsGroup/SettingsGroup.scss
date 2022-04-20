@@ -8,10 +8,6 @@
     display: flex;
     flex-direction: column;
 
-    button {
-      width: auto;
-    }
-
     .settings_item {
       display: flex;
       flex-direction: row;
@@ -19,6 +15,10 @@
       margin: 0 20px;
       padding: 10px 0;
 
+      .separator_inner {
+        width: 100%;
+        border-bottom: 1px solid #bdbdbd;
+      }
     }
   }
 }
