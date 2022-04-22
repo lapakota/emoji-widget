@@ -106,7 +106,7 @@ const Widget: React.FC = () => {
 
     return (
         <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
-            <div className={'buttons-wrapper'}>
+            <div className={cn('buttons-wrapper', isLightTheme ? 'light-buttons-wrapper' : 'dark-buttons-wrapper')}>
                 {icons.map((icon, index) => (
                     <ChangeGroupButton
                         key={`ChangeGroupButton${index}`}
