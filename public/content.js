@@ -5,7 +5,5 @@ chrome.runtime.onMessage.addListener(function (request) {
         if (activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement)
             activeElement.value += request.char;
         if (activeElement instanceof HTMLDivElement) activeElement.textContent += request.char;
-
-        console.log(request.char, activeElement);
     }
 });
