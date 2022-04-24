@@ -157,7 +157,7 @@ const Widget: React.FC = () => {
     return (
         <CurrentThemeContext.Provider
             value={{
-                [StatesKeys.IsLightTheme]: isLightTheme,
+                [StatesKeys.IsLightTheme]: isLightTheme, 
                 dispatchChangeTheme: (value: boolean) => setIsLightTheme(value)
             }}
         >

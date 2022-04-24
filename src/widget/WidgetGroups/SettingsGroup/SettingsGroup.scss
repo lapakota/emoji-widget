@@ -67,5 +67,10 @@ input[type="checkbox"]:focus {
   transform: translatex(15px)
 }
 
+.light-toggle:focus {
+  box-shadow: 0 0 0 1px $backgroundColorLight, 0 0 0 2px $inputBorderColor;
+}
 
-
+.dark-toggle:focus {
+  box-shadow: 0 0 0 1px $backgroundColorDark, 0 0 0 2px $inputBorderColor;
+}

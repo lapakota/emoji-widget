@@ -13,11 +13,12 @@
     border: none;
     font-size: 14px;
     border-radius: 5px;
+    transition: all .1s ease;
   }
 
   .light-search-input {
-    background-color: $inputBackgroundColorLight;
     color: #212529;
+    background: $inputBackgroundColorLight url("../../../public/img/light_search_icon.png") no-repeat calc(#{$emojis-row-width} - 25px);
 
     &:focus {
       box-shadow: 0 0 0 1px $backgroundColorLight,
@@ -27,7 +28,7 @@
 
   .dark-search-input {
     color: $fontColourDark;
-    background-color: $inputBackgroundColorDark;
+    background: $inputBackgroundColorDark url("../../../public/img/dark_search_icon.png") no-repeat calc(#{$emojis-row-width} - 25px);
 
     &:focus {
       box-shadow: 0 0 0 1px $backgroundColorDark,
