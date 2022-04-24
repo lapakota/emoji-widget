@@ -30,7 +30,8 @@ enum StatesKeys {
     CurrentGroupName = 'currentGroupName',
     RecentEmojis = 'recentEmojis',
     FavouritesEmojis = 'favouritesEmojis',
-    IsLightTheme = 'isLightTheme'
+    IsLightTheme = 'isLightTheme',
+    CurrentScheme = 'currentScheme'
 }
 
 type ThemeContextType = { isLightTheme: boolean; dispatchChangeTheme: (value: boolean) => void };
@@ -40,8 +41,16 @@ export const CurrentThemeContext = React.createContext<ThemeContextType>({
     dispatchChangeTheme: () => {}
 });
 
+type SchemeContextType = { currentScheme: number; dispatchChangeScheme: (value: number) => void };
+
+export const CurrentSchemeContext = React.createContext<SchemeContextType>({
+    [StatesKeys.CurrentScheme]: 1,
+    dispatchChangeScheme: () => {}
+});
+
 const Widget: React.FC = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
+    const [currentScheme, setCurrentScheme] = useState<number>(1);
 
     const { firestore } = useContext(FirebaseContext);
     const { auth } = useContext(FirebaseContext);
@@ -162,6 +171,12 @@ const Widget: React.FC = () => {
             }}
         >
             <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
+                <CurrentSchemeContext.Provider
+                    value={{
+                        [StatesKeys.CurrentScheme]: currentScheme,
+                        dispatchChangeScheme: (value: number) => setCurrentScheme(value)
+                    }}
+                >
                 <div className={'buttons-wrapper'}>
                     {icons.map((icon, index) => (
                         <ChangeGroupButton
@@ -193,6 +208,7 @@ const Widget: React.FC = () => {
                         setIsSearching={setIsSearching}
                     />
                 )}
+                </CurrentSchemeContext.Provider>
                 <ContextMenu
                     addFavourite={addFavouriteEmoji}
                     removeFavourite={removeFavouriteEmoji}
