@@ -3,7 +3,7 @@ import './EmojiGroup.scss';
 import { EmojiType } from '../../utils/emojisData';
 import sendEmojiMessage from '../../utils/messageSender';
 import cn from 'classnames';
-import { CurrentSchemeContext, CurrentThemeContext } from '../Widget/Widget';
+import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../Widget/Widget';
 
 type EmojiGroupProps = {
     groupName?: string;
@@ -25,9 +25,9 @@ const sheetSizeX = 100 * sheetColumns;
 const sheetSizeY = 100 * sheetRows;
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = false, groupEmojis, updateRecent }) => {
-    const { currentScheme } = useContext(CurrentSchemeContext);
+    const { currentEmojiScheme } = useContext(CurrentEmojiSchemeContext);
     let ImgPath = '/img/sheet_apple_64_indexed_256.png';
-    switch (currentScheme) {
+    switch (currentEmojiScheme) {
         case 1:
             ImgPath = '/img/sheet_apple_64_indexed_256.png';
             break;
