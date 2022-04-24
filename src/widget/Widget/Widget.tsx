@@ -25,6 +25,8 @@ const EMOJIS_IN_ROW = 9;
 
 const RECENT_COUNT = EMOJIS_IN_ROW;
 const FAVOURITES_COUNT = EMOJIS_IN_ROW * 7;
+const  WHITE_COLOR = '#FFFFFF';
+const  BLACK_COLOR = '#000000';
 
 enum StatesKeys {
     CurrentGroupName = 'currentGroupName',
@@ -139,7 +141,7 @@ const Widget: React.FC = () => {
     };
 
     function setCurrentIconColor() {
-        return isLightTheme ? '#000000' : '#dbdbdb';
+        return isLightTheme ? BLACK_COLOR : WHITE_COLOR;
     }
 
     const icons = [

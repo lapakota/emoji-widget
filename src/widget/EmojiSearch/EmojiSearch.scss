@@ -27,7 +27,7 @@
   }
 
   .dark-search-input {
-    color: $fontColourDark;
+    color: $fontColorDark;
     background: $inputBackgroundColorDark url("../../../public/img/dark_search_icon.png") no-repeat calc(#{$emojis-row-width} - 25px);
 
     &:focus {
