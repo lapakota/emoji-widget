@@ -1,11 +1,13 @@
 {
   "name": "Emoji Widget",
   "description": "Widget for picking Emojis",
-  "version": "2.0",
+  "version": "3.0",
   "manifest_version": 3,
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "identity",
+    "identity.email"
   ],
   "action": {
     "default_popup": "index.html",
@@ -14,11 +16,10 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+E",
-        "windows": "Ctrl+Shift+E",
-        "mac": "Command+Shift+E",
-        "chromeos": "Ctrl+Shift+E",
-        "linux": "Ctrl+Shift+E"
+        "default": "Ctrl+Shift+X",
+        "windows": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X",
+        "linux": "Ctrl+Shift+X"
       }
     }
   },
@@ -37,5 +38,18 @@
     "16": "favicon-16x16.png",
     "32": "favicon-32x32.png",
     "192": "favicon-192x192.png"
-  }
+  },
+  "oauth2": {
+    "client_id": "183747301370-9knnem9308ncnn6d0jukdb3bnp1i5v3p.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAihsOh0oS1aKBLnVgWzasZShjSPk3zBUewADjCC9ieea0qYURgdRgRRhxex25iGI161jbh8r50RQaNmrgwR1C4Tu0JCd8CDiiWbqtnDfz/W8kRMhaAluFEZ7CZlbK0YeO+2CU8ZPyieAsX33spmI05fH7aK2pEBwE0byKUGgJbCgbHrHb/mKMOSk6Bh9dZkkcY1Jtf99rJr851FSf7NweNtvcoyrkBP+zwWk4Q8x/XFX2RBCi1cWAsE1M5C+mAE3RAxsV+S9UDIMYYqss/RSza72E9QQKJ6Gv1irkveL/7MJWHQOQqlN9lHBpoCH993Q7rO1A3hTXwBirUFafGWn/1QIDAQAB"
 }

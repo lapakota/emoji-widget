@@ -3,8 +3,8 @@ import './ContextMenu.scss';
 import React, { useContext } from 'react';
 import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
-import { CurrentThemeContext } from '../../App';
 import cn from 'classnames';
+import { CurrentThemeContext } from "../Widget/Widget";
 
 type MenuPositionStyle = {
     top: number;
@@ -20,7 +20,7 @@ type ContextMenuProps = {
 const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, removeFavourite }) => {
     const { anchorPoint, show } = useContextMenu();
 
-    const isLightTheme = useContext(CurrentThemeContext);
+    const { isLightTheme } = useContext(CurrentThemeContext);
 
     const menuWidth = 100;
     const menuHeight = 70;

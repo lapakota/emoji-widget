@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import EmojiSearcher from '../../utils/emojiSearcher';
 import { EmojiType } from '../../utils/emojisData';
 import './EmojiSearch.scss';
-import { CurrentThemeContext } from '../../App';
 import cn from 'classnames';
+import { CurrentThemeContext } from "../Widget/Widget";
 
 type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;
@@ -11,7 +11,7 @@ type EmojiSearchProps = {
 };
 
 const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearched }) => {
-    const isLightTheme = useContext(CurrentThemeContext);
+    const { isLightTheme } = useContext(CurrentThemeContext);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputText = e.target.value;
