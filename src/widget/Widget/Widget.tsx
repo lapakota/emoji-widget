@@ -32,7 +32,9 @@ enum StatesKeys {
     CurrentGroupName = 'currentGroupName',
     RecentEmojis = 'recentEmojis',
     FavouritesEmojis = 'favouritesEmojis',
-    IsLightTheme = 'isLightTheme'
+    IsLightTheme = 'isLightTheme',
+    CurrentEmojiScheme = 'currentEmojiScheme'
+
 }
 
 type ThemeContextType = { isLightTheme: boolean; dispatchChangeTheme: (value: boolean) => void };
@@ -42,8 +44,16 @@ export const CurrentThemeContext = React.createContext<ThemeContextType>({
     dispatchChangeTheme: () => {}
 });
 
+type SchemeContextType = { currentEmojiScheme: number; dispatchChangeEmojiScheme: (value: number) => void };
+
+export const CurrentEmojiSchemeContext = React.createContext<SchemeContextType>({
+    [StatesKeys.CurrentEmojiScheme]: 1,
+    dispatchChangeEmojiScheme: () => {}
+});
+
 const Widget: React.FC = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
+    const [currentEmojiScheme, setCurrentEmojiScheme] = useState<number>(1);
 
     const { firestore } = useContext(FirebaseContext);
     const { auth } = useContext(FirebaseContext);
@@ -155,7 +165,6 @@ const Widget: React.FC = () => {
         <SymbolsIcon color={setCurrentIconColor()} />,
         <SettingsIcon color={setCurrentIconColor()} />
     ];
-
     return (
         <CurrentThemeContext.Provider
             value={{
@@ -164,6 +173,12 @@ const Widget: React.FC = () => {
             }}
         >
             <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
+                <CurrentEmojiSchemeContext.Provider
+                    value={{
+                        [StatesKeys.CurrentEmojiScheme]: currentEmojiScheme,
+                        dispatchChangeEmojiScheme: (value: number) => setCurrentEmojiScheme(value)
+                    }}
+                >
                 <div className={'buttons-wrapper'}>
                     {icons.map((icon, index) => (
                         <ChangeGroupButton
@@ -195,6 +210,7 @@ const Widget: React.FC = () => {
                         setIsSearching={setIsSearching}
                     />
                 )}
+                </CurrentEmojiSchemeContext.Provider>
                 <ContextMenu
                     addFavourite={addFavouriteEmoji}
                     removeFavourite={removeFavouriteEmoji}
