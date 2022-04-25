@@ -47,10 +47,12 @@ const Widget: React.FC = () => {
     useEffect(() => {
         if (user) {
             getDoc(doc(firestore, 'users', user?.uid)).then(data => {
+                const scheme = data.get(StatesKeys.EmojiScheme);
                 const light = data.get(StatesKeys.IsLightTheme);
                 const favourites = data.get(StatesKeys.FavouritesEmojis);
                 const recent = data.get(StatesKeys.RecentEmojis);
-                if (light !== null && favourites && recent) {
+                if (scheme !== null && light !== null && favourites && recent) {
+                    setEmojiScheme(scheme);
                     setIsLightTheme(light);
                     setFavouritesEmojis(favourites);
                     setRecentEmojis(recent);
