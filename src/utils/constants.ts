@@ -8,7 +8,7 @@ export const sheetSizeY = 100 * sheetRows;
 
 const EMOJIS_IN_ROW = 7;
 export const RECENT_COUNT = EMOJIS_IN_ROW;
-export const FAVOURITES_COUNT = EMOJIS_IN_ROW * 7;
+export const FAVOURITES_COUNT = EMOJIS_IN_ROW * 5;
 
 export const WHITE_COLOR = '#FFFFFF';
 export const BLACK_COLOR = '#000000';

@@ -1,11 +1,11 @@
 @import "../../vars";
 
 .buttons-wrapper {
-  padding: 0 0 0 $inner-gap;
   display: flex;
   flex-direction: row;
-  justify-content: left;
   align-items: center;
+  padding: 0 $inner-gap;
+  justify-content: space-between;
   height: 50px;
   border-bottom: 1px solid $borderBottomColor;
 
@@ -24,7 +24,6 @@
     justify-content: center;
     width: $emoji-container-size;
     height: 100%;
-    padding: 0;
     border: none;
     font: inherit;
     color: inherit;
