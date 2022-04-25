@@ -6,7 +6,7 @@ export const multiplyY = 100 / (sheetRows - 1);
 export const sheetSizeX = 100 * sheetColumns;
 export const sheetSizeY = 100 * sheetRows;
 
-const EMOJIS_IN_ROW = 8;
+const EMOJIS_IN_ROW = 7;
 export const RECENT_COUNT = EMOJIS_IN_ROW;
 export const FAVOURITES_COUNT = EMOJIS_IN_ROW * 7;
 
