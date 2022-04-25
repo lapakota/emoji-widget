@@ -25,6 +25,8 @@
 
   .emojis-wrapper {
     display: flex;
+    gap: 5px;
+
     flex-wrap: wrap;
     padding: 0 0 0 $inner-gap;
     max-height: $emojis-wrapper-height;
