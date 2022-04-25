@@ -18,11 +18,12 @@ import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
 import { FirebaseContext } from '../../index';
-import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { StatesKeys } from '../../utils/enums';
 import { BLACK_COLOR, FAVOURITES_COUNT, RECENT_COUNT, WHITE_COLOR } from '../../utils/constants';
 import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../../contexts';
+import { saveToLocalStorage } from '../../utils/localStorageSaver';
+import { getFromFirebase, saveToFirebase } from '../../utils/firebase';
 
 const Widget: React.FC = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
@@ -46,45 +47,21 @@ const Widget: React.FC = () => {
 
     useEffect(() => {
         if (user) {
-            getDoc(doc(firestore, 'users', user?.uid)).then(data => {
-                const scheme = data.get(StatesKeys.EmojiScheme);
-                const light = data.get(StatesKeys.IsLightTheme);
-                const favourites = data.get(StatesKeys.FavouritesEmojis);
-                const recent = data.get(StatesKeys.RecentEmojis);
-                if (scheme !== null && light !== null && favourites && recent) {
-                    setEmojiScheme(scheme);
-                    setIsLightTheme(light);
-                    setFavouritesEmojis(favourites);
-                    setRecentEmojis(recent);
-                } else {
-                    // TODO вынести в отдельную функцию и пофиксить баг с переключателем
-                    setDoc(doc(firestore, 'users', user.uid), {
-                        [StatesKeys.EmojiScheme]: emojiScheme,
-                        [StatesKeys.IsLightTheme]: isLightTheme,
-                        [StatesKeys.RecentEmojis]: recentEmojis,
-                        [StatesKeys.FavouritesEmojis]: favouritesEmojis
-                    }).then(_ => console.log('Save recent and favourites to firebase after creating account'));
-                }
+            getFromFirebase(firestore, user).then(data => {
+                onReceiveDataFromFirebase(data);
             });
         }
     }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        localStorage.setItem(StatesKeys.CurrentGroupName, JSON.stringify(currentGroupName));
-        localStorage.setItem(StatesKeys.RecentEmojis, JSON.stringify(recentEmojis));
-        localStorage.setItem(StatesKeys.FavouritesEmojis, JSON.stringify(favouritesEmojis));
-        localStorage.setItem(StatesKeys.IsLightTheme, JSON.stringify(isLightTheme));
-        localStorage.setItem(StatesKeys.EmojiScheme, JSON.stringify(emojiScheme));
+        saveToLocalStorage(currentGroupName, recentEmojis, favouritesEmojis, isLightTheme, emojiScheme);
     }, [currentGroupName, recentEmojis, favouritesEmojis, isLightTheme, emojiScheme]);
 
     useEffect(() => {
         if (user) {
-            setDoc(doc(firestore, 'users', user.uid), {
-                [StatesKeys.EmojiScheme]: emojiScheme,
-                [StatesKeys.IsLightTheme]: isLightTheme,
-                [StatesKeys.RecentEmojis]: recentEmojis,
-                [StatesKeys.FavouritesEmojis]: favouritesEmojis
-            }).then(_ => console.log('Save recent and favourites to firebase'));
+            saveToFirebase(firestore, user, recentEmojis, favouritesEmojis, emojiScheme, isLightTheme).then(_ =>
+                console.log('Saved to firebase')
+            );
         }
     }, [recentEmojis, favouritesEmojis, isLightTheme, emojiScheme]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -92,6 +69,24 @@ const Widget: React.FC = () => {
         const state = JSON.parse(localStorage.getItem(key) as string);
         if (state !== null && typeof state !== 'undefined') return state;
         return defaultValue;
+    }
+
+    function onReceiveDataFromFirebase(data: any) {
+        const scheme = data.get(StatesKeys.EmojiScheme);
+        const light = data.get(StatesKeys.IsLightTheme);
+        const favourites = data.get(StatesKeys.FavouritesEmojis);
+        const recent = data.get(StatesKeys.RecentEmojis);
+        // user already exist
+        if (scheme !== null) {
+            setEmojiScheme(scheme);
+            setIsLightTheme(light);
+            setFavouritesEmojis(favourites);
+            setRecentEmojis(recent);
+        } else {
+            saveToFirebase(firestore, user, recentEmojis, favouritesEmojis, emojiScheme, isLightTheme).then(_ =>
+                console.log('Saved to firebase after creating account')
+            );
+        }
     }
 
     const getNewEmojisStateAfterAdding = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {
