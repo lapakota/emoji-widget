@@ -38,7 +38,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = f
             ImgPath = '/img/sheet_twitter_64_indexed_256.png';
             break;
         case 4:
-            ImgPath = '/img/sheet_witter_64_indexed_256.png';
+            ImgPath = '/img/sheet_facebook_64_indexed_256.png';
             break;
         default:
             ImgPath = '/img/sheet_apple_64_indexed_256.png';

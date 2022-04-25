@@ -82,11 +82,11 @@ input[type="checkbox"]:focus {
   height: 20px;
 
   input[type=radio] {
-    display: none;
+    position: fixed;
+    top: -1000px;
 
     &:checked + label {
-      border: 1px solid $green;
-      color: white;
+      box-shadow: 0 0 0 1.5px $green inset;
     }
   }
 
@@ -96,8 +96,8 @@ input[type="checkbox"]:focus {
     display: flex;
     padding: 2px;
     cursor: pointer;
-    border: 1px solid $borderBottomColor;
-    border-radius: 6px;
+    box-shadow: 0 0 0 1px $borderBottomColor inset;
+    border-radius: 60px;
     user-select: none;
 
     img {
