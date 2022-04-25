@@ -1,4 +1,4 @@
-@import "../../vars";
+@import "../../../../vars";
 
 $image-size: 40px;
 $white: #fff;
@@ -7,8 +7,6 @@ $button-active-blue: #1669F2;
 $button-font-size: 14px;
 
 .auth {
-  margin: 20px 20px 10px;
-
   .user-info {
     display: flex;
     align-items: center;

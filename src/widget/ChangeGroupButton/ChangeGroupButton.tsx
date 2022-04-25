@@ -3,7 +3,7 @@ import './ChangeGroupButton.scss';
 import '../EmojiGroup/EmojiGroup.scss';
 import { Groups } from '../../utils/emojiGroups';
 import cn from 'classnames';
-import { CurrentThemeContext } from '../Widget/Widget';
+import { CurrentThemeContext } from "../../contexts";
 
 type ChangeGroupButtonProps = {
     groupName: Groups;

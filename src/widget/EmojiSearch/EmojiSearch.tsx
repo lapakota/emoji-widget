@@ -3,7 +3,7 @@ import EmojiSearcher from '../../utils/emojiSearcher';
 import { EmojiType } from '../../utils/emojisData';
 import './EmojiSearch.scss';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../Widget/Widget";
+import { CurrentThemeContext } from "../../contexts";
 
 type EmojiSearchProps = {
     setIsSearching: (value: boolean) => void;

@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { FirebaseContext } from '../../index';
+import { FirebaseContext } from '../../../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GoogleAuthProvider, signOut, signInWithCredential } from 'firebase/auth';
 import './Auth.scss';
 import cn from 'classnames';
-import Loading from '../Loading/Loading';
-import { CurrentThemeContext } from '../Widget/Widget';
+import Loading from '../../../Loading/Loading';
+import { CurrentThemeContext } from '../../../../contexts';
+import { GOOGLE_ICON } from '../../../../utils/constants';
 
 const Auth: React.FC = () => {
     const { isLightTheme } = useContext(CurrentThemeContext);
@@ -15,7 +16,7 @@ const Auth: React.FC = () => {
     const login = async () => {
         chrome.identity.getAuthToken({ interactive: true }, token => {
             if (chrome.runtime.lastError) {
-                console.error(chrome.runtime.lastError);
+                console.error('Google auth works only in Chrome');
             }
             if (token) {
                 let credential = GoogleAuthProvider.credential(null, token);
@@ -43,7 +44,7 @@ const Auth: React.FC = () => {
     }
 
     return (
-        <div className={'auth'}>
+        <div className={cn('auth', 'settings_item')}>
             {user && (
                 <div className={'user-info'}>
                     <div className={'user-info_name'}>{user.displayName}</div>
@@ -62,11 +63,7 @@ const Auth: React.FC = () => {
             ) : (
                 <button className={cn('login_button', isLightTheme ? 'light-login' : 'dark-login')} onClick={login}>
                     <div className="google-icon-wrapper">
-                        <img
-                            className="google-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                            alt={'google icon'}
-                        />
+                        <img className="google-icon" src={GOOGLE_ICON} alt={'google icon'} />
                     </div>
                     <p className="btn-text">
                         <b>Sign in with google</b>

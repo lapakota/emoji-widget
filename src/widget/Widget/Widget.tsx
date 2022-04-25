@@ -18,42 +18,16 @@ import FavouritesGroup from '../WidgetGroups/FavouritesGroup/FavouritesGroup';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
 import { FirebaseContext } from '../../index';
-import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-const EMOJIS_IN_ROW = 9;
-
-const RECENT_COUNT = EMOJIS_IN_ROW;
-const FAVOURITES_COUNT = EMOJIS_IN_ROW * 7;
-const  WHITE_COLOR = '#FFFFFF';
-const  BLACK_COLOR = '#000000';
-
-enum StatesKeys {
-    CurrentGroupName = 'currentGroupName',
-    RecentEmojis = 'recentEmojis',
-    FavouritesEmojis = 'favouritesEmojis',
-    IsLightTheme = 'isLightTheme',
-    CurrentEmojiScheme = 'currentEmojiScheme'
-
-}
-
-type ThemeContextType = { isLightTheme: boolean; dispatchChangeTheme: (value: boolean) => void };
-
-export const CurrentThemeContext = React.createContext<ThemeContextType>({
-    [StatesKeys.IsLightTheme]: true,
-    dispatchChangeTheme: () => {}
-});
-
-type SchemeContextType = { currentEmojiScheme: number; dispatchChangeEmojiScheme: (value: number) => void };
-
-export const CurrentEmojiSchemeContext = React.createContext<SchemeContextType>({
-    [StatesKeys.CurrentEmojiScheme]: 1,
-    dispatchChangeEmojiScheme: () => {}
-});
+import { StatesKeys } from '../../utils/enums';
+import { BLACK_COLOR, FAVOURITES_COUNT, RECENT_COUNT, WHITE_COLOR } from '../../utils/constants';
+import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../../contexts';
+import { saveToLocalStorage } from '../../utils/localStorageSaver';
+import { getFromFirebase, saveToFirebase } from '../../utils/firebase';
 
 const Widget: React.FC = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
-    const [currentEmojiScheme, setCurrentEmojiScheme] = useState<number>(1);
+    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
 
     const { firestore } = useContext(FirebaseContext);
     const { auth } = useContext(FirebaseContext);
@@ -73,47 +47,46 @@ const Widget: React.FC = () => {
 
     useEffect(() => {
         if (user) {
-            getDoc(doc(firestore, 'users', user?.uid)).then(data => {
-                const light = data.get(StatesKeys.IsLightTheme);
-                const favourites = data.get(StatesKeys.FavouritesEmojis);
-                const recent = data.get(StatesKeys.RecentEmojis);
-                if (light !== null && favourites && recent) {
-                    setIsLightTheme(light);
-                    setFavouritesEmojis(favourites);
-                    setRecentEmojis(recent);
-                } else {
-                    // TODO вынести в отдельную функцию и пофиксить баг с переключателем
-                    setDoc(doc(firestore, 'users', user.uid), {
-                        [StatesKeys.IsLightTheme]: isLightTheme,
-                        [StatesKeys.RecentEmojis]: recentEmojis,
-                        [StatesKeys.FavouritesEmojis]: favouritesEmojis
-                    }).then(_ => console.log('Save recent and favourites to firebase after creating account'));
-                }
+            getFromFirebase(firestore, user).then(data => {
+                onReceiveDataFromFirebase(data);
             });
         }
     }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        localStorage.setItem(StatesKeys.CurrentGroupName, JSON.stringify(currentGroupName));
-        localStorage.setItem(StatesKeys.RecentEmojis, JSON.stringify(recentEmojis));
-        localStorage.setItem(StatesKeys.FavouritesEmojis, JSON.stringify(favouritesEmojis));
-        localStorage.setItem(StatesKeys.IsLightTheme, JSON.stringify(isLightTheme));
-    }, [currentGroupName, recentEmojis, favouritesEmojis, isLightTheme]);
+        saveToLocalStorage(currentGroupName, recentEmojis, favouritesEmojis, isLightTheme, emojiScheme);
+    }, [currentGroupName, recentEmojis, favouritesEmojis, isLightTheme, emojiScheme]);
 
     useEffect(() => {
         if (user) {
-            setDoc(doc(firestore, 'users', user.uid), {
-                [StatesKeys.IsLightTheme]: isLightTheme,
-                [StatesKeys.RecentEmojis]: recentEmojis,
-                [StatesKeys.FavouritesEmojis]: favouritesEmojis
-            }).then(_ => console.log('Save recent and favourites to firebase'));
+            saveToFirebase(firestore, user, recentEmojis, favouritesEmojis, emojiScheme, isLightTheme).then(_ =>
+                console.log('Saved to firebase')
+            );
         }
-    }, [recentEmojis, favouritesEmojis, isLightTheme]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [recentEmojis, favouritesEmojis, isLightTheme, emojiScheme]); // eslint-disable-line react-hooks/exhaustive-deps
 
     function loadWidgetState(key: string, defaultValue: any) {
         const state = JSON.parse(localStorage.getItem(key) as string);
         if (state !== null && typeof state !== 'undefined') return state;
         return defaultValue;
+    }
+
+    function onReceiveDataFromFirebase(data: any) {
+        const scheme = data.get(StatesKeys.EmojiScheme);
+        const light = data.get(StatesKeys.IsLightTheme);
+        const favourites = data.get(StatesKeys.FavouritesEmojis);
+        const recent = data.get(StatesKeys.RecentEmojis);
+        // user already exist
+        if (scheme !== null) {
+            setEmojiScheme(scheme);
+            setIsLightTheme(light);
+            setFavouritesEmojis(favourites);
+            setRecentEmojis(recent);
+        } else {
+            saveToFirebase(firestore, user, recentEmojis, favouritesEmojis, emojiScheme, isLightTheme).then(_ =>
+                console.log('Saved to firebase after creating account')
+            );
+        }
     }
 
     const getNewEmojisStateAfterAdding = (prevState: EmojiType[], emoji: EmojiType, limit: number) => {
@@ -168,55 +141,55 @@ const Widget: React.FC = () => {
     return (
         <CurrentThemeContext.Provider
             value={{
-                [StatesKeys.IsLightTheme]: isLightTheme, 
+                [StatesKeys.IsLightTheme]: isLightTheme,
                 dispatchChangeTheme: (value: boolean) => setIsLightTheme(value)
             }}
         >
-            <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
-                <CurrentEmojiSchemeContext.Provider
-                    value={{
-                        [StatesKeys.CurrentEmojiScheme]: currentEmojiScheme,
-                        dispatchChangeEmojiScheme: (value: number) => setCurrentEmojiScheme(value)
-                    }}
-                >
-                <div className={'buttons-wrapper'}>
-                    {icons.map((icon, index) => (
-                        <ChangeGroupButton
-                            key={`ChangeGroupButton${index}`}
-                            groupName={emojiGroups[index]}
-                            icon={icon}
-                            onClick={changeCurrentGroupData(emojiGroups[index])}
-                            isActive={emojiGroups[index] === currentGroupName}
+            <CurrentEmojiSchemeContext.Provider
+                value={{
+                    [StatesKeys.EmojiScheme]: emojiScheme,
+                    dispatchChangeEmojiScheme: (value: number) => setEmojiScheme(value)
+                }}
+            >
+                <div className={cn('widget', isLightTheme ? 'light-widget' : 'dark-widget')}>
+                    <div className={'buttons-wrapper'}>
+                        {icons.map((icon, index) => (
+                            <ChangeGroupButton
+                                key={`ChangeGroupButton${index}`}
+                                groupName={emojiGroups[index]}
+                                icon={icon}
+                                onClick={changeCurrentGroupData(emojiGroups[index])}
+                                isActive={emojiGroups[index] === currentGroupName}
+                            />
+                        ))}
+                    </div>
+                    {currentGroupName === Groups.Favourites ? (
+                        <FavouritesGroup
+                            recentEmojis={isSearching ? searchedEmojis : recentEmojis}
+                            favouritesEmojis={favouritesEmojis}
+                            updateSearchedGroup={updateSearchedGroup}
+                            updateRecentEmojis={updateRecentEmojis}
+                            isSearching={isSearching}
+                            setIsSearching={setIsSearching}
                         />
-                    ))}
+                    ) : currentGroupName === Groups.Settings ? (
+                        <SettingsGroup />
+                    ) : (
+                        <BasicGroup
+                            groupName={isSearching ? Groups.Searched : currentGroupName}
+                            groupEmojis={isSearching ? searchedEmojis : currentGroupEmojis}
+                            updateSearchedGroup={updateSearchedGroup}
+                            updateRecentEmojis={updateRecentEmojis}
+                            setIsSearching={setIsSearching}
+                        />
+                    )}
+                    <ContextMenu
+                        addFavourite={addFavouriteEmoji}
+                        removeFavourite={removeFavouriteEmoji}
+                        updateRecent={updateRecentEmojis}
+                    />
                 </div>
-                {currentGroupName === Groups.Favourites ? (
-                    <FavouritesGroup
-                        recentEmojis={isSearching ? searchedEmojis : recentEmojis}
-                        favouritesEmojis={favouritesEmojis}
-                        updateSearchedGroup={updateSearchedGroup}
-                        updateRecentEmojis={updateRecentEmojis}
-                        isSearching={isSearching}
-                        setIsSearching={setIsSearching}
-                    />
-                ) : currentGroupName === Groups.Settings ? (
-                    <SettingsGroup />
-                ) : (
-                    <BasicGroup
-                        groupName={isSearching ? Groups.Searched : currentGroupName}
-                        groupEmojis={isSearching ? searchedEmojis : currentGroupEmojis}
-                        updateSearchedGroup={updateSearchedGroup}
-                        updateRecentEmojis={updateRecentEmojis}
-                        setIsSearching={setIsSearching}
-                    />
-                )}
-                </CurrentEmojiSchemeContext.Provider>
-                <ContextMenu
-                    addFavourite={addFavouriteEmoji}
-                    removeFavourite={removeFavouriteEmoji}
-                    updateRecent={updateRecentEmojis}
-                />
-            </div>
+            </CurrentEmojiSchemeContext.Provider>
         </CurrentThemeContext.Provider>
     );
 };
