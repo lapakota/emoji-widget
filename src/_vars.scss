@@ -1,13 +1,13 @@
-$emoji-container-size: 32px;
-$emoji-image-size: 25px;
-$emojis-count-in-row: 9;
+$emoji-container-size: 40px;
+$emoji-image-size: 28px;
+$emojis-count-in-row: 8;
 $emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
 $inner-gap: 10px;
 
 $widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
-$widget-height: 440px;
+$widget-height: 460px;
 
-$emojis-wrapper-height: 298px;
+$emojis-wrapper-height: 315px;
 
 $fontColorLight: #212529;
 $backgroundColorLight: #F5F5F5;
