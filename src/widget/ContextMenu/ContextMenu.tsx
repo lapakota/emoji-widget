@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../Widget/Widget";
+import { CurrentThemeContext } from "../../contexts";
 
 type MenuPositionStyle = {
     top: number;

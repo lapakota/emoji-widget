@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './Loading.scss';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../Widget/Widget";
+import { CurrentThemeContext } from "../../contexts";
 
 const Loading: React.FC = () => {
     const { isLightTheme } = useContext(CurrentThemeContext);

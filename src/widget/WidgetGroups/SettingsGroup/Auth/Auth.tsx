@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { FirebaseContext } from '../../index';
+import { FirebaseContext } from '../../../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GoogleAuthProvider, signOut, signInWithCredential } from 'firebase/auth';
 import './Auth.scss';
 import cn from 'classnames';
-import Loading from '../Loading/Loading';
-import { CurrentThemeContext } from '../Widget/Widget';
+import Loading from '../../../Loading/Loading';
+import { CurrentThemeContext } from "../../../../contexts";
 
 const Auth: React.FC = () => {
     const { isLightTheme } = useContext(CurrentThemeContext);
@@ -43,7 +43,7 @@ const Auth: React.FC = () => {
     }
 
     return (
-        <div className={'auth'}>
+        <div className={cn('auth', 'settings_item')}>
             {user && (
                 <div className={'user-info'}>
                     <div className={'user-info_name'}>{user.displayName}</div>

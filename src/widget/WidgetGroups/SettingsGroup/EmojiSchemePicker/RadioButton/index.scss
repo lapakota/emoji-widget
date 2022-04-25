@@ -1,0 +1,40 @@
+@import "../../../../../vars";
+
+$labelSize: calc(#{$emoji-image-size} + 4px);
+
+.form_radio_btn {
+  display: inline-block;
+  margin-left: 5px;
+  height: 20px;
+
+  input[type=radio] {
+    position: fixed;
+    top: -1000px;
+
+    &:checked + label {
+      box-shadow: 0 0 0 2px $green inset;
+    }
+  }
+
+  label {
+    height: $labelSize;
+    width: $labelSize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px $borderBottomColor inset;
+    border-radius: 60px;
+    user-select: none;
+
+    img {
+      height: $emoji-image-size;
+      width: $emoji-image-size;
+    }
+
+    &:hover {
+      color: #666;
+    }
+  }
+}
