@@ -26,11 +26,11 @@ import { saveToLocalStorage } from '../../utils/localStorageSaver';
 import { getFromFirebase, saveToFirebase } from '../../utils/firebase';
 
 const Widget: React.FC = () => {
-    const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
-    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
-
     const { firestore } = useContext(FirebaseContext);
     const { auth } = useContext(FirebaseContext);
+
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
+    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
 
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
         loadWidgetState(StatesKeys.CurrentGroupName, Groups.Emotion)
