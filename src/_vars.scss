@@ -2,10 +2,10 @@ $emoji-container-size: 45px;
 $emoji-image-size: 28px;
 $emojis-count-in-row: 7;
 $emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
-$inner-gap: 10px;
+$inner-gap: 15px;
 
 $widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
-$widget-height: 464px;
+$widget-height: 479px;
 
 $emojis-wrapper-height: 315px;
 

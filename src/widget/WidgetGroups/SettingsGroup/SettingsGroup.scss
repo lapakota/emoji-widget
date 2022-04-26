@@ -9,7 +9,7 @@
     flex-direction: column;
 
     .settings_item {
-      margin: 0 15px;
+      margin: 0 $inner-gap;
       padding: 10px 0;
 
       .separator_inner {
