@@ -4,7 +4,8 @@ import React, { useContext } from 'react';
 import { EmojiType } from '../../utils/emojisData';
 import EmojiSearcher from '../../utils/emojiSearcher';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../Widget/Widget";
+import { CurrentThemeContext } from '../../contexts';
+import { MENU_HEIGHT, MENU_WIDTH } from '../../utils/constants';
 
 type MenuPositionStyle = {
     top: number;
@@ -21,9 +22,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
     const { anchorPoint, show } = useContextMenu();
 
     const { isLightTheme } = useContext(CurrentThemeContext);
-
-    const menuWidth = 100;
-    const menuHeight = 70;
 
     const widgetWidth = document.documentElement.clientWidth;
     const widgetHeight = document.documentElement.clientHeight;
@@ -67,10 +65,10 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
     const getRightPositionStyle = () => {
         const positionStyle: MenuPositionStyle = { top: 0, left: 0 };
         // Доп сдвиг на 1 пиксель, чтобы не перекрывать контейнер со смайликом
-        if (anchorPoint.x > widgetWidth / 2) positionStyle.left = anchorPoint.x - menuWidth - 1;
+        if (anchorPoint.x > widgetWidth / 2) positionStyle.left = anchorPoint.x - MENU_WIDTH - 1;
         else positionStyle.left = anchorPoint.x + 1;
 
-        if (anchorPoint.y > widgetHeight - menuHeight) positionStyle.top = anchorPoint.y - menuHeight - 1;
+        if (anchorPoint.y > widgetHeight - MENU_HEIGHT) positionStyle.top = anchorPoint.y - MENU_HEIGHT - 1;
         else positionStyle.top = anchorPoint.y + 1;
 
         return positionStyle;
@@ -83,7 +81,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ updateRecent, addFavourite, r
         return (
             <ul
                 className={cn('menu', isLightTheme ? 'light-menu' : 'dark-menu')}
-                style={{ ...getRightPositionStyle(), width: menuWidth, height: menuHeight }}
+                style={{ ...getRightPositionStyle(), width: MENU_WIDTH, height: MENU_HEIGHT }}
             >
                 <li className={'current-emoji_wrapper'}>
                     <span className={'current-emoji'}>{currentEmojiChar}</span>

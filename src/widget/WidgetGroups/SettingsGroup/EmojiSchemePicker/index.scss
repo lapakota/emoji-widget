@@ -1,0 +1,9 @@
+@import "../../../../vars";
+
+$labelSize: calc(#{$emoji-image-size} + 4px);
+
+.emoji-scheme_picker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

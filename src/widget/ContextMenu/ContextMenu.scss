@@ -2,12 +2,12 @@
 
 .menu {
   font-size: 14px;
-  border-radius: 2px;
-  padding: 0;
+  padding: 5px;
   margin: 0;
   position: absolute;
   list-style: none;
   box-shadow: 0 0 15px #bdbdbd;
+  border-radius: 5px;
 
   .button_text {
     font-size: inherit;
@@ -41,13 +41,13 @@
 }
 
 .light-menu {
-  color: $fontColourLight;
+  color: $fontColorLight;
   background-color: $inputBackgroundColorLight;
   box-shadow: 0 0 3px 0 #cccccc;
 }
 
 .dark-menu {
-  color: $fontColourDark;
+  color: $fontColorDark;
   background-color: $inputBackgroundColorDark;
   box-shadow: none;
 }

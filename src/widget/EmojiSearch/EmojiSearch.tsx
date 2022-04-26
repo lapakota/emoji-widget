@@ -3,24 +3,31 @@ import EmojiSearcher from '../../utils/emojiSearcher';
 import { EmojiType } from '../../utils/emojisData';
 import './EmojiSearch.scss';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../Widget/Widget";
+import { CurrentThemeContext } from '../../contexts';
+import { MAX_QUERY_LENGTH } from '../../utils/constants';
 
 type EmojiSearchProps = {
+    inputText: string;
+    setInputText: (value: string) => void;
     setIsSearching: (value: boolean) => void;
     updateSearched: (emojis: EmojiType[]) => void;
 };
 
-const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearched }) => {
+const EmojiSearch: React.FC<EmojiSearchProps> = ({ inputText, setInputText, setIsSearching, updateSearched }) => {
     const { isLightTheme } = useContext(CurrentThemeContext);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputText = e.target.value;
+        let text = e.target.value;
 
-        if (inputText === '') {
+        if (text.length > MAX_QUERY_LENGTH) text = text.slice(0, MAX_QUERY_LENGTH);
+
+        setInputText(text);
+
+        if (text === '') {
             setIsSearching(false);
         } else setIsSearching(true);
 
-        updateSearched(EmojiSearcher.searchEmojis(inputText));
+        updateSearched(EmojiSearcher.searchEmojis(text));
     };
 
     return (
@@ -28,6 +35,7 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ setIsSearching, updateSearche
             <input
                 className={cn('search-input', isLightTheme ? 'light-search-input' : 'dark-search-input')}
                 placeholder={'Emoji Search'}
+                value={inputText}
                 onChange={onChange}
             />
         </div>

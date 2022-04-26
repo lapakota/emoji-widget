@@ -1,17 +1,20 @@
 @import "../../vars";
 
 .buttons-wrapper {
-  padding: 0 0 0 $inner-gap;
   display: flex;
   flex-direction: row;
-  justify-content: left;
   align-items: center;
-  height: 60px;
+  justify-content: space-between;
+  height: 50px;
   border-bottom: 1px solid $borderBottomColor;
 
 
-  .active-group {
+  .light-active-group {
     box-shadow: inset 0 -2px $borderBottomColor;
+  }
+
+  .dark-active-group {
+    box-shadow: inset 0 -2px $borderHoverGroupColor;
   }
 
   .change-group_button {
@@ -20,17 +23,26 @@
     justify-content: center;
     width: $emoji-container-size;
     height: 100%;
-    padding: 0;
     border: none;
     font: inherit;
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+  }
 
-    &:hover {
-      box-shadow: inset 0 -2px $borderHoverGroupColor;
-    }
+  .light-change-group_button:hover {
+    box-shadow: inset 0 -2px $borderHoverGroupColor;
+  }
+
+  .dark-change-group_button:hover {
+    box-shadow: inset 0 -2px $borderBottomColor;
   }
 }
 
+.light-buttons-wrapper {
+  border-bottom: 1px solid $borderBottomColor;
+}
 
+.dark-buttons-wrapper {
+  border-bottom: 1px solid $borderHoverGroupColor;
+}

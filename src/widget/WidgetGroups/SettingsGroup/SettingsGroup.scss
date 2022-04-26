@@ -9,10 +9,7 @@
     flex-direction: column;
 
     .settings_item {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 0 20px;
+      margin: 0 $inner-gap;
       padding: 10px 0;
 
       .separator_inner {
@@ -22,50 +19,3 @@
     }
   }
 }
-
-//for toggle
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-}
-
-input[type="checkbox"]:focus {
-  outline: 0;
-}
-
-.toggle {
-  height: 24px;
-  width: 40px;
-  border-radius: 16px;
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  background: #EE5E52;
-  transition: all .2s ease;
-}
-
-.toggle:after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: white;
-  transition: all .2s cubic-bezier(.5, .1, .75, 1.35);
-}
-
-.toggle:checked {
-  background-color: #5CB176;
-}
-
-.toggle:checked:after {
-  transform: translatex(15px)
-}
-
-
-

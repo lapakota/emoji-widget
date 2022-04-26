@@ -1,26 +1,28 @@
-$emoji-container-size: 32px;
-$emoji-image-size: 25px;
-$emojis-count-in-row: 9;
+$emoji-container-size: 45px;
+$emoji-image-size: 28px;
+$emojis-count-in-row: 7;
 $emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
-$inner-gap: 10px;
+$inner-gap: 15px;
 
 $widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
-$widget-height: 440px;
+$widget-height: 479px;
 
-$emojis-wrapper-height: 288px;
+$emojis-wrapper-height: 315px;
 
-$fontColourLight: #212529;
-$backgroundColorLight: #f5f5f5;
-$inputBackgroundColorLight: #ffffff;
-$hoverBackgroundColorLight: #e8e8e8;
+$fontColorLight: #212529;
+$backgroundColorLight: #F5F5F5;
+$inputBackgroundColorLight: #FFFFFF;
+$hoverBackgroundColorLight: #E8E8E8;
 
 $scrollbarColor: #0000004C;
-$borderBottomColor: #bdbdbd;
-$borderHoverGroupColor: #dcdcdc;
+$borderBottomColor: #BDBDBD;
+$borderHoverGroupColor: #DCDCDC;
 
-$fontColourDark: #dbdbdb;
+$fontColorDark: #DBDBDB;
 $backgroundColorDark: #333336;
 $inputBackgroundColorDark: #444446;
-$hoverBackgroundColorDark: #5e5e5e;
+$hoverBackgroundColorDark: #5E5E5E;
 
 $inputBorderColor: #0090FF;
+$green: #5CB176;
+$red: #EE5E52

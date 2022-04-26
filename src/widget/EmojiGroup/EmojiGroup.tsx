@@ -3,7 +3,9 @@ import './EmojiGroup.scss';
 import { EmojiType } from '../../utils/emojisData';
 import sendEmojiMessage from '../../utils/messageSender';
 import cn from 'classnames';
-import { CurrentThemeContext } from '../Widget/Widget';
+import { EmojiScheme } from '../../utils/enums';
+import { multiplyX, multiplyY, sheetSizeX, sheetSizeY } from '../../utils/constants';
+import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../../contexts';
 
 type EmojiGroupProps = {
     groupName?: string;
@@ -12,20 +14,18 @@ type EmojiGroupProps = {
     updateRecent: (emoji: EmojiType) => void;
 };
 
-const appleImgPath = '/img/sheet_apple_64_indexed_256.png';
-// const googleImgPath = '/img/sheet_google_64_indexed_256.png';
-// const twitterImgPath = '/img/sheet_twitter_64_indexed_256.png';
-// const facebookImgPath = '/img/sheet_facebook_64_indexed_256.png';
-
-const sheetColumns = 60;
-const sheetRows = 60;
-const multiplyX = 100 / (sheetColumns - 1);
-const multiplyY = 100 / (sheetRows - 1);
-const sheetSizeX = 100 * sheetColumns;
-const sheetSizeY = 100 * sheetRows;
+const SchemeToImagePath = {
+    [EmojiScheme.Apple]: '/img/sheet_apple_64_indexed_256.png',
+    [EmojiScheme.Google]: '/img/sheet_google_64_indexed_256.png',
+    [EmojiScheme.Twitter]: '/img/sheet_twitter_64_indexed_256.png',
+    [EmojiScheme.Facebook]: '/img/sheet_facebook_64_indexed_256.png'
+};
 
 const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = false, groupEmojis, updateRecent }) => {
     const { isLightTheme } = useContext(CurrentThemeContext);
+    const { emojiScheme } = useContext(CurrentEmojiSchemeContext);
+
+    let imagePath = SchemeToImagePath[emojiScheme];
 
     const onClick = (emojiInfo: EmojiType) => {
         updateRecent(emojiInfo);
@@ -34,7 +34,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = f
 
     const getImageStyles = (emojiInfo: EmojiType) => {
         return {
-            backgroundImage: `url(${appleImgPath})`,
+            backgroundImage: `url(${imagePath})`,
             backgroundPosition: `${emojiInfo.sheet_x * multiplyX}% ${emojiInfo.sheet_y * multiplyY}%`,
             backgroundSize: `${sheetSizeX}% ${sheetSizeY}%`
         };
@@ -52,7 +52,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = f
                     <button
                         key={`${emojiInfo.short_name}${index}`}
                         className={cn('emoji-container', getRightThemeClassname('light-container', 'dark-container'))}
-                        title={emojiInfo.short_name}
+                        title={emojiInfo.name}
                         onClick={() => onClick(emojiInfo)}
                     >
                         <span

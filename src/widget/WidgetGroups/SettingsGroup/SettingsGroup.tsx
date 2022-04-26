@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './SettingsGroup.scss';
-import Auth from '../../Auth/Auth';
-import { CurrentThemeContext } from "../../Widget/Widget";
+import Auth from './Auth/Auth';
+import ThemeToggle from './ThemeToggle';
+import EmojiSchemePicker from './EmojiSchemePicker';
 
 const SettingsGroup = () => {
-    const { isLightTheme, dispatchChangeTheme } = useContext(CurrentThemeContext);
-
     return (
         <div className={'settings'}>
             <div className={'settings_menu'}>
@@ -13,15 +12,8 @@ const SettingsGroup = () => {
                 <div className={'settings_item'}>
                     <div className="separator_inner" />
                 </div>
-                <div className={'settings_item'}>
-                    <div>Dark theme</div>
-                    <input
-                        type={'checkbox'}
-                        className={'toggle'}
-                        onClick={() => dispatchChangeTheme(!isLightTheme)}
-                        defaultChecked={!isLightTheme}
-                    />
-                </div>
+                <ThemeToggle />
+                <EmojiSchemePicker />
             </div>
         </div>
     );
