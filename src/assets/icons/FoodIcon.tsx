@@ -6,7 +6,7 @@ type propsType = {
 
 const FoodIcon = (props: propsType) => {
     return (
-        <svg width="22" height="22" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M17 14.8564C14.5677 16.2607 11.8086 17 9 17C6.19141 17 3.43231 16.2607 1 14.8564L9 1L17 14.8564Z"
                 stroke={props.color}

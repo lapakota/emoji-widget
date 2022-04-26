@@ -52,7 +52,7 @@ const EmojiGroup: React.FC<EmojiGroupProps> = ({ groupName, isFavouriteGroup = f
                     <button
                         key={`${emojiInfo.short_name}${index}`}
                         className={cn('emoji-container', getRightThemeClassname('light-container', 'dark-container'))}
-                        title={emojiInfo.short_name}
+                        title={emojiInfo.name}
                         onClick={() => onClick(emojiInfo)}
                     >
                         <span

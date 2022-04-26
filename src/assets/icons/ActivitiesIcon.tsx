@@ -6,7 +6,7 @@ type propsType = {
 
 const ActivitiesIcon = (props: propsType) => {
     return (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="24" height="24" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M2.00476 6.71679C5.03818 5.81596 8.99791 6.74848 12.2448 9.43155C15.5425 12.1567 17.2053 15.9443 16.8244 19.1241"
                 stroke={props.color}

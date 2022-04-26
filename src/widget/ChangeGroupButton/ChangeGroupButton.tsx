@@ -14,7 +14,8 @@ type ChangeGroupButtonProps = {
 
 const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, onClick, isActive }) => {
     const isLightTheme = useContext(CurrentThemeContext);
-    const selectRightClass = () => {
+
+    const getRightClass = () => {
         let active = '';
         let hover = isLightTheme ? 'light-change-group_button' : 'dark-change-group_button';
         if (isLightTheme && isActive) {
@@ -27,7 +28,13 @@ const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, 
     };
 
     return (
-        <button id={groupName} name={`change group to ${groupName}`} className={selectRightClass()} onClick={onClick}>
+        <button
+            id={groupName}
+            name={`change group to ${groupName}`}
+            className={getRightClass()}
+            onClick={onClick}
+            title={groupName}
+        >
             {icon}
         </button>
     );
