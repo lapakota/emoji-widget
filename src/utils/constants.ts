@@ -17,3 +17,5 @@ export const GOOGLE_ICON = 'https://upload.wikimedia.org/wikipedia/commons/5/53/
 
 export const MENU_WIDTH = 100;
 export const MENU_HEIGHT = 70;
+
+export const MAX_QUERY_LENGTH = 100;

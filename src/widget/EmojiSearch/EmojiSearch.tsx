@@ -4,6 +4,7 @@ import { EmojiType } from '../../utils/emojisData';
 import './EmojiSearch.scss';
 import cn from 'classnames';
 import { CurrentThemeContext } from '../../contexts';
+import { MAX_QUERY_LENGTH } from '../../utils/constants';
 
 type EmojiSearchProps = {
     inputText: string;
@@ -16,7 +17,10 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ inputText, setInputText, setI
     const { isLightTheme } = useContext(CurrentThemeContext);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const text = e.target.value;
+        let text = e.target.value;
+
+        if (text.length > MAX_QUERY_LENGTH) text = text.slice(0, MAX_QUERY_LENGTH);
+
         setInputText(text);
 
         if (text === '') {
