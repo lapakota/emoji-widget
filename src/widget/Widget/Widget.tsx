@@ -40,6 +40,8 @@ const Widget: React.FC = () => {
     const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(
         loadWidgetState(StatesKeys.FavouritesEmojis, [])
     );
+
+    const [inputText, setInputText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     const [searchedEmojis, setSearchedEmojis] = useState<EmojiType[]>([]);
 
@@ -113,10 +115,13 @@ const Widget: React.FC = () => {
         setFavouritesEmojis(prevState => prevState.filter(x => x.char !== emoji.char));
     };
 
-    const changeCurrentGroupData = (name: Groups) => () => {
+    const changeCurrentGroupData = (newGroupName: Groups) => () => {
+        if (newGroupName === currentGroupName) return;
+
+        setInputText('');
         setIsSearching(false);
-        setCurrentGroupEmojis(emojisData[name]);
-        setCurrentGroupName(name);
+        setCurrentGroupEmojis(emojisData[newGroupName]);
+        setCurrentGroupName(newGroupName);
     };
 
     const updateSearchedGroup = (emojis: EmojiType[]) => {
@@ -171,6 +176,8 @@ const Widget: React.FC = () => {
                             updateRecentEmojis={updateRecentEmojis}
                             isSearching={isSearching}
                             setIsSearching={setIsSearching}
+                            inputText={inputText}
+                            setInputText={setInputText}
                         />
                     ) : currentGroupName === Groups.Settings ? (
                         <SettingsGroup />
@@ -181,6 +188,8 @@ const Widget: React.FC = () => {
                             updateSearchedGroup={updateSearchedGroup}
                             updateRecentEmojis={updateRecentEmojis}
                             setIsSearching={setIsSearching}
+                            inputText={inputText}
+                            setInputText={setInputText}
                         />
                     )}
                     <ContextMenu

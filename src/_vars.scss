@@ -5,7 +5,7 @@ $emojis-row-width: calc(#{$emojis-count-in-row} * #{$emoji-container-size});
 $inner-gap: 10px;
 
 $widget-width: calc(#{$emojis-row-width} + #{$inner-gap} * 2);
-$widget-height: 460px;
+$widget-height: 464px;
 
 $emojis-wrapper-height: 315px;
 

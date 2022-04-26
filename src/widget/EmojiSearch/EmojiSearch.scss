@@ -1,5 +1,7 @@
 @import "../../vars";
 
+$inputPadding: 12px;
+
 .search {
   margin: $inner-gap 0;
   display: flex;
@@ -8,31 +10,33 @@
 
   .search-input {
     all: unset;
-    width: calc(#{$emojis-row-width} - 10px);
-    padding: 5px;
+    width: calc(#{$emojis-row-width} - #{$inputPadding} * 2);
+    padding: 8px $inputPadding;
     border: none;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 5px;
     transition: all .1s ease;
   }
 
   .light-search-input {
     color: #212529;
-    background: $inputBackgroundColorLight url("../../../public/img/light_search_icon.png") no-repeat calc(#{$emojis-row-width} - 25px);
+    background: $inputBackgroundColorLight url("../../../public/img/light_search_icon.png") no-repeat calc(#{$emojis-row-width} - #{$inputPadding} - #{$inner-gap} * 2);
 
     &:focus {
       box-shadow: 0 0 0 1px $backgroundColorLight,
       0 0 0 2px $inputBorderColor;
+      background: $inputBackgroundColorLight;
     }
   }
 
   .dark-search-input {
     color: $fontColorDark;
-    background: $inputBackgroundColorDark url("../../../public/img/dark_search_icon.png") no-repeat calc(#{$emojis-row-width} - 25px);
+    background: $inputBackgroundColorDark url("../../../public/img/dark_search_icon.png") no-repeat calc(#{$emojis-row-width} - #{$inputPadding} - #{$inner-gap} * 2);
 
     &:focus {
       box-shadow: 0 0 0 1px $backgroundColorDark,
       0 0 0 2px $inputBorderColor;
+      background: $inputBackgroundColorDark;
     }
   }
 }

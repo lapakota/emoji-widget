@@ -3,7 +3,7 @@ import './ChangeGroupButton.scss';
 import '../EmojiGroup/EmojiGroup.scss';
 import { Groups } from '../../utils/emojiGroups';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../../contexts";
+import { CurrentThemeContext } from '../../contexts';
 
 type ChangeGroupButtonProps = {
     groupName: Groups;
@@ -27,12 +27,7 @@ const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, 
     };
 
     return (
-        <button
-            id={groupName}
-            name={`change group to ${groupName}`}
-            className={selectRightClass()}
-            onClick={onClick}
-        >
+        <button id={groupName} name={`change group to ${groupName}`} className={selectRightClass()} onClick={onClick}>
             {icon}
         </button>
     );

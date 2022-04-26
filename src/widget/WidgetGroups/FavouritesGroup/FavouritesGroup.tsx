@@ -8,6 +8,8 @@ import './FavouritesGroup.scss';
 type FavouritesGroupProps = {
     recentEmojis: EmojiType[];
     favouritesEmojis: EmojiType[];
+    inputText: string;
+    setInputText: (value: string) => void;
     isSearching: boolean;
     setIsSearching: (value: boolean) => void;
     updateSearchedGroup: (emojis: EmojiType[]) => void;
@@ -17,6 +19,8 @@ type FavouritesGroupProps = {
 const FavouritesGroup: React.FC<FavouritesGroupProps> = ({
     recentEmojis,
     favouritesEmojis,
+    inputText,
+    setInputText,
     isSearching,
     setIsSearching,
     updateSearchedGroup,
@@ -24,7 +28,12 @@ const FavouritesGroup: React.FC<FavouritesGroupProps> = ({
 }) => {
     return (
         <>
-            <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
+            <EmojiSearch
+                setIsSearching={setIsSearching}
+                updateSearched={updateSearchedGroup}
+                inputText={inputText}
+                setInputText={setInputText}
+            />
             <EmojiGroup groupName={Groups.Favourites} groupEmojis={recentEmojis} updateRecent={updateRecentEmojis} />
             {!isSearching && (
                 <>

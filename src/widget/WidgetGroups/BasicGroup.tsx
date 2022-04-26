@@ -7,6 +7,8 @@ import { Groups } from '../../utils/emojiGroups';
 type BasicGroupProps = {
     groupName: Groups;
     groupEmojis: EmojiType[];
+    inputText: string;
+    setInputText: (value: string) => void;
     setIsSearching: (value: boolean) => void;
     updateSearchedGroup: (emojis: EmojiType[]) => void;
     updateRecentEmojis: (emoji: EmojiType) => void;
@@ -15,13 +17,20 @@ type BasicGroupProps = {
 const BasicGroup: React.FC<BasicGroupProps> = ({
     groupName,
     groupEmojis,
+    inputText,
+    setInputText,
     setIsSearching,
     updateSearchedGroup,
     updateRecentEmojis
 }) => {
     return (
         <>
-            <EmojiSearch setIsSearching={setIsSearching} updateSearched={updateSearchedGroup} />
+            <EmojiSearch
+                setIsSearching={setIsSearching}
+                updateSearched={updateSearchedGroup}
+                inputText={inputText}
+                setInputText={setInputText}
+            />
             <EmojiGroup groupName={groupName} groupEmojis={groupEmojis} updateRecent={updateRecentEmojis} />
         </>
     );
