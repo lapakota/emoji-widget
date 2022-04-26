@@ -19,7 +19,7 @@ import ContextMenu from '../ContextMenu/ContextMenu';
 import cn from 'classnames';
 import { FirebaseContext } from '../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { StatesKeys } from '../../utils/enums';
+import { EmojiScheme, StatesKeys } from '../../utils/enums';
 import { BLACK_COLOR, FAVOURITES_COUNT, RECENT_COUNT, WHITE_COLOR } from '../../utils/constants';
 import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../../contexts';
 import { saveToLocalStorage } from '../../utils/localStorageSaver';
@@ -30,7 +30,9 @@ const Widget: React.FC = () => {
     const { auth } = useContext(FirebaseContext);
 
     const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
-    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
+    const [emojiScheme, setEmojiScheme] = useState<EmojiScheme>(
+        loadWidgetState(StatesKeys.EmojiScheme, EmojiScheme.Apple)
+    );
 
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
         loadWidgetState(StatesKeys.CurrentGroupName, Groups.Emotion)
@@ -79,7 +81,7 @@ const Widget: React.FC = () => {
         const favourites = data.get(StatesKeys.FavouritesEmojis);
         const recent = data.get(StatesKeys.RecentEmojis);
         // user already exist
-        if (scheme !== null) {
+        if (scheme !== null && scheme !== undefined) {
             setEmojiScheme(scheme);
             setIsLightTheme(light);
             setFavouritesEmojis(favourites);
