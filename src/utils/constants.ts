@@ -12,6 +12,7 @@ export const FAVOURITES_COUNT = EMOJIS_IN_ROW * 5;
 
 export const WHITE_COLOR = '#FFFFFF';
 export const BLACK_COLOR = '#000000';
+export const BLUE_COLOR = '#0090FF';
 
 export const GOOGLE_ICON = 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
 
