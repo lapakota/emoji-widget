@@ -14,9 +14,11 @@ const EmojiSchemePicker: React.FC = () => {
     return (
         <div className={cn('emoji-scheme_picker', 'settings_item')}>
             <div>Emoji scheme</div>
-            {imagesPaths.map((path, index) => (
-                <RadioButton key={path} scheme={index} imageSrc={path} />
-            ))}
+            <div>
+                {imagesPaths.map((path, index) => (
+                    <RadioButton key={path} scheme={index} imageSrc={path} />
+                ))}
+            </div>
         </div>
     );
 };

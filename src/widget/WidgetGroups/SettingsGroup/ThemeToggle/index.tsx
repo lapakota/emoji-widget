@@ -12,8 +12,8 @@ const ThemeToggle: React.FC = () => {
             <input
                 type={'checkbox'}
                 className={cn('toggle', isLightTheme ? 'light-toggle' : 'dark-toggle')}
-                onClick={() => dispatchChangeTheme(!isLightTheme)}
-                defaultChecked={!isLightTheme}
+                onChange={() => dispatchChangeTheme(!isLightTheme)}
+                checked={!isLightTheme}
             />
         </div>
     );

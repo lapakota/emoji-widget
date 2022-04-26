@@ -26,11 +26,11 @@ import { saveToLocalStorage } from '../../utils/localStorageSaver';
 import { getFromFirebase, saveToFirebase } from '../../utils/firebase';
 
 const Widget: React.FC = () => {
-    const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
-    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
-
     const { firestore } = useContext(FirebaseContext);
     const { auth } = useContext(FirebaseContext);
+
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(loadWidgetState(StatesKeys.IsLightTheme, true));
+    const [emojiScheme, setEmojiScheme] = useState<number>(loadWidgetState(StatesKeys.EmojiScheme, 0));
 
     const [currentGroupName, setCurrentGroupName] = useState<Groups>(
         loadWidgetState(StatesKeys.CurrentGroupName, Groups.Emotion)
@@ -40,6 +40,8 @@ const Widget: React.FC = () => {
     const [favouritesEmojis, setFavouritesEmojis] = useState<EmojiType[]>(
         loadWidgetState(StatesKeys.FavouritesEmojis, [])
     );
+
+    const [inputText, setInputText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     const [searchedEmojis, setSearchedEmojis] = useState<EmojiType[]>([]);
 
@@ -113,30 +115,33 @@ const Widget: React.FC = () => {
         setFavouritesEmojis(prevState => prevState.filter(x => x.char !== emoji.char));
     };
 
-    const changeCurrentGroupData = (name: Groups) => () => {
+    const changeCurrentGroupData = (newGroupName: Groups) => () => {
+        if (newGroupName === currentGroupName) return;
+
+        setInputText('');
         setIsSearching(false);
-        setCurrentGroupEmojis(emojisData[name]);
-        setCurrentGroupName(name);
+        setCurrentGroupEmojis(emojisData[newGroupName]);
+        setCurrentGroupName(newGroupName);
     };
 
     const updateSearchedGroup = (emojis: EmojiType[]) => {
         setSearchedEmojis(emojis);
     };
 
-    function setCurrentIconColor() {
+    function getCurrentIconColor() {
         return isLightTheme ? BLACK_COLOR : WHITE_COLOR;
     }
 
     const icons = [
-        <FavoriteIcon color={setCurrentIconColor()} />,
-        <PeopleIcon color={setCurrentIconColor()} />,
-        <NatureIcon color={setCurrentIconColor()} />,
-        <FoodIcon color={setCurrentIconColor()} />,
-        <ActivitiesIcon color={setCurrentIconColor()} />,
-        <TravelIcon color={setCurrentIconColor()} />,
-        <ObjectsIcon color={setCurrentIconColor()} />,
-        <SymbolsIcon color={setCurrentIconColor()} />,
-        <SettingsIcon color={setCurrentIconColor()} />
+        <FavoriteIcon color={getCurrentIconColor()} />,
+        <PeopleIcon color={getCurrentIconColor()} />,
+        <NatureIcon color={getCurrentIconColor()} />,
+        <FoodIcon color={getCurrentIconColor()} />,
+        <ActivitiesIcon color={getCurrentIconColor()} />,
+        <TravelIcon color={getCurrentIconColor()} />,
+        <ObjectsIcon color={getCurrentIconColor()} />,
+        <SymbolsIcon color={getCurrentIconColor()} />,
+        <SettingsIcon color={getCurrentIconColor()} />
     ];
     return (
         <CurrentThemeContext.Provider
@@ -165,12 +170,15 @@ const Widget: React.FC = () => {
                     </div>
                     {currentGroupName === Groups.Favourites ? (
                         <FavouritesGroup
-                            recentEmojis={isSearching ? searchedEmojis : recentEmojis}
+                            recentEmojis={recentEmojis}
                             favouritesEmojis={favouritesEmojis}
                             updateSearchedGroup={updateSearchedGroup}
                             updateRecentEmojis={updateRecentEmojis}
                             isSearching={isSearching}
                             setIsSearching={setIsSearching}
+                            inputText={inputText}
+                            setInputText={setInputText}
+                            searchedEmojis={searchedEmojis}
                         />
                     ) : currentGroupName === Groups.Settings ? (
                         <SettingsGroup />
@@ -181,6 +189,8 @@ const Widget: React.FC = () => {
                             updateSearchedGroup={updateSearchedGroup}
                             updateRecentEmojis={updateRecentEmojis}
                             setIsSearching={setIsSearching}
+                            inputText={inputText}
+                            setInputText={setInputText}
                         />
                     )}
                     <ContextMenu

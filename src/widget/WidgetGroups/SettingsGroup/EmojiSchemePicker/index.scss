@@ -5,5 +5,5 @@ $labelSize: calc(#{$emoji-image-size} + 4px);
 .emoji-scheme_picker {
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  justify-content: space-between;
 }

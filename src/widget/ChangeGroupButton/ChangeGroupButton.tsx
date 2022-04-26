@@ -3,7 +3,7 @@ import './ChangeGroupButton.scss';
 import '../EmojiGroup/EmojiGroup.scss';
 import { Groups } from '../../utils/emojiGroups';
 import cn from 'classnames';
-import { CurrentThemeContext } from "../../contexts";
+import { CurrentThemeContext } from '../../contexts';
 
 type ChangeGroupButtonProps = {
     groupName: Groups;
@@ -14,7 +14,8 @@ type ChangeGroupButtonProps = {
 
 const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, onClick, isActive }) => {
     const isLightTheme = useContext(CurrentThemeContext);
-    const selectRightClass = () => {
+
+    const getRightClass = () => {
         let active = '';
         let hover = isLightTheme ? 'light-change-group_button' : 'dark-change-group_button';
         if (isLightTheme && isActive) {
@@ -30,8 +31,9 @@ const ChangeGroupButton: React.FC<ChangeGroupButtonProps> = ({ groupName, icon, 
         <button
             id={groupName}
             name={`change group to ${groupName}`}
-            className={selectRightClass()}
+            className={getRightClass()}
             onClick={onClick}
+            title={groupName}
         >
             {icon}
         </button>
