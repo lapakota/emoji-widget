@@ -7,6 +7,8 @@ $button-active-blue: #1669F2;
 $button-font-size: 14px;
 
 .auth {
+  padding-bottom: 0 !important;
+
   .user-info {
     display: flex;
     align-items: center;
@@ -66,7 +68,7 @@ $button-font-size: 14px;
     }
 
     .btn-text {
-      margin: 11px 55px 0 0;
+      margin: 11px 75px 0 0;
       color: $white;
       font-size: $button-font-size;
       letter-spacing: 0.2px;

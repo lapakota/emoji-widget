@@ -128,20 +128,20 @@ const Widget: React.FC = () => {
         setSearchedEmojis(emojis);
     };
 
-    function setCurrentIconColor() {
+    function getCurrentIconColor() {
         return isLightTheme ? BLACK_COLOR : WHITE_COLOR;
     }
 
     const icons = [
-        <FavoriteIcon color={setCurrentIconColor()} />,
-        <PeopleIcon color={setCurrentIconColor()} />,
-        <NatureIcon color={setCurrentIconColor()} />,
-        <FoodIcon color={setCurrentIconColor()} />,
-        <ActivitiesIcon color={setCurrentIconColor()} />,
-        <TravelIcon color={setCurrentIconColor()} />,
-        <ObjectsIcon color={setCurrentIconColor()} />,
-        <SymbolsIcon color={setCurrentIconColor()} />,
-        <SettingsIcon color={setCurrentIconColor()} />
+        <FavoriteIcon color={getCurrentIconColor()} />,
+        <PeopleIcon color={getCurrentIconColor()} />,
+        <NatureIcon color={getCurrentIconColor()} />,
+        <FoodIcon color={getCurrentIconColor()} />,
+        <ActivitiesIcon color={getCurrentIconColor()} />,
+        <TravelIcon color={getCurrentIconColor()} />,
+        <ObjectsIcon color={getCurrentIconColor()} />,
+        <SymbolsIcon color={getCurrentIconColor()} />,
+        <SettingsIcon color={getCurrentIconColor()} />
     ];
     return (
         <CurrentThemeContext.Provider
@@ -170,7 +170,7 @@ const Widget: React.FC = () => {
                     </div>
                     {currentGroupName === Groups.Favourites ? (
                         <FavouritesGroup
-                            recentEmojis={isSearching ? searchedEmojis : recentEmojis}
+                            recentEmojis={recentEmojis}
                             favouritesEmojis={favouritesEmojis}
                             updateSearchedGroup={updateSearchedGroup}
                             updateRecentEmojis={updateRecentEmojis}
@@ -178,6 +178,7 @@ const Widget: React.FC = () => {
                             setIsSearching={setIsSearching}
                             inputText={inputText}
                             setInputText={setInputText}
+                            searchedEmojis={searchedEmojis}
                         />
                     ) : currentGroupName === Groups.Settings ? (
                         <SettingsGroup />
