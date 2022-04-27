@@ -20,7 +20,7 @@ import cn from 'classnames';
 import { FirebaseContext } from '../../index';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { EmojiScheme, StatesKeys } from '../../utils/enums';
-import { BLACK_COLOR, FAVOURITES_COUNT, RECENT_COUNT, WHITE_COLOR } from '../../utils/constants';
+import { BLACK_COLOR, FAVOURITES_COUNT, RECENT_COUNT, WHITE_COLOR, BLUE_COLOR } from '../../utils/constants';
 import { CurrentEmojiSchemeContext, CurrentThemeContext } from '../../contexts';
 import { saveToLocalStorage } from '../../utils/localStorageSaver';
 import { getFromFirebase, saveToFirebase } from '../../utils/firebase';
@@ -130,21 +130,22 @@ const Widget: React.FC = () => {
         setSearchedEmojis(emojis);
     };
 
-    function getCurrentIconColor() {
-        return isLightTheme ? BLACK_COLOR : WHITE_COLOR;
+    function getCurrentIconColor(groupName: Groups) {
+        return groupName === currentGroupName ? BLUE_COLOR : isLightTheme ? BLACK_COLOR : WHITE_COLOR;
     }
 
     const icons = [
-        <FavoriteIcon color={getCurrentIconColor()} />,
-        <PeopleIcon color={getCurrentIconColor()} />,
-        <NatureIcon color={getCurrentIconColor()} />,
-        <FoodIcon color={getCurrentIconColor()} />,
-        <ActivitiesIcon color={getCurrentIconColor()} />,
-        <TravelIcon color={getCurrentIconColor()} />,
-        <ObjectsIcon color={getCurrentIconColor()} />,
-        <SymbolsIcon color={getCurrentIconColor()} />,
-        <SettingsIcon color={getCurrentIconColor()} />
+        <FavoriteIcon color={getCurrentIconColor(Groups.Favourites)} />,
+        <PeopleIcon color={getCurrentIconColor(Groups.Emotion)} />,
+        <NatureIcon color={getCurrentIconColor(Groups.Nature)} />,
+        <FoodIcon color={getCurrentIconColor(Groups.Food)} />,
+        <ActivitiesIcon color={getCurrentIconColor(Groups.Activities)} />,
+        <TravelIcon color={getCurrentIconColor(Groups.Travel)} />,
+        <ObjectsIcon color={getCurrentIconColor(Groups.Objects)} />,
+        <SymbolsIcon color={getCurrentIconColor(Groups.Symbols)} />,
+        <SettingsIcon color={getCurrentIconColor(Groups.Settings)} />
     ];
+
     return (
         <CurrentThemeContext.Provider
             value={{
