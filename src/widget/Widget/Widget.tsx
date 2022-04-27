@@ -81,7 +81,7 @@ const Widget: React.FC = () => {
         const favourites = data.get(StatesKeys.FavouritesEmojis);
         const recent = data.get(StatesKeys.RecentEmojis);
         // user already exist
-        if (scheme !== null && scheme !== undefined) {
+        if (scheme ?? false) {
             setEmojiScheme(scheme);
             setIsLightTheme(light);
             setFavouritesEmojis(favourites);
