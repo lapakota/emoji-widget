@@ -23,7 +23,7 @@ const EmojiSearch: React.FC<EmojiSearchProps> = ({ inputText, setInputText, setI
 
         setInputText(text);
 
-        if (text === '') {
+        if (text.trim() === '') {
             setIsSearching(false);
         } else setIsSearching(true);
 
