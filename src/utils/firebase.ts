@@ -19,5 +19,5 @@ export const saveToFirebase = async (
 };
 
 export const getFromFirebase = async (firestore: any, user: any) => {
-    return await getDoc(doc(firestore, 'users', user?.uid));
+    return await getDoc(doc(firestore, 'users', user.uid));
 };
