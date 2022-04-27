@@ -49,3 +49,7 @@
 
 ![](readme_images/img_scheme_1.png)
 ![](readme_images/img_scheme_2.png)
+
+## Ссылка на инструкцию по установке
+
+- https://disk.yandex.ru/d/fDFUwcpjGoJRkA
