@@ -1,8 +1,10 @@
 import { EmojiType } from './emojisData';
 import { emojisData } from './emojisData';
+import ruTranslationObject from '../assets/englishNameToRussian.json';
 
 export default class EmojiSearcher {
     private static allEmojis = this._getAllEmojis();
+    private static ruTranslation: { [enName: string]: string } = ruTranslationObject;
 
     static searchEmojis(query: string) {
         const queryTokens = this._splitIntoTokens(query, ' ');
@@ -11,8 +13,8 @@ export default class EmojiSearcher {
         for (let emojiData of this.allEmojis) {
             const nameTokens = [
                 emojiData.char,
-                ...this._splitIntoTokens(emojiData.name, '_')
-                // TODO сделать словарь с переводами названий
+                ...this._splitIntoTokens(emojiData.name, '_'),
+                ...this._splitIntoTokens(this.ruTranslation[emojiData.name], '_')
             ];
 
             const queryOccurrences: string[] = [];
