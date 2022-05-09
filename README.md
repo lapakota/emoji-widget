@@ -1,5 +1,7 @@
 # Виджет эмодзи
 
+https://chrome.google.com/webstore/detail/emoji-widget/gmagpgpipaiaflghjofnpjnpekpcagen/related?hl=ru&authuser=0
+
 ## Информация
 
 Расширение для Google Chrome с возможностью вставки эмодзи в поля ввода на любом сайте.
